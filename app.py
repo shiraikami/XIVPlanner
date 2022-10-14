@@ -5,7 +5,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
 from forms import UserSignUpForm, LoginForm
-from models import connect_db, db, User, Static, Gear
+from models import connect_db, db, User, Static
 
 CURR_USER = "curr_user"
 

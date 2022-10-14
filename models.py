@@ -28,8 +28,8 @@ class User(db.Model):
         nullable = False
     )
 
-    static = db.relationship('Static')
-    gear = db.relationship('Gear')
+    statics = db.relationship('Static', secondary="staticmembers", backref="users")
+    gearsets = db.relationship('GearSet', backref="users")
 
     @classmethod
     def signup(cls, username, password):
@@ -76,11 +76,6 @@ class Static(db.Model):
         primary_key = True
     )
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id', ondelete='cascade')
-    )
-
     name = db.Column(
         db.Text,
         nullable = False,
@@ -88,10 +83,10 @@ class Static(db.Model):
     )
 
 
-class Gear(db.Model):
-    """Gear list for a user."""
+class StaticMember(db.Model):
+    """Static/Guild members in the system."""
 
-    __tablename__ = 'gear'
+    __tablename__ = 'staticmembers'
 
     id = db.Column(
         db.Integer,
@@ -100,69 +95,384 @@ class Gear(db.Model):
 
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey('users.id', ondelete='cascade')
+        db.ForeignKey('users.id')
     )
 
-    weapon = db.Column(
+    static_id = db.Column(
+        db.Integer,
+        db.ForeignKey('statics.id')
+    )
+
+
+class Weapon(db.Model):
+    """Gear list for a user."""
+
+    __tablename__ = 'weapons'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
+
+    icon = db.Column(
+        db.Text
+    )
+
+    url = db.Column(
+        db.Text
+    )
+
+class Offhand(db.Model):
+    """Gear list for a user."""
+
+    __tablename__ = 'offhands'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
+
+    icon = db.Column(
+        db.Text
+    )
+
+    url = db.Column(
+        db.Text
+    )
+
+    class Head(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'heads'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Body(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'bodies'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Gloves(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'gloves'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Pants(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'pants'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Boots(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'boots'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Earring(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'earrings'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Necklace(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'necklaces'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Bracelet(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'bracelets'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Ring1(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'rings1'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+    class Ring2(db.Model):
+        """Gear list for a user."""
+
+        __tablename__ = 'rings2'
+
+        id = db.Column(
+            db.Integer,
+            primary_key = True
+        )
+
+        name = db.Column(
+            db.Text,
+            nullable = False,
+            unique = True
+        )
+
+        icon = db.Column(
+            db.Text
+        )
+
+        url = db.Column(
+            db.Text
+        )
+
+
+class GearSet(db.Model):
+    """List of gear the user saved."""
+
+    __tablename__ = 'gearset'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
+    )
+
+    job = db.Column(
         db.Text,
         nullable = False
     )
 
-    offhand = db.Column(
-        db.Text,
-        nullable = False
+    weapon_id = db.Column(
+        db.Integer,
+        db.ForeignKey('weapons.id')
     )
 
-    head = db.Column(
-        db.Text,
-        nullable = False
+    offhand_id = db.Column(
+        db.Integer,
+        db.ForeignKey('offhands.id')
+
     )
 
-    body = db.Column(
-        db.Text,
-        nullable = False
+    helmet_id = db.Column(
+        db.Integer,
+        db.ForeignKey('helmets.id')
     )
 
-    gloves = db.Column(
-        db.Text,
-        nullable = False
+    body_id = db.Column(
+        db.Integer,
+        db.ForeignKey('bodies.id')
     )
 
-    pants = db.Column(
-        db.Text,
-        nullable = False
+    gloves_id = db.Column(
+        db.Integer,
+        db.ForeignKey('gloves.id')
     )
 
-    boots = db.Column(
-        db.Text,
-        nullable = False
+    pants_id = db.Column(
+        db.Integer,
+        db.ForeignKey('pants.id')
     )
 
-    earring = db.Column(
-        db.Text,
-        nullable = False
+    boots_id = db.Column(
+        db.Integer,
+        db.ForeignKey('boots.id')
     )
 
-    necklace = db.Column(
-        db.Text,
-        nullable = False
+    earring_id = db.Column(
+        db.Integer,
+        db.ForeignKey('earrings.id')
     )
 
-    bracelet = db.Column(
-        db.Text,
-        nullable = False
+    necklace_id = db.Column(
+        db.Integer,
+        db.ForeignKey('necklaces.id')
     )
 
-    ring1 = db.Column(
-        db.Text,
-        nullable = False
+    bracelet_id = db.Column(
+        db.Integer,
+        db.ForeignKey('bracelets.id')
     )
 
-    ring2 = db.Column(
-        db.Text,
-        nullable = False
+    ring1_id = db.Column(
+        db.Integer,
+        db.ForeignKey('rings1.id')
     )
 
+    ring2_id = db.Column(
+        db.Integer,
+        db.ForeignKey('rings2.id')
+    )
 
 def connect_db(app):
     """Connect this database to provided Flask app."""
