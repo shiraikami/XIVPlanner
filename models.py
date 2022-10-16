@@ -128,6 +128,10 @@ class Weapon(db.Model):
         db.Text
     )
 
+    ilevel = db.Column(
+        db.Integer
+    )
+
 class Offhand(db.Model):
     """Gear list for a user."""
 
@@ -152,246 +156,261 @@ class Offhand(db.Model):
         db.Text
     )
 
-    class Head(db.Model):
-        """Gear list for a user."""
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        __tablename__ = 'heads'
+class Helmet(db.Model):
+    """Gear list for a user."""
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    __tablename__ = 'helmets'
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        icon = db.Column(
-            db.Text
-        )
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True        
+    )
 
-        url = db.Column(
-            db.Text
-        )
+    icon = db.Column(
+        db.Text
+    )
 
-    class Body(db.Model):
-        """Gear list for a user."""
+    url = db.Column(
+        db.Text
+    )
 
-        __tablename__ = 'bodies'
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+class Body(db.Model):
+    """Gear list for a user."""
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    __tablename__ = 'bodies'
 
-        icon = db.Column(
-            db.Text
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        url = db.Column(
-            db.Text
-        )
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-    class Gloves(db.Model):
-        """Gear list for a user."""
+    icon = db.Column(
+        db.Text
+    )
 
-        __tablename__ = 'gloves'
+    url = db.Column(
+        db.Text
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+class Gloves(db.Model):
+    """Gear list for a user."""
 
-        icon = db.Column(
-            db.Text
-        )
+    __tablename__ = 'gloves'
 
-        url = db.Column(
-            db.Text
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-    class Pants(db.Model):
-        """Gear list for a user."""
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-        __tablename__ = 'pants'
+    icon = db.Column(
+        db.Text
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    url = db.Column(
+        db.Text
+    )
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        icon = db.Column(
-            db.Text
-        )
+class Pants(db.Model):
+    """Gear list for a user."""
 
-        url = db.Column(
-            db.Text
-        )
+    __tablename__ = 'pants'
 
-    class Boots(db.Model):
-        """Gear list for a user."""
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        __tablename__ = 'boots'
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    icon = db.Column(
+        db.Text
+    )
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    url = db.Column(
+        db.Text
+    )
 
-        icon = db.Column(
-            db.Text
-        )
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        url = db.Column(
-            db.Text
-        )
+class Boots(db.Model):
+    """Gear list for a user."""
 
-    class Earring(db.Model):
-        """Gear list for a user."""
+    __tablename__ = 'boots'
 
-        __tablename__ = 'earrings'
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    icon = db.Column(
+        db.Text
+    )
 
-        icon = db.Column(
-            db.Text
-        )
+    url = db.Column(
+        db.Text
+    )
 
-        url = db.Column(
-            db.Text
-        )
+    ilevel = db.Column(
+        db.Integer
+    )
 
-    class Necklace(db.Model):
-        """Gear list for a user."""
+class Earring(db.Model):
+    """Gear list for a user."""
 
-        __tablename__ = 'necklaces'
+    __tablename__ = 'earrings'
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-        icon = db.Column(
-            db.Text
-        )
+    icon = db.Column(
+        db.Text
+    )
 
-        url = db.Column(
-            db.Text
-        )
+    url = db.Column(
+        db.Text
+    )
 
-    class Bracelet(db.Model):
-        """Gear list for a user."""
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        __tablename__ = 'bracelets'
+class Necklace(db.Model):
+    """Gear list for a user."""
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    __tablename__ = 'necklaces'
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        icon = db.Column(
-            db.Text
-        )
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-        url = db.Column(
-            db.Text
-        )
+    icon = db.Column(
+        db.Text
+    )
 
-    class Ring1(db.Model):
-        """Gear list for a user."""
+    url = db.Column(
+        db.Text
+    )
 
-        __tablename__ = 'rings1'
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+class Bracelet(db.Model):
+    """Gear list for a user."""
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+    __tablename__ = 'bracelets'
 
-        icon = db.Column(
-            db.Text
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
-        url = db.Column(
-            db.Text
-        )
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
 
-    class Ring2(db.Model):
-        """Gear list for a user."""
+    icon = db.Column(
+        db.Text
+    )
 
-        __tablename__ = 'rings2'
+    url = db.Column(
+        db.Text
+    )
 
-        id = db.Column(
-            db.Integer,
-            primary_key = True
-        )
+    ilevel = db.Column(
+        db.Integer
+    )
 
-        name = db.Column(
-            db.Text,
-            nullable = False,
-            unique = True
-        )
+class Ring(db.Model):
+    """Gear list for a user."""
 
-        icon = db.Column(
-            db.Text
-        )
+    __tablename__ = 'rings'
 
-        url = db.Column(
-            db.Text
-        )
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
 
+    name = db.Column(
+        db.Text,
+        nullable = False,
+        unique = True
+    )
+
+    icon = db.Column(
+        db.Text
+    )
+
+    url = db.Column(
+        db.Text
+    )
+
+    ilevel = db.Column(
+        db.Integer
+    )
 
 class GearSet(db.Model):
     """List of gear the user saved."""
@@ -466,12 +485,12 @@ class GearSet(db.Model):
 
     ring1_id = db.Column(
         db.Integer,
-        db.ForeignKey('rings1.id')
+        db.ForeignKey('rings.id')
     )
 
     ring2_id = db.Column(
         db.Integer,
-        db.ForeignKey('rings2.id')
+        db.ForeignKey('rings.id')
     )
 
 def connect_db(app):
