@@ -1,25 +1,29 @@
 """XIVPlanner Flask app."""
 
-from flask import Flask, render_template, redirect, session, flash, g
+import os
+from flask import Flask, render_template, request, redirect, session, flash, g
 from flask_debugtoolbar import DebugToolbarExtension
+from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
 
 from forms import UserSignUpForm, LoginForm
-from models import connect_db, db, User, Static
+from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 
 CURR_USER = "curr_user"
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///XIVPlanner"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "password"
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    os.environ.get('DATABASE_URL', 'postgresql:///XIVPlanner'))
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = False
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'SECRET')
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
+
 
 ##############################################################################
 # User signup/login/logout
@@ -109,23 +113,45 @@ def logout():
 @app.route("/profile/id/<int:user_id>")
 def show_profile(user_id):
     """Show the profile of a user."""
+
     user = User.query.get(user_id)
     return render_template('users/profile.html', user=user)
+
 
 @app.route("/gear")
 def show_gear():
     """Show the gear page of a user."""
-    return render_template('users/gear.html')
+
+
+    weapons = db.session.query(Weapon).filter(or_(Weapon.name.contains("Abyssos"),Weapon.name.contains("Augmented Lunar Envoy")))
+        
+
+    return render_template('users/gear.html', weapons=weapons)
+
+
+@app.route("/gear/save", methods=["POST"])
+def save_gear():
+    """Save the current gearset of user."""
+
+    select = request.form.get('weapon')
+    print("//////////////////////////////////////////")
+    print(select)
+
+    return redirect("/gear")
 
 @app.route("/fflogs")
 def show_fflogs():
     """Show the FFLogs page."""
+
     return render_template('users/fflogs.html')
+
 
 @app.route("/static")
 def show_static():
     """Show the static/guild page."""
+
     return render_template('users/static.html')
+
 
 ##############################################################################
 # Homepage

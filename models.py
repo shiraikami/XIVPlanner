@@ -117,7 +117,6 @@ class Weapon(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -130,6 +129,10 @@ class Weapon(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Offhand(db.Model):
@@ -145,7 +148,6 @@ class Offhand(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -158,6 +160,10 @@ class Offhand(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Helmet(db.Model):
@@ -173,7 +179,6 @@ class Helmet(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True        
     )
 
     icon = db.Column(
@@ -186,6 +191,10 @@ class Helmet(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Body(db.Model):
@@ -201,7 +210,6 @@ class Body(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -214,6 +222,10 @@ class Body(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Gloves(db.Model):
@@ -229,7 +241,6 @@ class Gloves(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -242,6 +253,10 @@ class Gloves(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Pants(db.Model):
@@ -257,7 +272,6 @@ class Pants(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -270,6 +284,10 @@ class Pants(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Boots(db.Model):
@@ -285,7 +303,6 @@ class Boots(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -298,6 +315,10 @@ class Boots(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Earring(db.Model):
@@ -313,7 +334,6 @@ class Earring(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -326,6 +346,10 @@ class Earring(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Necklace(db.Model):
@@ -341,7 +365,6 @@ class Necklace(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -354,6 +377,10 @@ class Necklace(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Bracelet(db.Model):
@@ -369,7 +396,6 @@ class Bracelet(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -382,6 +408,10 @@ class Bracelet(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class Ring(db.Model):
@@ -397,7 +427,6 @@ class Ring(db.Model):
     name = db.Column(
         db.Text,
         nullable = False,
-        unique = True
     )
 
     icon = db.Column(
@@ -410,6 +439,10 @@ class Ring(db.Model):
 
     ilevel = db.Column(
         db.Integer
+    )
+
+    classjob = db.Column(
+        db.Text
     )
 
 class GearSet(db.Model):
@@ -430,6 +463,10 @@ class GearSet(db.Model):
     job = db.Column(
         db.Text,
         nullable = False
+    )
+
+    name = db.Column(
+        db.Text
     )
 
     weapon_id = db.Column(
