@@ -5,9 +5,10 @@ from flask import Flask, render_template, request, redirect, session, flash, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
+import requests
 
 from forms import UserSignUpForm, LoginForm
-from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
+from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, Static, StaticMember
 
 CURR_USER = "curr_user"
 
@@ -124,9 +125,9 @@ def show_gear():
 
 
     weapons = db.session.query(Weapon).filter(or_(Weapon.name.contains("Abyssos"),Weapon.name.contains("Augmented Lunar Envoy")))
-        
+    
 
-    return render_template('users/gear.html', weapons=weapons)
+    return render_template('gear/gear.html', weapons=weapons)
 
 
 @app.route("/gear/save", methods=["POST"])
@@ -147,11 +148,35 @@ def show_fflogs():
 
 
 @app.route("/static")
-def show_static():
+def create_static():
     """Show the static/guild page."""
 
-    return render_template('users/static.html')
+    dc = requests.get("https://xivapi.com/servers/dc").json()
+    print(g.user.statics)
+    return render_template('static/create.html', dc=dc)
 
+
+@app.route("/static/id/<int:static_id>")
+def show_static(static_id):
+    """Show details about a specific static."""
+
+    static = Static.query.get(static_id)
+    return render_template('static/details.html', static=static)
+
+@app.route("/static/save", methods=["POST"])
+def save_static():
+    """Save the static/guild created by user."""
+
+    name = request.form.get('name')
+    faction = request.form.get('faction')
+    server = request.form.get('server')
+    static = Static(name=name, faction=faction, server=server)
+    db.session.add(static)
+    db.session.commit()
+    staticmember = StaticMember(role="Leader", user_id=g.user.id, static_id=static.id)
+    db.session.add(staticmember)
+    db.session.commit()
+    return redirect("/")
 
 ##############################################################################
 # Homepage
@@ -160,5 +185,4 @@ def show_static():
 def homepage():
     """Show homepage."""
 
-    flash("Hi")
     return render_template('home.html')

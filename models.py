@@ -82,7 +82,15 @@ class Static(db.Model):
         unique = True
     )
 
+    faction = db.Column(
+        db.Text
+    )
 
+    server = db.Column(
+        db.Text
+    )
+
+    
 class StaticMember(db.Model):
     """Static/Guild members in the system."""
 
@@ -91,6 +99,10 @@ class StaticMember(db.Model):
     id = db.Column(
         db.Integer,
         primary_key = True
+    )
+
+    role = db.Column(
+        db.Text
     )
 
     user_id = db.Column(

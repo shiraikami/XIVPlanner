@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container w-50 mt-5">
+    <h2>Create a Static/Guild</h2>
+    <form action="/static/save" method="POST">
+        <div class="row">
+            <div class="col">
+                <div class="input-group">
+                    <span class="input-group-text" id="static-name">Name</span>
+                    <input type="text" name="name" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="static-name">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <div class="input-group">
+                    <span class="input-group-text" id="static-faction">Faction</span>
+                    <select name="faction" class="custom-select" id="faction-select">
+                        <option value="Immortal Flames">Immortal Flames</option>
+                        <option value="Twin Addler">Order of the Twin Addler</option>
+                        <option value="The Maelstrom">The Maelstrom</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <div class="input-group">
+                    <span class="input-group-text" id="static-server">Server</span>
+                    <select name="server" class="custom-select" id="server-select">
+                        {% for datacenter in dc %}
+                            <optgroup label={{datacenter}}></optgroup>
+                            {% for server in dc[datacenter] %}
+                                <option value={{server}}>{{server}}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary float-end" type="submit">Create</button>
+    </form>
+</div>
+
+{% endblock %}
