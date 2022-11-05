@@ -90,6 +90,8 @@ class Static(db.Model):
         db.Text
     )
 
+    members = db.relationship('StaticMember', backref="statics")
+
     
 class StaticMember(db.Model):
     """Static/Guild members in the system."""
@@ -99,6 +101,10 @@ class StaticMember(db.Model):
     id = db.Column(
         db.Integer,
         primary_key = True
+    )
+
+    username = db.Column(
+        db.Text
     )
 
     role = db.Column(
@@ -147,6 +153,23 @@ class Weapon(db.Model):
         db.Text
     )
 
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
+
 class Offhand(db.Model):
     """Gear list for a user."""
 
@@ -177,6 +200,23 @@ class Offhand(db.Model):
     classjob = db.Column(
         db.Text
     )
+
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
 
 class Helmet(db.Model):
     """Gear list for a user."""
@@ -209,6 +249,23 @@ class Helmet(db.Model):
         db.Text
     )
 
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
+
 class Body(db.Model):
     """Gear list for a user."""
 
@@ -239,6 +296,23 @@ class Body(db.Model):
     classjob = db.Column(
         db.Text
     )
+
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
 
 class Gloves(db.Model):
     """Gear list for a user."""
@@ -271,6 +345,23 @@ class Gloves(db.Model):
         db.Text
     )
 
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
+
 class Pants(db.Model):
     """Gear list for a user."""
 
@@ -301,6 +392,23 @@ class Pants(db.Model):
     classjob = db.Column(
         db.Text
     )
+
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
 
 class Boots(db.Model):
     """Gear list for a user."""
@@ -333,6 +441,23 @@ class Boots(db.Model):
         db.Text
     )
 
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
+
 class Earring(db.Model):
     """Gear list for a user."""
 
@@ -363,6 +488,23 @@ class Earring(db.Model):
     classjob = db.Column(
         db.Text
     )
+
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
 
 class Necklace(db.Model):
     """Gear list for a user."""
@@ -395,6 +537,23 @@ class Necklace(db.Model):
         db.Text
     )
 
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
+
 class Bracelet(db.Model):
     """Gear list for a user."""
 
@@ -426,6 +585,23 @@ class Bracelet(db.Model):
         db.Text
     )
 
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
+
 class Ring(db.Model):
     """Gear list for a user."""
 
@@ -456,6 +632,23 @@ class Ring(db.Model):
     classjob = db.Column(
         db.Text
     )
+
+    equipslot = db.Column(
+        db.Integer
+    )
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "icon": self.icon,
+            "url": self.url,
+            "ilevel": self.ilevel,
+            "classjob": self.classjob,
+            "equipslot": self.equipslot
+        }
 
 class GearSet(db.Model):
     """List of gear the user saved."""
@@ -489,7 +682,6 @@ class GearSet(db.Model):
     offhand_id = db.Column(
         db.Integer,
         db.ForeignKey('offhands.id')
-
     )
 
     helmet_id = db.Column(
@@ -532,12 +724,12 @@ class GearSet(db.Model):
         db.ForeignKey('bracelets.id')
     )
 
-    ring1_id = db.Column(
+    lring_id = db.Column(
         db.Integer,
         db.ForeignKey('rings.id')
     )
 
-    ring2_id = db.Column(
+    rring_id = db.Column(
         db.Integer,
         db.ForeignKey('rings.id')
     )

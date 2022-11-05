@@ -1,65 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="JobSelect">Job</label>
+<form action="/gear/save" method="POST">
+    <div class="container">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <label class="input-group-text" for="JobSelect">Job</label>
+            </div>
+            <select name="job" class="form-select-md" id="JobSelect">
+                <option hidden disabled selected value>Select a Job</option>
+                <optgroup label="Tank"></optgroup>
+                    <option value="PLD">Paladin</option>
+                    <option value="WAR">Warrior</option>
+                    <option value="DRK">Dark Knight</option>
+                    <option value="GNB">Gunbreaker</option>
+                </optgroup>
+                <optgroup label="Healer"></optgroup>
+                    <option value="WHM">White Mage</option>
+                    <option value="SCH">Scholar</option>
+                    <option value="AST">Astrologian</option>
+                    <option value="SGE">Sage</option>
+                </optgroup>
+                <optgroup label="Melee"></optgroup>
+                    <option value="MNK">Monk</option>
+                    <option value="DRG">Dragoon</option>
+                    <option value="NIN">Ninja</option>
+                    <option value="SAM">Samurai</option>
+                    <option value="RPR">Reaper</option>
+                </optgroup>
+                <optgroup label="Physical Ranged"></optgroup>
+                    <option value="BRD">Bard</option>
+                    <option value="MCH">Machinist</option>
+                    <option value="DNC">Dancer</option>
+                </optgroup>
+                <optgroup label="Magical Ranged"></optgroup>
+                    <option value="BLM">Black Mage</option>
+                    <option value="SMN">Summoner</option>
+                    <option value="RDM">Red Mage</option>
+                </optgroup>
+            </select>
         </div>
-        <select class="form-select-md" id="JobSelect">
-            <optgroup label="Tank"></optgroup>
-                <option data-icon="static/images/job/paladin.png" value="PLD">Paladin</option>
-                <option value="PLD">Paladin</option>
-                <option value="WAR">Warrior</option>
-                <option value="DRK">Dark Knight</option>
-                <option value="GNB">Gunbreaker</option>
-            </optgroup>
-            <optgroup label="Healer"></optgroup>
-                <option value="WHM">White Mage</option>
-                <option value="SCH">Scholar</option>
-                <option value="AST">Astrologian</option>
-                <option value="SGE">Sage</option>
-            </optgroup>
-            <optgroup label="Melee"></optgroup>
-                <option value="MNK">Monk</option>
-                <option value="DRG">Dragoon</option>
-                <option value="NIN">Ninja</option>
-                <option value="SAM">Samurai</option>
-                <option value="RPR">Reaper</option>
-            </optgroup>
-            <optgroup label="Physical Ranged"></optgroup>
-                <option value="BRD">Bard</option>
-                <option value="MCH">Machinist</option>
-                <option value="DNC">Dancer</option>
-            </optgroup>
-            <optgroup label="Magical Ranged"></optgroup>
-                <option value="BLM">Black Mage</option>
-                <option value="SMN">Summoner</option>
-                <option value="RDM">Red Mage</option>
-            </optgroup>
-        </select>
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Name</span>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+            </div>
+            <input name="setname" type="text" class="form-control" aria-label="Gearset Name">
         </div>
-        <input type="text" class="form-control" aria-label="Gearset Name">
-      </div>
-</div>
+    </div>
 
-<div class="container">
-    <form action="/gear/save" method="POST">
+    <div class="container">
         <div class="row align-items-center">
             <div class="col-md-4">
                 <span>Weapon</span>
                 <img src="static/images/gear/mainhand.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="weapon" class="custom-select" id="WeaponSelect">
-                        {% for weapon in weapons %}
-                            
-                        {% endfor %}
-                    <option value="abyssos">Abyssos</option>
-                    <option value="lunar_envoy">Augmented Lunar Envoy</option>
                     </select>
                 </div>
             </div>
@@ -68,8 +63,6 @@
                 <img src="static/images/gear/offhand.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="offhand" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
                     </select>
                 </div>
             </div>
@@ -77,9 +70,7 @@
                 <span>Helmet</span>
                 <img src="static/images/gear/head.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="helmet" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="helmet" class="custom-select" id="HelmetSelect">
                     </select>
                 </div>
             </div>
@@ -89,9 +80,7 @@
                 <span>Body</span>
                 <img src="static/images/gear/body.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="Body" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="body" class="custom-select" id="BodySelect">
                     </select>
                 </div>
             </div>
@@ -99,9 +88,7 @@
                 <span>Gloves</span>
                 <img src="static/images/gear/hands.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="gloves" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="gloves" class="custom-select" id="GlovesSelect">
                     </select>
                 </div>
             </div>
@@ -109,9 +96,7 @@
                 <span>Pants</span>
                 <img src="static/images/gear/underlegs.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="pants" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="pants" class="custom-select" id="PantsSelect">
                     </select>
                 </div>
             </div>
@@ -121,9 +106,7 @@
                 <span>Boots</span>
                 <img src="static/images/gear/feet.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="boots" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="boots" class="custom-select" id="BootsSelect">
                     </select>
                 </div>
             </div>
@@ -131,9 +114,7 @@
                 <span>Earrings</span>
                 <img src="static/images/gear/ear.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="earrings" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="earring" class="custom-select" id="EarringSelect">
                     </select>
                 </div>
             </div>
@@ -141,9 +122,7 @@
                 <span>Necklace</span>
                 <img src="static/images/gear/neck.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="Necklace" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="necklace" class="custom-select" id="NecklaceSelect">
                     </select>
                 </div>
             </div>
@@ -153,9 +132,7 @@
                 <span>Bracelet</span>
                 <img src="static/images/gear/wrist.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="Bracelet" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="bracelet" class="custom-select" id="BraceletSelect">
                     </select>
                 </div>
             </div>
@@ -163,9 +140,7 @@
                 <span>Left Ring</span>
                 <img src="static/images/gear/ring.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="lring" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="lring" class="custom-select" id="LRingSelect">
                     </select>
                 </div>
             </div>
@@ -173,17 +148,17 @@
                 <span>Right Ring</span>
                 <img src="static/images/gear/ring.png" class="img-fluid">
                 <div class="input-group mb-3">
-                    <select name="rring" class="custom-select" id="OffhandSelect">
-                        <option value="abyssos">Abyssos</option>
-                        <option value="lunar_envoy">Augmented Lunar Envoy</option>
+                    <select name="rring" class="custom-select" id="RRingSelect">
                     </select>
                 </div>
             </div>
         </div>
-    <button class="btn btn-primary float-end" type="submit">Save</button>
-    <br><br>
+        {% if g.user %}
+            <button class="btn btn-primary float-end" type="submit">Save</button>
+            <br><br>
+        {% endif %}
+    </div>
 </form>
-</div>
 <div class="container border">
     <div class="row">
         <div class="col-sm-10">
@@ -193,27 +168,23 @@
             Item Level: 
         </div>
     </div>
+</div>
+<div class="container border">
     <div class="row">
-        <div class="col-sm-10">
-            <div class="gear-img">
-                <img src="">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src="https://xivapi.com/i/033000/033363.png">
             </div>
-            <div class="gear-name">
-                <span class="name"></span>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">Name</span>
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel"></span>
+            <span class="ilevel" id="weapon-ilevel">ilevel</span>
         </div>
     </div>
-</div>
-
-<div>
-    {% for weapon in weapons %}
-        <span>{{weapon.name}}</span>
-        <span>{{weapon.classjob}}</span>
-        <br>
-    {% endfor %}
 </div>
 
 {% endblock %}
