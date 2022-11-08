@@ -2,7 +2,7 @@
 
 let gears;
 
-window.onload = (event) => {
+window.onload = (evt) => {
   if(!gears) {
     requestGear()
   }
@@ -26,6 +26,57 @@ async function mapGear(url) {
 
 async function requestGear() {
   gears = await mapGear('http://127.0.0.1:5000/api/gear')
+  let selected = $('#JobSelect').find(":selected").val();
+  for(let gear of gears) {
+    if(gear.classjob.includes(selected)) {
+      if(gear.equipslot == 1 || gear.equipslot == 13) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#WeaponSelect").append(option)
+      }
+      if(gear.equipslot == 2) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#OffhandSelect").append(option)
+      }
+      if(gear.equipslot == 3) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#HelmetSelect").append(option)
+      }
+      if(gear.equipslot == 4) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#BodySelect").append(option)
+      }
+      if(gear.equipslot == 5) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#GlovesSelect").append(option)
+      }
+      if(gear.equipslot == 7) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#PantsSelect").append(option)
+      }
+      if(gear.equipslot == 8) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#BootsSelect").append(option)
+      }
+      if(gear.equipslot == 9) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#EarringSelect").append(option)
+      }
+      if(gear.equipslot == 10) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#NecklaceSelect").append(option)
+      }
+      if(gear.equipslot == 11) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#BraceletSelect").append(option)
+      }
+      if(gear.equipslot == 12) {
+        let option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#LRingSelect").append(option)
+        option = $('<option></option>').attr("value", gear.id).text(gear.name)
+        $("#RRingSelect").append(option)
+      }
+    }
+  }
 }
 
 $('#JobSelect').change(function(evt) {

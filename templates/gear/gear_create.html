@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<br><br><br><br>
 <form action="/gear/save" method="POST">
     <div class="container">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
             <label class="input-group-text" for="JobSelect">Job</label>
             </div>
-            <select name="job" class="form-select-md" id="JobSelect">
+            <select name="job" class="custom-select" id="JobSelect">
                 <option hidden disabled selected value>Select a Job</option>
                 <optgroup label="Tank"></optgroup>
                     <option value="PLD">Paladin</option>
@@ -44,7 +45,7 @@
             <div class="input-group-prepend">
             <span class="input-group-text">Name</span>
             </div>
-            <input name="setname" type="text" class="form-control" aria-label="Gearset Name">
+            <input name="name" type="text" class="form-control" aria-label="Gearset Name" required>
         </div>
     </div>
 
@@ -52,7 +53,7 @@
         <div class="row align-items-center">
             <div class="col-md-4">
                 <span>Weapon</span>
-                <img src="static/images/gear/mainhand.png" class="img-fluid">
+                <img src="/static/images/gear/mainhand.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="weapon" class="custom-select" id="WeaponSelect">
                     </select>
@@ -60,7 +61,7 @@
             </div>
             <div class="col-md-4">
                 <span>Offhand</span>
-                <img src="static/images/gear/offhand.png" class="img-fluid">
+                <img src="/static/images/gear/offhand.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="offhand" class="custom-select" id="OffhandSelect">
                     </select>
@@ -68,7 +69,7 @@
             </div>
             <div class="col-md-4">
                 <span>Helmet</span>
-                <img src="static/images/gear/head.png" class="img-fluid">
+                <img src="/static/images/gear/head.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="helmet" class="custom-select" id="HelmetSelect">
                     </select>
@@ -78,7 +79,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <span>Body</span>
-                <img src="static/images/gear/body.png" class="img-fluid">
+                <img src="/static/images/gear/body.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="body" class="custom-select" id="BodySelect">
                     </select>
@@ -86,7 +87,7 @@
             </div>
             <div class="col col-md-4">
                 <span>Gloves</span>
-                <img src="static/images/gear/hands.png" class="img-fluid">
+                <img src="/static/images/gear/hands.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="gloves" class="custom-select" id="GlovesSelect">
                     </select>
@@ -94,7 +95,7 @@
             </div>
             <div class="col col-md-4">
                 <span>Pants</span>
-                <img src="static/images/gear/underlegs.png" class="img-fluid">
+                <img src="/static/images/gear/underlegs.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="pants" class="custom-select" id="PantsSelect">
                     </select>
@@ -104,7 +105,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <span>Boots</span>
-                <img src="static/images/gear/feet.png" class="img-fluid">
+                <img src="/static/images/gear/feet.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="boots" class="custom-select" id="BootsSelect">
                     </select>
@@ -112,7 +113,7 @@
             </div>
             <div class="col col-md-4">
                 <span>Earrings</span>
-                <img src="static/images/gear/ear.png" class="img-fluid">
+                <img src="/static/images/gear/ear.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="earring" class="custom-select" id="EarringSelect">
                     </select>
@@ -120,7 +121,7 @@
             </div>
             <div class="col col-md-4">
                 <span>Necklace</span>
-                <img src="static/images/gear/neck.png" class="img-fluid">
+                <img src="/static/images/gear/neck.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="necklace" class="custom-select" id="NecklaceSelect">
                     </select>
@@ -130,7 +131,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <span>Bracelet</span>
-                <img src="static/images/gear/wrist.png" class="img-fluid">
+                <img src="/static/images/gear/wrist.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="bracelet" class="custom-select" id="BraceletSelect">
                     </select>
@@ -138,7 +139,7 @@
             </div>
             <div class="col col-md-4">
                 <span>Left Ring</span>
-                <img src="static/images/gear/ring.png" class="img-fluid">
+                <img src="/static/images/gear/ring.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="lring" class="custom-select" id="LRingSelect">
                     </select>
@@ -146,7 +147,7 @@
             </div>
             <div class="col col-md-4">
                 <span>Right Ring</span>
-                <img src="static/images/gear/ring.png" class="img-fluid">
+                <img src="/static/images/gear/ring.png" class="img-fluid">
                 <div class="input-group mb-3">
                     <select name="rring" class="custom-select" id="RRingSelect">
                     </select>
@@ -159,32 +160,9 @@
         {% endif %}
     </div>
 </form>
-<div class="container border">
-    <div class="row">
-        <div class="col-sm-10">
-            Gear
-        </div>
-        <div class="col-sm-2">
-            Item Level: 
-        </div>
-    </div>
-</div>
-<div class="container border">
-    <div class="row">
-        <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
-                <img src="https://xivapi.com/i/033000/033363.png">
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">Name</span>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">ilevel</span>
-        </div>
-    </div>
-</div>
 
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/gear.js"></script>
 {% endblock %}

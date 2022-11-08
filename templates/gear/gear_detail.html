@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br><br><br><br>
+<div class="container d-flex justify-content-center">
+    <h3>{{ gearset.name }}</h3>
+</div>
+<div class="container border">
+    <div class="row">
+        <div class="col-sm-10">
+            Gear
+        </div>
+        <div class="col-sm-2">
+            Item Level: 
+        </div>
+    </div>
+</div>
+<div class="container border">
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + weapon.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ weapon.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ weapon.ilevel }}</span>
+        </div>
+    </div>
+    
+    {% if offhand %}
+        <div class="row">
+            <div class="col-sm-1">
+                <div class="gear-img" id="weapon-img">
+                    <img src={{"https://xivapi.com" + offhand.icon}}>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="gear-name" id="weapon-name">
+                    <span class="name">{{ offhand.name }}</span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <span class="ilevel" id="weapon-ilevel">{{ offhand.ilevel }}</span>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + helmet.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ helmet.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ helmet.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + body.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ body.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ body.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + gloves.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ gloves.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ gloves.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + pants.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ pants.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ pants.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + boots.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ boots.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ boots.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + earring.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ earring.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ earring.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + necklace.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ necklace.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ necklace.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + bracelet.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ bracelet.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ bracelet.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + lring.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ lring.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ lring.ilevel }}</span>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-sm-1">
+            <div class="gear-img" id="weapon-img">
+                <img src={{"https://xivapi.com" + rring.icon}}>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="gear-name" id="weapon-name">
+                <span class="name">{{ rring.name }}</span>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <span class="ilevel" id="weapon-ilevel">{{ rring.ilevel }}</span>
+        </div>
+    </div>
+</div>
+<br>
+<form action="/gear/id/{{gearset.id}}/delete" method="POST">
+    <div class="container">
+        <button class="btn btn-danger float-end" type="submit">Delete</button>
+    </div>
+</form>
+<form action="/gear/id/{{gearset.id}}/edit" method="GET">
+    <div class="container">
+        <button class="btn btn-primary float-end" type="submit">Edit</button>
+    </div>
+</form>
+
+{% endblock %}

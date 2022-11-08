@@ -28,7 +28,6 @@ class User(db.Model):
         nullable = False
     )
 
-    statics = db.relationship('Static', secondary="staticmembers", backref="users")
     gearsets = db.relationship('GearSet', backref="users")
 
     @classmethod
@@ -64,63 +63,6 @@ class User(db.Model):
                 return user
 
         return False
-
-
-class Static(db.Model):
-    """Static/Guild in the system."""
-
-    __tablename__ = 'statics'
-
-    id = db.Column(
-        db.Integer,
-        primary_key = True
-    )
-
-    name = db.Column(
-        db.Text,
-        nullable = False,
-        unique = True
-    )
-
-    faction = db.Column(
-        db.Text
-    )
-
-    server = db.Column(
-        db.Text
-    )
-
-    members = db.relationship('StaticMember', backref="statics")
-
-    
-class StaticMember(db.Model):
-    """Static/Guild members in the system."""
-
-    __tablename__ = 'staticmembers'
-
-    id = db.Column(
-        db.Integer,
-        primary_key = True
-    )
-
-    username = db.Column(
-        db.Text
-    )
-
-    role = db.Column(
-        db.Text
-    )
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id')
-    )
-
-    static_id = db.Column(
-        db.Integer,
-        db.ForeignKey('statics.id')
-    )
-
 
 class Weapon(db.Model):
     """Gear list for a user."""

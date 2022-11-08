@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br><br><br><br>
+<form action="/gear/id/{{gearset.id}}/edit" method="POST">
+    <div class="container">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <label class="input-group-text" for="JobSelect">Job</label>
+            </div>
+            <select name="job" class="custom-select" id="JobSelect">
+                <option hidden disabled selected value="{{ gearset.job }}">{{ gearset.job }}</option>
+                <optgroup label="Tank"></optgroup>
+                    <option value="PLD">Paladin</option>
+                    <option value="WAR">Warrior</option>
+                    <option value="DRK">Dark Knight</option>
+                    <option value="GNB">Gunbreaker</option>
+                </optgroup>
+                <optgroup label="Healer"></optgroup>
+                    <option value="WHM">White Mage</option>
+                    <option value="SCH">Scholar</option>
+                    <option value="AST">Astrologian</option>
+                    <option value="SGE">Sage</option>
+                </optgroup>
+                <optgroup label="Melee"></optgroup>
+                    <option value="MNK">Monk</option>
+                    <option value="DRG">Dragoon</option>
+                    <option value="NIN">Ninja</option>
+                    <option value="SAM">Samurai</option>
+                    <option value="RPR">Reaper</option>
+                </optgroup>
+                <optgroup label="Physical Ranged"></optgroup>
+                    <option value="BRD">Bard</option>
+                    <option value="MCH">Machinist</option>
+                    <option value="DNC">Dancer</option>
+                </optgroup>
+                <optgroup label="Magical Ranged"></optgroup>
+                    <option value="BLM">Black Mage</option>
+                    <option value="SMN">Summoner</option>
+                    <option value="RDM">Red Mage</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+            </div>
+            <input name="name" type="text" class="form-control" aria-label="Gearset Name" required>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <span>Weapon</span>
+                <img src="/static/images/gear/mainhand.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="weapon" class="custom-select" id="WeaponSelect">
+                        <option hidden disabled selected value="{{ weapon.id }}">{{ weapon.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span>Offhand</span>
+                <img src="/static/images/gear/offhand.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="offhand" class="custom-select" id="OffhandSelect">
+                        <option hidden disabled selected value="{{ offhand.id }}">{{ offhand.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <span>Helmet</span>
+                <img src="/static/images/gear/head.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="helmet" class="custom-select" id="HelmetSelect">
+                        <option hidden disabled selected value="{{ helmet.id }}">{{ helmet.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-4">
+                <span>Body</span>
+                <img src="/static/images/gear/body.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="body" class="custom-select" id="BodySelect">
+                        <option hidden disabled selected value="{{ body.id }}">{{ body.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <span>Gloves</span>
+                <img src="/static/images/gear/hands.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="gloves" class="custom-select" id="GlovesSelect">
+                        <option hidden disabled selected value="{{ gloves.id }}">{{ gloves.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <span>Pants</span>
+                <img src="/static/images/gear/underlegs.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="pants" class="custom-select" id="PantsSelect">
+                        <option hidden disabled selected value="{{ pants.id }}">{{ pants.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-4">
+                <span>Boots</span>
+                <img src="/static/images/gear/feet.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="boots" class="custom-select" id="BootsSelect">
+                        <option hidden disabled selected value="{{ boots.id }}">{{ boots.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <span>Earrings</span>
+                <img src="/static/images/gear/ear.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="earring" class="custom-select" id="EarringSelect">
+                        <option hidden disabled selected value="{{ earring.id }}">{{ earring.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <span>Necklace</span>
+                <img src="/static/images/gear/neck.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="necklace" class="custom-select" id="NecklaceSelect">
+                        <option hidden disabled selected value="{{ necklace.id }}">{{ necklace.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-4">
+                <span>Bracelet</span>
+                <img src="/static/images/gear/wrist.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="bracelet" class="custom-select" id="BraceletSelect">
+                        <option hidden disabled selected value="{{ bracelet.id }}">{{ bracelet.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <span>Left Ring</span>
+                <img src="/static/images/gear/ring.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="lring" class="custom-select" id="LRingSelect">
+                        <option hidden disabled selected value="{{ lring.id }}">{{ lring.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col col-md-4">
+                <span>Right Ring</span>
+                <img src="/static/images/gear/ring.png" class="img-fluid">
+                <div class="input-group mb-3">
+                    <select name="rring" class="custom-select" id="RRingSelect">
+                        <option hidden disabled selected value="{{ rring.id }}">{{ rring.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        {% if g.user %}
+            <button class="btn btn-primary float-end" type="submit">Save</button>
+            <br><br>
+        {% endif %}
+    </div>
+</form>
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/gear_edit.js"></script>
+{% endblock %}

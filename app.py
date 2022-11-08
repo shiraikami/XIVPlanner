@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 import requests
 
 from forms import UserSignUpForm, LoginForm
-from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, Static, StaticMember
+from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet
 
 CURR_USER = "curr_user"
 
@@ -127,7 +127,7 @@ def show_profile(user_id):
 def show_gear():
     """Show the gear page of a user."""
 
-    return render_template('gear/gear.html')
+    return render_template('gear/gear_create.html')
 
 
 @app.route("/gear/save", methods=["POST"])
@@ -135,7 +135,7 @@ def save_gear():
     """Save the current gearset of user."""
 
     job = request.form.get('job')
-    name = request.form.get('setname')
+    name = request.form.get('name')
     weapon = request.form.get('weapon')
     offhand = request.form.get('offhand')
     helmet = request.form.get('helmet')
@@ -151,6 +151,136 @@ def save_gear():
 
     gearset = GearSet(user_id=g.user.id, job=job, name=name, weapon_id=weapon, offhand_id=offhand, helmet_id=helmet, body_id=body, gloves_id=gloves, pants_id=pants, boots_id=boots, earring_id=earring, necklace_id=necklace, bracelet_id=bracelet, lring_id=lring, rring_id=rring)
     db.session.add(gearset)
+    db.session.commit()
+    return redirect("/gear")
+
+
+@app.route("/gear/id/<int:gearset_id>")
+def gear_detail(gearset_id):
+    """Shows a gearset that is saved."""
+    
+    gearset = GearSet.query.get(gearset_id)
+    weapon = Weapon.query.get(gearset.weapon_id)
+    offhand = Offhand.query.get(gearset.offhand_id)
+    helmet = Helmet.query.get(gearset.helmet_id)
+    body = Body.query.get(gearset.body_id)
+    gloves = Gloves.query.get(gearset.gloves_id)
+    pants = Pants.query.get(gearset.pants_id)
+    boots = Boots.query.get(gearset.boots_id)
+    earring = Earring.query.get(gearset.earring_id)
+    necklace = Necklace.query.get(gearset.necklace_id)
+    bracelet = Bracelet.query.get(gearset.bracelet_id)
+    lring = Ring.query.get(gearset.lring_id)
+    rring = Ring.query.get(gearset.rring_id)
+
+    return render_template("/gear/gear_detail.html", gearset=gearset, weapon=weapon, offhand=offhand, helmet=helmet, body=body, gloves=gloves, pants=pants, boots=boots, earring=earring, necklace=necklace, bracelet=bracelet, lring=lring, rring=rring)
+
+
+@app.route("/gear/id/<int:gearset_id>/edit")
+def gear_show_edit(gearset_id):
+    """Shows a page for user to edit a gearset."""
+
+    gearset = GearSet.query.get(gearset_id)
+    weapon = Weapon.query.get(gearset.weapon_id)
+    offhand = Offhand.query.get(gearset.offhand_id)
+    helmet = Helmet.query.get(gearset.helmet_id)
+    body = Body.query.get(gearset.body_id)
+    gloves = Gloves.query.get(gearset.gloves_id)
+    pants = Pants.query.get(gearset.pants_id)
+    boots = Boots.query.get(gearset.boots_id)
+    earring = Earring.query.get(gearset.earring_id)
+    necklace = Necklace.query.get(gearset.necklace_id)
+    bracelet = Bracelet.query.get(gearset.bracelet_id)
+    lring = Ring.query.get(gearset.lring_id)
+    rring = Ring.query.get(gearset.rring_id)
+    return render_template('gear/gear_edit.html', gearset=gearset, weapon=weapon, offhand=offhand, helmet=helmet, body=body, gloves=gloves, pants=pants, boots=boots, earring=earring, necklace=necklace, bracelet=bracelet, lring=lring, rring=rring)
+
+
+@app.route("/gear/id/<int:gearset_id>/edit", methods=["POST"])
+def gear_save_edit(gearset_id):
+    """Shows a page for user to edit a gearset."""
+    print(request.form.get('job'))
+
+    editgearset = GearSet.query.get(gearset_id)
+    if request.form.get('job') == None:
+        editgearset.job = editgearset.job
+    else:
+        editgearset.job = request.form.get('job')
+
+    if request.form.get('weapon') == None:
+        editgearset.weapon_id = editgearset.weapon_id
+    else:
+        editgearset.weapon_id = request.form.get('weapon')
+
+
+    if request.form.get('offhand') == None:
+        editgearset.offhand_id = editgearset.offhand_id
+    else:
+        editgearset.offhand_id = request.form.get('offhand')
+
+    if request.form.get('helmet') == None:
+        editgearset.helmet_id = editgearset.helmet_id
+    else:
+        editgearset.helmet_id = request.form.get('helmet')
+
+    if request.form.get('body') == None:
+        editgearset.body_id = editgearset.body_id
+    else:
+        editgearset.body_id = request.form.get('body')
+
+    if request.form.get('gloves') == None:
+        editgearset.gloves_id = editgearset.gloves_id
+    else:
+        editgearset.gloves_id = request.form.get('gloves')
+
+    if request.form.get('pants') == None:
+        editgearset.pants_id = editgearset.pants_id
+    else:
+        editgearset.pants_id = request.form.get('pants')
+
+    if request.form.get('boots') == None:
+        editgearset.boots_id = editgearset.boots_id
+    else:
+        editgearset.boots_id = request.form.get('boots')
+
+    if request.form.get('earring') == None:
+        editgearset.earring_id = editgearset.earring_id
+    else:
+        editgearset.earring_id = request.form.get('earring')
+
+    if request.form.get('necklace') == None:
+        editgearset.necklace_id = editgearset.necklace_id
+    else:
+        editgearset.necklace_id = request.form.get('necklace')
+
+    if request.form.get('bracelet') == None:
+        editgearset.bracelet_id = editgearset.bracelet_id
+    else:
+        editgearset.bracelet_id = request.form.get('bracelet')
+
+    if request.form.get('lring') == None:
+        editgearset.lring_id = editgearset.lring_id
+    else:
+        editgearset.lring_id = request.form.get('lring')
+
+    if request.form.get('rring') == None:
+        editgearset.rring_id = editgearset.rring_id
+    else:
+        editgearset.rring_id = request.form.get('rring')
+        
+    editgearset.name = request.form.get('name')
+    
+    db.session.add(editgearset)
+    db.session.commit()
+    return redirect("/gear/id/" + str(gearset_id))
+
+
+@app.route("/gear/id/<int:gearset_id>/delete", methods=["POST"])
+def gear_delete(gearset_id):
+    """Shows a page for user to edit a gearset."""
+
+    gearset = GearSet.query.get(gearset_id)
+    db.session.delete(gearset)
     db.session.commit()
     return redirect("/gear")
 
@@ -192,41 +322,6 @@ def show_fflogs():
     """Show the FFLogs page."""
 
     return render_template('users/fflogs.html')
-
-##############################################################################
-# Static routes
-
-@app.route("/static")
-def create_static():
-    """Show the static/guild page."""
-
-    dc = requests.get("https://xivapi.com/servers/dc").json()
-    print(g.user.statics)
-    return render_template('static/create.html', dc=dc)
-
-
-@app.route("/static/id/<int:static_id>")
-def show_static(static_id):
-    """Show details about a specific static."""
-
-    static = Static.query.get(static_id)
-    return render_template('static/details.html', static=static)
-
-
-@app.route("/static/save", methods=["POST"])
-def save_static():
-    """Save the static/guild created by user."""
-
-    name = request.form.get('name')
-    faction = request.form.get('faction')
-    server = request.form.get('server')
-    static = Static(name=name, faction=faction, server=server)
-    db.session.add(static)
-    db.session.commit()
-    staticmember = StaticMember(role="Leader", username=g.user.username, user_id=g.user.id, static_id=static.id)
-    db.session.add(staticmember)
-    db.session.commit()
-    return redirect("/")
 
 ##############################################################################
 # Homepage
