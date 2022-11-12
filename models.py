@@ -28,7 +28,7 @@ class User(db.Model):
         nullable = False
     )
 
-    gearsets = db.relationship('GearSet', backref="users")
+    gearsets = db.relationship('GearSet', cascade="all,delete", backref="users")
 
     @classmethod
     def signup(cls, username, password):
@@ -61,6 +61,26 @@ class User(db.Model):
             is_auth = bcrypt.check_password_hash(user.password, password)
             if is_auth:
                 return user
+
+        return False
+
+    @classmethod
+    def update(cls, username, password, user_id):
+        """Updates the user with new username and/or password."""
+
+        user = cls.query.get(user_id)
+
+        if user:
+            if password != '':
+                hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
+                user.password = hashed_pwd
+            if username != '':
+                user.username = username
+            else:
+                user.username = user.username
+
+            db.session.add(user)
+            return user
 
         return False
 

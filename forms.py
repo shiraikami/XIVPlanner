@@ -15,3 +15,11 @@ class LoginForm(FlaskForm):
 
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[Length(min=6)])
+
+
+class UserEditForm(FlaskForm):
+    """Form for editting users."""
+
+    username = StringField('Enter new username', validators=[])
+    password = PasswordField('Enter new password', validators=[])
+    confirmpass = PasswordField('Confirm Password', validators=[Length(min=6)])

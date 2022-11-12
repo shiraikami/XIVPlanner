@@ -45,7 +45,7 @@
             <div class="input-group-prepend">
             <span class="input-group-text">Name</span>
             </div>
-            <input name="name" type="text" class="form-control" aria-label="Gearset Name" required>
+            <input name="name" type="text" placeholder="{{ gearset.name }}  " class="form-control" aria-label="Gearset Name" required>
         </div>
     </div>
 
@@ -166,10 +166,15 @@
                 </div>
             </div>
         </div>
-        {% if g.user %}
+        <div class="container">
             <button class="btn btn-primary float-end" type="submit">Save</button>
             <br><br>
-        {% endif %}
+        </div>
+    </div>
+</form>
+<form action="/gear" method="GET">
+    <div class="container">
+        <button class="btn btn-danger float-end" type="submit">Cancel</button>
     </div>
 </form>
 

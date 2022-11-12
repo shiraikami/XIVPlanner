@@ -6,9 +6,10 @@ from flask import Flask, render_template, request, redirect, session, flash, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
+from psycopg2.errors import UniqueViolation
 import requests
 
-from forms import UserSignUpForm, LoginForm
+from forms import UserSignUpForm, LoginForm, UserEditForm
 from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet
 
 CURR_USER = "curr_user"
@@ -74,7 +75,7 @@ def signup():
 
         except IntegrityError:
             flash("Username already taken", 'error')
-            return render_template('users/signup.html', form=form)
+            return render_template('/users/signup.html', form=form)
 
         do_login(user)
 
@@ -99,7 +100,7 @@ def login():
 
         flash("Invalid credentials.", 'error')
 
-    return render_template('users/login.html', form=form)
+    return render_template('/users/login.html', form=form)
 
 
 @app.route('/logout')
@@ -118,7 +119,42 @@ def show_profile(user_id):
     """Show the profile of a user."""
 
     user = User.query.get(user_id)
-    return render_template('users/profile.html', user=user)
+    return render_template('/users/profile.html', user=user)
+
+
+@app.route("/profile/id/<int:user_id>/edit", methods=["GET", "POST"])
+def edit_profile(user_id):
+    """Shows the edit page for a user."""
+
+    user = User.query.get(user_id)
+    form = UserEditForm()
+
+    if form.validate_on_submit():
+        try:
+            if(User.authenticate(g.user.username, form.confirmpass.data)):
+                User.update(form.username.data, form.password.data, user.id)
+                db.session.commit()
+
+        except IntegrityError:    
+            flash("Username already taken", 'error')
+            return render_template('/profile/id/' + str(g.user.id), form=form)
+
+        return redirect("/profile/id/" + str(g.user.id))
+
+    else:
+        return render_template('/users/profile_edit.html', form=form)
+
+
+@app.route("/profile/id/<int:user_id>/delete", methods=["GET"])
+def delete_profile(user_id):
+    """Deletes the user."""
+
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect("/")
+
+
 
 ##############################################################################
 # Gear routes
@@ -277,7 +313,7 @@ def gear_save_edit(gearset_id):
 
 @app.route("/gear/id/<int:gearset_id>/delete", methods=["POST"])
 def gear_delete(gearset_id):
-    """Shows a page for user to edit a gearset."""
+    """Deletes a gearset."""
 
     gearset = GearSet.query.get(gearset_id)
     db.session.delete(gearset)
