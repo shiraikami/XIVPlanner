@@ -696,6 +696,66 @@ class GearSet(db.Model):
         db.ForeignKey('rings.id')
     )
 
+    got_weapon = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_offhand = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_helmet = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_body = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_gloves = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_pants = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_boots = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_earring = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_necklace = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_bracelet = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_lring = db.Column(
+        db.Boolean,
+        default = False
+    )
+
+    got_rring = db.Column(
+        db.Boolean,
+        default = False
+    )
+
 def connect_db(app):
     """Connect this database to provided Flask app."""
 

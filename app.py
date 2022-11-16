@@ -212,6 +212,79 @@ def gear_detail(gearset_id):
     return render_template("/gear/gear_detail.html", gearset=gearset, weapon=weapon, offhand=offhand, helmet=helmet, body=body, gloves=gloves, pants=pants, boots=boots, earring=earring, necklace=necklace, bracelet=bracelet, lring=lring, rring=rring)
 
 
+@app.route("/gear/id/<int:gearset_id>", methods=["POST"])
+def gear_acquired(gearset_id):
+    """Updates what gear the user currently has."""
+
+    gearset = GearSet.query.get(gearset_id)
+    if request.form.get('weaponcheck') == 'True':
+        weapon = True
+    else:
+        weapon = False
+    if request.form.get('offhandcheck') == 'True':
+        offhand = True
+    else:
+        offhand = False
+    if request.form.get('helmetcheck') == 'True':
+        helmet = True
+    else:
+        helmet = False
+    if request.form.get('bodycheck') == 'True':
+        body = True
+    else:
+        body = False
+    if request.form.get('glovescheck') == 'True':
+        gloves = True
+    else:
+        gloves = False
+    if request.form.get('pantscheck') == 'True':
+        pants = True
+    else:
+        pants = False
+    if request.form.get('bootscheck') == 'True':
+        boots = True
+    else:
+        weapon = False
+    if request.form.get('earringcheck') == 'True':
+        earring = True
+    else:
+        earring = False
+    if request.form.get('necklacecheck') == 'True':
+        necklace = True
+    else:
+        necklace = False
+    if request.form.get('braceletcheck') == 'True':
+        bracelet = True
+    else:
+        bracelet = False
+    if request.form.get('lringcheck') == 'True':
+        lring = True
+    else:
+        lring = False
+    if request.form.get('rringcheck') == 'True':
+        rring = True
+    else:
+        rring = False
+
+    gearset.got_weapon = weapon
+    gearset.got_offhand = offhand
+    gearset.got_helmet = helmet
+    gearset.got_body = body
+    gearset.got_gloves = gloves
+    gearset.got_pants = pants
+    gearset.got_boots = boots
+    gearset.got_earring = earring
+    gearset.got_necklace = necklace
+    gearset.got_bracelet = bracelet
+    gearset.got_lring = lring
+    gearset.got_rring = rring
+    
+    db.session.add(gearset)
+    db.session.commit()
+
+    return redirect("/gear/id/" + str(gearset_id))
+
+
 @app.route("/gear/id/<int:gearset_id>/edit")
 def gear_show_edit(gearset_id):
     """Shows a page for user to edit a gearset."""

@@ -212,6 +212,160 @@
         <button class="btn btn-primary float-end" type="submit">Edit</button>
     </div>
 </form>
+<br><br><br>
+<form action="/gear/id/{{ gearset.id }}" method="POST">
+    {% if gearset.offhand_id != None %}
+    <div class="container border">
+        <h3 class="text-center">Currently Acquired Gear</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="weaponcheck" name="weaponcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Weapon
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="offhandcheck" name="offhandcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Offhand
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="helmetcheck" name="helmetcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Helmet
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="bodycheck" name="bodycheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Body
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="glovescheck" name="glovescheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Gloves
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="pantscheck" name="pantscheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Pants
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="bootscheck" name="bootscheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Boots
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="earringcheck" name="earringcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Earring
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="necklacecheck" name="necklacecheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Necklace
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="braceletcheck" name="braceletcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Bracelet
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="lringcheck" name="lringcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Ring
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="rringcheck" name="rringcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Ring
+            </label>
+        </div>
+    </div>
+    {% else %}
+    <div class="container border">
+        <h3 class="text-center">Currently Acquired Gear</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="weaponcheck" name="weaponcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Weapon
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="helmetcheck" name="helmetcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Helmet
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="bodycheck" name="bodycheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Body
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="glovescheck" name="glovescheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Gloves
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="pantscheck" name="pantscheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Pants
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="bootscheck" name="bootscheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Boots
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="earringcheck" name="earringcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Earring
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="necklacecheck" name="necklacecheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Necklace
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="braceletcheck" name="braceletcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Bracelet
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="lringcheck" name="lringcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Ring
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value=True id="rringcheck" name="rringcheck">
+            <label class="form-check-label" for="flexCheckDefault">
+                Ring
+            </label>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container">
+        <button class="btn btn-primary float-end" type="submit">Save</button>
+    </div>
+</form>
+<br><br><br>
 
 {% endblock %}
 
