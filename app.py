@@ -10,7 +10,7 @@ from psycopg2.errors import UniqueViolation
 import requests
 
 from forms import UserSignUpForm, LoginForm, UserEditForm
-from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet
+from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, AcquiredGear
 
 CURR_USER = "curr_user"
 
@@ -135,7 +135,7 @@ def edit_profile(user_id):
                 User.update(form.username.data, form.password.data, user.id)
                 db.session.commit()
 
-        except IntegrityError:    
+        except:
             flash("Username already taken", 'error')
             return render_template('/profile/id/' + str(g.user.id), form=form)
 
@@ -153,7 +153,6 @@ def delete_profile(user_id):
     db.session.delete(user)
     db.session.commit()
     return redirect("/")
-
 
 
 ##############################################################################
@@ -208,7 +207,7 @@ def gear_detail(gearset_id):
     bracelet = Bracelet.query.get(gearset.bracelet_id)
     lring = Ring.query.get(gearset.lring_id)
     rring = Ring.query.get(gearset.rring_id)
-
+    
     return render_template("/gear/gear_detail.html", gearset=gearset, weapon=weapon, offhand=offhand, helmet=helmet, body=body, gloves=gloves, pants=pants, boots=boots, earring=earring, necklace=necklace, bracelet=bracelet, lring=lring, rring=rring)
 
 
@@ -216,72 +215,19 @@ def gear_detail(gearset_id):
 def gear_acquired(gearset_id):
     """Updates what gear the user currently has."""
 
-    gearset = GearSet.query.get(gearset_id)
-    if request.form.get('weaponcheck') == 'True':
-        weapon = True
+    data = request.json
+    if(data['checked'] == True and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is None):
+        acquiredgear = AcquiredGear(user_id=g.user.id, gearset_id=gearset_id, gear_id=data['gear'])
+        db.session.add(acquiredgear)
+        db.session.commit()
+    elif(data['checked'] == True and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is not None):
+        pass
+    elif(data['checked'] == False and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is not None):
+        acquiredgear = AcquiredGear.query.filter_by(gear_id=data['gear']).first()
+        db.session.delete(acquiredgear)
+        db.session.commit()
     else:
-        weapon = False
-    if request.form.get('offhandcheck') == 'True':
-        offhand = True
-    else:
-        offhand = False
-    if request.form.get('helmetcheck') == 'True':
-        helmet = True
-    else:
-        helmet = False
-    if request.form.get('bodycheck') == 'True':
-        body = True
-    else:
-        body = False
-    if request.form.get('glovescheck') == 'True':
-        gloves = True
-    else:
-        gloves = False
-    if request.form.get('pantscheck') == 'True':
-        pants = True
-    else:
-        pants = False
-    if request.form.get('bootscheck') == 'True':
-        boots = True
-    else:
-        weapon = False
-    if request.form.get('earringcheck') == 'True':
-        earring = True
-    else:
-        earring = False
-    if request.form.get('necklacecheck') == 'True':
-        necklace = True
-    else:
-        necklace = False
-    if request.form.get('braceletcheck') == 'True':
-        bracelet = True
-    else:
-        bracelet = False
-    if request.form.get('lringcheck') == 'True':
-        lring = True
-    else:
-        lring = False
-    if request.form.get('rringcheck') == 'True':
-        rring = True
-    else:
-        rring = False
-
-    gearset.got_weapon = weapon
-    gearset.got_offhand = offhand
-    gearset.got_helmet = helmet
-    gearset.got_body = body
-    gearset.got_gloves = gloves
-    gearset.got_pants = pants
-    gearset.got_boots = boots
-    gearset.got_earring = earring
-    gearset.got_necklace = necklace
-    gearset.got_bracelet = bracelet
-    gearset.got_lring = lring
-    gearset.got_rring = rring
-    
-    db.session.add(gearset)
-    db.session.commit()
-
+        pass
     return redirect("/gear/id/" + str(gearset_id))
 
 
@@ -424,6 +370,16 @@ def api_gear():
     gears = [gear.to_dict() for gear in gears]
 
     return jsonify(gears)
+
+
+@app.route("/api/acquiredgear")
+def api_acquiredgear():
+    """Sends necessary data for acquired gear as JSON."""
+
+    acquiredgear = g.user.acquiredgear
+    acquiredgear = [gear.to_dict() for gear in acquiredgear]
+
+    return jsonify(acquiredgear)
 
 
 @app.route("/fflogs")

@@ -4,6 +4,7 @@
 <br><br><br><br>
 <div class="container d-flex justify-content-center">
     <h3>{{ gearset.name }}</h3>
+    <p hidden id="gearid">{{gearset.id}}</p>
 </div>
 <div class="container border">
     <div class="row">
@@ -18,7 +19,10 @@
 <div class="container border">
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{weapon.id}} id="weaponcheck" name="weaponcheck">
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + weapon.icon}}>
             </div>
         </div>
@@ -31,11 +35,13 @@
             <span class="ilevel" id="weapon-ilevel">{{ weapon.ilevel }}</span>
         </div>
     </div>
-    
     {% if offhand %}
         <div class="row">
             <div class="col-sm-1">
-                <div class="gear-img" id="weapon-img">
+                <div class="form-check" style="display: inline-block;">
+                    <input class="form-check-input" type="checkbox" value={{offhand.id}} id="offhandcheck" name="offhandcheck">   
+                </div>
+                <div class="gear-img" id="weapon-img" style="display: inline-block;">
                     <img src={{"https://xivapi.com" + offhand.icon}}>
                 </div>
             </div>
@@ -49,10 +55,12 @@
             </div>
         </div>
     {% endif %}
-
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{helmet.id}} id="helmetcheck" name="helmetcheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + helmet.icon}}>
             </div>
         </div>
@@ -67,7 +75,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{body.id}} id="bodycheck" name="bodycheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + body.icon}}>
             </div>
         </div>
@@ -82,7 +93,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{gloves.id}} id="glovescheck" name="glovescheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + gloves.icon}}>
             </div>
         </div>
@@ -97,7 +111,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{pants.id}} id="pantscheck" name="pantscheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + pants.icon}}>
             </div>
         </div>
@@ -112,7 +129,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{boots.id}} id="bootscheck" name="bootscheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + boots.icon}}>
             </div>
         </div>
@@ -127,7 +147,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{earring.id}} id="earringcheck" name="earringcheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + earring.icon}}>
             </div>
         </div>
@@ -142,7 +165,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{necklace.id}} id="necklacecheck" name="necklacecheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + necklace.icon}}>
             </div>
         </div>
@@ -157,7 +183,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{bracelet.id}} id="braceletcheck" name="braceletcheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + bracelet.icon}}>
             </div>
         </div>
@@ -172,7 +201,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{lring.id}} id="lringcheck" name="lringcheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + lring.icon}}>
             </div>
         </div>
@@ -187,7 +219,10 @@
     </div>
     <div class="row border">
         <div class="col-sm-1">
-            <div class="gear-img" id="weapon-img">
+            <div class="form-check" style="display: inline-block;">
+                <input class="form-check-input" type="checkbox" value={{rring.id}} id="rringcheck" name="rringcheck">   
+            </div>
+            <div class="gear-img" id="weapon-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + rring.icon}}>
             </div>
         </div>
@@ -213,160 +248,6 @@
     </div>
 </form>
 <br><br><br>
-<form action="/gear/id/{{ gearset.id }}" method="POST">
-    {% if gearset.offhand_id != None %}
-    <div class="container border">
-        <h3 class="text-center">Currently Acquired Gear</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="weaponcheck" name="weaponcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Weapon
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="offhandcheck" name="offhandcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Offhand
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="helmetcheck" name="helmetcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Helmet
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="bodycheck" name="bodycheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Body
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="glovescheck" name="glovescheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Gloves
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="pantscheck" name="pantscheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Pants
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="bootscheck" name="bootscheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Boots
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="earringcheck" name="earringcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Earring
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="necklacecheck" name="necklacecheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Necklace
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="braceletcheck" name="braceletcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Bracelet
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="lringcheck" name="lringcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Ring
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="rringcheck" name="rringcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Ring
-            </label>
-        </div>
-    </div>
-    {% else %}
-    <div class="container border">
-        <h3 class="text-center">Currently Acquired Gear</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="weaponcheck" name="weaponcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Weapon
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="helmetcheck" name="helmetcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Helmet
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="bodycheck" name="bodycheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Body
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="glovescheck" name="glovescheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Gloves
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="pantscheck" name="pantscheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Pants
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="bootscheck" name="bootscheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Boots
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="earringcheck" name="earringcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Earring
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="necklacecheck" name="necklacecheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Necklace
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="braceletcheck" name="braceletcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Bracelet
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="lringcheck" name="lringcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Ring
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=True id="rringcheck" name="rringcheck">
-            <label class="form-check-label" for="flexCheckDefault">
-                Ring
-            </label>
-        </div>
-    </div>
-    {% endif %}
-    <div class="container">
-        <button class="btn btn-primary float-end" type="submit">Save</button>
-    </div>
-</form>
-<br><br><br>
-
 {% endblock %}
 
 {% block script %}

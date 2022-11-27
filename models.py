@@ -29,6 +29,7 @@ class User(db.Model):
     )
 
     gearsets = db.relationship('GearSet', cascade="all,delete", backref="users")
+    acquiredgear = db.relationship('AcquiredGear', cascade="all,delete", backref="users")
 
     @classmethod
     def signup(cls, username, password):
@@ -615,7 +616,7 @@ class Ring(db.Model):
 class GearSet(db.Model):
     """List of gear the user saved."""
 
-    __tablename__ = 'gearset'
+    __tablename__ = 'gearsets'
 
     id = db.Column(
         db.Integer,
@@ -696,65 +697,42 @@ class GearSet(db.Model):
         db.ForeignKey('rings.id')
     )
 
-    got_weapon = db.Column(
-        db.Boolean,
-        default = False
+class AcquiredGear(db.Model):
+    """Piece of gear each user has."""
+
+    __tablename__ = 'acquiredgear'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
     )
 
-    got_offhand = db.Column(
-        db.Boolean,
-        default = False
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
     )
 
-    got_helmet = db.Column(
-        db.Boolean,
-        default = False
+    gearset_id = db.Column(
+        db.Integer,
+        db.ForeignKey('gearsets.id')
     )
 
-    got_body = db.Column(
-        db.Boolean,
-        default = False
+    gear_id = db.Column(
+        db.Integer
+    )
+    
+    __table_args__ = (
+        db.UniqueConstraint('user_id', 'gear_id', name='acquired_unique'), 
     )
 
-    got_gloves = db.Column(
-        db.Boolean,
-        default = False
-    )
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
 
-    got_pants = db.Column(
-        db.Boolean,
-        default = False
-    )
-
-    got_boots = db.Column(
-        db.Boolean,
-        default = False
-    )
-
-    got_earring = db.Column(
-        db.Boolean,
-        default = False
-    )
-
-    got_necklace = db.Column(
-        db.Boolean,
-        default = False
-    )
-
-    got_bracelet = db.Column(
-        db.Boolean,
-        default = False
-    )
-
-    got_lring = db.Column(
-        db.Boolean,
-        default = False
-    )
-
-    got_rring = db.Column(
-        db.Boolean,
-        default = False
-    )
+        return {
+            "gear_id": self.gear_id,
+            "gearset_id": self.gearset_id,
+            "user_id": self.user_id
+        }
 
 def connect_db(app):
     """Connect this database to provided Flask app."""
