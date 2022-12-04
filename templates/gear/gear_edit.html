@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<br><br><br><br>
-<form action="/gear/id/{{gearset.id}}/edit" method="POST">
+<form action="/gear/id/{{gearset.id}}/edit" method="POST" style="margin-top: 70px;">
     <div class="container">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -48,7 +47,6 @@
             <input name="name" type="text" placeholder="{{ gearset.name }}  " class="form-control" aria-label="Gearset Name" required>
         </div>
     </div>
-
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-4">

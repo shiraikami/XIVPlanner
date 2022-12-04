@@ -85,6 +85,35 @@ class User(db.Model):
 
         return False
 
+
+class Character(db.Model):
+    """User's character data from FFXIV."""
+
+    __tablename__ = 'characters'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
+    )
+
+    name = db.Column(
+        db.Text
+    )
+
+    portrait = db.Column(
+        db.Text
+    )
+
+    lodestone_id = db.Column(
+        db.Integer
+    )
+
+
 class Weapon(db.Model):
     """Gear list for a user."""
 
@@ -132,6 +161,7 @@ class Weapon(db.Model):
             "classjob": self.classjob,
             "equipslot": self.equipslot
         }
+
 
 class Offhand(db.Model):
     """Gear list for a user."""
@@ -181,6 +211,7 @@ class Offhand(db.Model):
             "equipslot": self.equipslot
         }
 
+
 class Helmet(db.Model):
     """Gear list for a user."""
 
@@ -228,6 +259,7 @@ class Helmet(db.Model):
             "classjob": self.classjob,
             "equipslot": self.equipslot
         }
+
 
 class Body(db.Model):
     """Gear list for a user."""
@@ -277,6 +309,7 @@ class Body(db.Model):
             "equipslot": self.equipslot
         }
 
+
 class Gloves(db.Model):
     """Gear list for a user."""
 
@@ -324,6 +357,7 @@ class Gloves(db.Model):
             "classjob": self.classjob,
             "equipslot": self.equipslot
         }
+
 
 class Pants(db.Model):
     """Gear list for a user."""
@@ -373,6 +407,7 @@ class Pants(db.Model):
             "equipslot": self.equipslot
         }
 
+
 class Boots(db.Model):
     """Gear list for a user."""
 
@@ -420,6 +455,7 @@ class Boots(db.Model):
             "classjob": self.classjob,
             "equipslot": self.equipslot
         }
+
 
 class Earring(db.Model):
     """Gear list for a user."""
@@ -469,6 +505,7 @@ class Earring(db.Model):
             "equipslot": self.equipslot
         }
 
+
 class Necklace(db.Model):
     """Gear list for a user."""
 
@@ -517,6 +554,7 @@ class Necklace(db.Model):
             "equipslot": self.equipslot
         }
 
+
 class Bracelet(db.Model):
     """Gear list for a user."""
 
@@ -564,6 +602,7 @@ class Bracelet(db.Model):
             "classjob": self.classjob,
             "equipslot": self.equipslot
         }
+
 
 class Ring(db.Model):
     """Gear list for a user."""

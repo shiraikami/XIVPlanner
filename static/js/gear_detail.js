@@ -114,6 +114,7 @@ try {
           checked,
           gear
         });
+        
     } else {
         let gear = offhandbox.value;
         let checked = false;

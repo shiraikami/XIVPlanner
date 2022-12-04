@@ -114,6 +114,14 @@ def logout():
 ##############################################################################
 # User routes
 
+@app.route("/search")
+def search_character():
+    """Shows a list of characters that match the search terms."""
+
+    term = request.args.get('term')
+    return render_template('/users/search.html', term=term)
+
+
 @app.route("/profile/id/<int:user_id>")
 def show_profile(user_id):
     """Show the profile of a user."""
@@ -356,6 +364,7 @@ def api_gear():
     necklaces = db.session.query(Necklace).filter(or_(Necklace.name.contains("Abyssos"),Necklace.name.contains("Augmented Lunar Envoy")))
     bracelets = db.session.query(Bracelet).filter(or_(Bracelet.name.contains("Abyssos"),Bracelet.name.contains("Augmented Lunar Envoy")))
     rings = db.session.query(Ring).filter(or_(Ring.name.contains("Abyssos"),Ring.name.contains("Augmented Lunar Envoy")))
+    
     gears.extend(weapons)
     gears.extend(offhands)
     gears.extend(helmet)
@@ -395,4 +404,4 @@ def show_fflogs():
 def homepage():
     """Show homepage."""
 
-    return render_template('home.html')
+    return render_template('gear/gear_create.html')

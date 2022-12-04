@@ -58,7 +58,7 @@ try:
             db.session.add(off)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'offhand data'")
 
 try:
     helmet_data = []
@@ -76,7 +76,7 @@ try:
             db.session.add(hel)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'helmet data'")
 
 try:
     body_data = []
@@ -94,7 +94,7 @@ try:
             db.session.add(bod)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'body data'")
 
 try:
     gloves_data = []
@@ -112,7 +112,7 @@ try:
             db.session.add(glov)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'gloves data'")
 
 try:
     pants_data = []
@@ -130,7 +130,7 @@ try:
             db.session.add(pant)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'pants data'")
 
 try:
     boots_data = []
@@ -148,7 +148,7 @@ try:
             db.session.add(boot)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'boots data'")
 
 try:
     earring_data = []
@@ -166,7 +166,7 @@ try:
             db.session.add(ear)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'earring data'")
 
 try:
     necklace_data = []
@@ -184,7 +184,7 @@ try:
             db.session.add(neck)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'necklace data'")
 
 try:
     bracelet_data = []
@@ -202,7 +202,7 @@ try:
             db.session.add(brace)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'bracelet data'")
 
 try:
     ring_data = []
@@ -220,4 +220,4 @@ try:
             db.session.add(r)
             db.session.commit()
 except:
-    print("API request error with 'pffhand data'")
+    print("API request error with 'ring data'")

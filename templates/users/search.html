@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid border w-75 mt-5">
+    <h3 class="text-start">Characters</h3>
+    <p hidden id="term">{{ term }}</p>
+</div>
+<div class="container-fluid w-75 border" id="characterList">
+</div>
+<div class="loader" id="loader"></div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/search.js"></script>
+{% endblock %}
