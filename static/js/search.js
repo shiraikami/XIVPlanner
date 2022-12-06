@@ -8,12 +8,6 @@ window.onload = async (evt) => {
     await searchCharacter({url: url, page:0});
 };
 
-function customizer(objValue, srcValue) {
-  if (_.isArray(objValue)) {
-      return objValue.concat(srcValue);
-  }
-}
-
 async function searchCharacter({url, page}) {
     page++;
 
@@ -31,7 +25,7 @@ async function searchCharacter({url, page}) {
 }
 
 function listCharacters() {
-    document.getElementById("loader").style.display = "none";
+    document.getElementById("spinner").style.display = "none";
     let index = 0;
     let row;
     let charList = document.getElementById('characterList');
@@ -42,32 +36,40 @@ function listCharacters() {
         rowDiv.setAttribute("class", "row");
 
         let charDiv = document.createElement("div");
-        charDiv.innerText = character.Name;
         charDiv.setAttribute("class", "col-2 border border-end-0");
         charDiv.style.fontSize = "13px";
 
+        let anchor = document.createElement("a");
+        anchor.innerText = character.Name;
+        anchor.setAttribute("href", `/character/id/${character.ID}`);
+
         let serverDiv = document.createElement("div");
         serverDiv.innerText = character.Lang + " - " + character.Server;
-        serverDiv.setAttribute("class", "col border border-start-0");
+        serverDiv.setAttribute("class", "col border border-start-0 text-end");
         serverDiv.style.fontSize = "12px";
 
-        rowDiv.append(charDiv)
-        rowDiv.append(serverDiv)
+        charDiv.append(anchor);
+        rowDiv.append(charDiv);
+        rowDiv.append(serverDiv);
         charList.append(rowDiv);
         row = rowDiv;
         index++;
       } 
       else {
         let charDiv = document.createElement("div");
-        charDiv.innerText = character.Name;
         charDiv.setAttribute("class", "col-2 border border-end-0");
         charDiv.style.fontSize = "13px";
 
+        let anchor = document.createElement("a");
+        anchor.innerText = character.Name;
+        anchor.setAttribute("href", `/character/id/${character.ID}`);
+
         let serverDiv = document.createElement("div");
         serverDiv.innerText = character.Lang + " - " + character.Server;
-        serverDiv.setAttribute("class", "col border border-start-0");
+        serverDiv.setAttribute("class", "col border border-start-0 text-end");
         serverDiv.style.fontSize = "12px";
 
+        charDiv.append(anchor);
         row.append(charDiv);
         row.append(serverDiv);
         index++;

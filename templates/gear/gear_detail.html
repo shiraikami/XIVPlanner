@@ -27,7 +27,7 @@
         </div>
         <div class="col-sm-9">
             <div class="gear-name" id="weapon-name">
-                <span class="name">{{ weapon.name }}</span>
+                {{ weapon.name }}
             </div>
         </div>
         <div class="col-sm-2">
@@ -40,17 +40,17 @@
                 <div class="form-check" style="display: inline-block;">
                     <input class="form-check-input" type="checkbox" value={{offhand.id}} id="offhandcheck" name="{{ offhand.name }}">   
                 </div>
-                <div class="gear-img" id="weapon-img" style="display: inline-block;">
+                <div class="gear-img" id="offhand-img" style="display: inline-block;">
                     <img src={{"https://xivapi.com" + offhand.icon}}>
                 </div>
             </div>
             <div class="col-sm-9">
-                <div class="gear-name" id="weapon-name">
-                    <span class="name">{{ offhand.name }}</span>
+                <div class="gear-name" id="offhand-name">
+                    {{ offhand.name }}
                 </div>
             </div>
             <div class="col-sm-2">
-                <span class="ilevel" id="weapon-ilevel">{{ offhand.ilevel }}</span>
+                <span class="ilevel" id="offhand-ilevel">{{ offhand.ilevel }}</span>
             </div>
         </div>
     {% endif %}
@@ -59,17 +59,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{helmet.id}} id="helmetcheck" name="{{ helmet.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="helmet-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + helmet.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ helmet.name }}</span>
+            <div class="gear-name" id="helmet-name">
+                {{ helmet.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ helmet.ilevel }}</span>
+            <span class="ilevel" id="helmet-ilevel">{{ helmet.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -77,17 +77,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{body.id}} id="bodycheck" name="{{ body.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="body-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + body.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ body.name }}</span>
+            <div class="gear-name" id="body-name">
+                {{ body.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ body.ilevel }}</span>
+            <span class="ilevel" id="body-ilevel">{{ body.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -95,17 +95,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{gloves.id}} id="glovescheck" name="{{ gloves.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="gloves-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + gloves.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ gloves.name }}</span>
+            <div class="gear-name" id="gloves-name">
+                {{ gloves.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ gloves.ilevel }}</span>
+            <span class="ilevel" id="gloves-ilevel">{{ gloves.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -113,17 +113,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{pants.id}} id="pantscheck" name="{{ pants.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="pants-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + pants.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ pants.name }}</span>
+            <div class="gear-name" id="pants-name">
+                {{ pants.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ pants.ilevel }}</span>
+            <span class="ilevel" id="pants-ilevel">{{ pants.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -131,17 +131,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{boots.id}} id="bootscheck" name="{{ boots.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="boots-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + boots.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ boots.name }}</span>
+            <div class="gear-name" id="boots-name">
+                {{ boots.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ boots.ilevel }}</span>
+            <span class="ilevel" id="boots-ilevel">{{ boots.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -149,17 +149,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{earring.id}} id="earringcheck" name="{{ earring.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="earring-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + earring.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ earring.name }}</span>
+            <div class="gear-name" id="earring-name">
+                {{ earring.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ earring.ilevel }}</span>
+            <span class="ilevel" id="earring-ilevel">{{ earring.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -167,17 +167,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{necklace.id}} id="necklacecheck" name="{{ necklace.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="necklace-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + necklace.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ necklace.name }}</span>
+            <div class="gear-name" id="necklace-name">
+                {{ necklace.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ necklace.ilevel }}</span>
+            <span class="ilevel" id="necklace-ilevel">{{ necklace.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -185,17 +185,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{bracelet.id}} id="braceletcheck" name="{{ bracelet.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="bracelet-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + bracelet.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ bracelet.name }}</span>
+            <div class="gear-name" id="bracelet-name">
+                {{ bracelet.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ bracelet.ilevel }}</span>
+            <span class="ilevel" id="bracelet-ilevel">{{ bracelet.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -203,17 +203,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{lring.id}} id="lringcheck" name="{{ lring.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="lring-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + lring.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ lring.name }}</span>
+            <div class="gear-name" id="lring-name">
+                {{ lring.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ lring.ilevel }}</span>
+            <span class="ilevel" id="lring-ilevel">{{ lring.ilevel }}</span>
         </div>
     </div>
     <div class="row border">
@@ -221,17 +221,17 @@
             <div class="form-check" style="display: inline-block;">
                 <input class="form-check-input" type="checkbox" value={{rring.id}} id="rringcheck" name="{{ rring.name }}">   
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+            <div class="gear-img" id="rring-img" style="display: inline-block;">
                 <img src={{"https://xivapi.com" + rring.icon}}>
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="gear-name" id="weapon-name">
-                <span class="name">{{ rring.name }}</span>
+            <div class="gear-name" id="rring-name">
+                {{ rring.name }}
             </div>
         </div>
         <div class="col-sm-2">
-            <span class="ilevel" id="weapon-ilevel">{{ rring.ilevel }}</span>
+            <span class="ilevel" id="rring-ilevel">{{ rring.ilevel }}</span>
         </div>
     </div>
 </div>
@@ -252,31 +252,72 @@
 <div class="container border" style="margin-bottom: 50px">
     <div class="row">
         <div class="col text-center border">
-            <h5>Raid 1</h5>
+            <h5><b>Raid 1</b></h5>
         </div>
         <div class="col text-center border">
-            <h5>Raid 2</h5>
+            <h5><b>Raid 2</b></h5>
         </div>
     </div>
     <div class="row">
-        <div class="col text-center" id="raid-1">
+        <div class="col text-center border" id="raid-1">
+            <p id="earrings" style="display: none">Earrings</p>
+            <p id="necklace" style="display: none">Necklace</p>
+            <p id="bracelet" style="display: none">Bracelet</p>
+            <p id="lring" style="display: none">Ring</p>
+            <p id="rring" style="display: none">Ring</p>
         </div>
-        <div class="col text-center" id="raid-2">
+        <div class="col text-center border" id="raid-2">
+            <p id="helmet" style="display: none">Helmet</p>
+            <p id="gloves" style="display: none">Gloves</p>
+            <p id="boots" style="display: none">Boots</p>
         </div>
     </div>
     <div class="row">
         <div class="col text-center border">
-            <h5>Raid 3</h5>
-        </div>
-        <div class="col text-center border">
-            <h5>Raid 4</h5>
+            <h5><b>Shine</b></h5>
         </div>
     </div>
     <div class="row">
-        <div class="col text-center" id="raid-3">
+        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="earrings-shine">
+        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="necklace-shine">
+        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="bracelet-shine">
+        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="lring-shine">
+        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="rring-shine">
+    </div>
+    <div class="row">
+        <div class="col text-center border">
+            <h5><b>Raid 3</b></h5>
         </div>
-        <div class="col text-center" id="raid-4">
+        <div class="col text-center border">
+            <h5><b>Raid 4</b></h5>
         </div>
+    </div>
+    <div class="row">
+        <div class="col text-center border" id="raid-3">
+            <p id="helmet2" style="display: none">Helmet</p>
+            <p id="gloves2" style="display: none">Gloves</p>
+            <p id="pants" style="display: none">Pants</p>
+            <p id="boots2" style="display: none">Boots</p>
+        </div>
+        <div class="col text-center border" id="raid-4">
+            <p id="weapon" style="display: none">Weapon</p>
+            <p id="offhand" style="display: none">Offhand</p>
+            <p id="body" style="display: none">Body</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center border">
+            <h5><b>Twine</b></h5>
+        </div>
+    </div>
+    <div class="row text-center">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="weapon-twine">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="offhand-twine">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="helmet-twine">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="body-twine">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="gloves-twine">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="pants-twine">
+        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="boots-twine">
     </div>
 </div>
 {% endblock %}

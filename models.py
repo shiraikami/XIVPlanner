@@ -101,6 +101,10 @@ class Character(db.Model):
         db.ForeignKey('users.id')
     )
 
+    character_id = db.Column(
+        db.Integer
+    )
+
     name = db.Column(
         db.Text
     )
@@ -111,6 +115,10 @@ class Character(db.Model):
 
     lodestone_id = db.Column(
         db.Integer
+    )
+
+    __table_args__ = (
+        db.UniqueConstraint('user_id', 'character_id', name='user_character'), 
     )
 
 
@@ -736,6 +744,8 @@ class GearSet(db.Model):
         db.ForeignKey('rings.id')
     )
 
+    acquiredgear = db.relationship('AcquiredGear', cascade="all,delete", backref="gearsets")
+
 class AcquiredGear(db.Model):
     """Piece of gear each user has."""
 
@@ -761,7 +771,7 @@ class AcquiredGear(db.Model):
     )
     
     __table_args__ = (
-        db.UniqueConstraint('user_id', 'gear_id', name='acquired_unique'), 
+        db.UniqueConstraint('user_id', 'gear_id', name='acquired_unique'),
     )
 
     def to_dict(self):

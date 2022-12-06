@@ -114,14 +114,6 @@ def logout():
 ##############################################################################
 # User routes
 
-@app.route("/search")
-def search_character():
-    """Shows a list of characters that match the search terms."""
-
-    term = request.args.get('term')
-    return render_template('/users/search.html', term=term)
-
-
 @app.route("/profile/id/<int:user_id>")
 def show_profile(user_id):
     """Show the profile of a user."""
@@ -389,6 +381,24 @@ def api_acquiredgear():
     acquiredgear = [gear.to_dict() for gear in acquiredgear]
 
     return jsonify(acquiredgear)
+
+
+##############################################################################
+# Character
+
+@app.route("/search")
+def search_character():
+    """Shows a list of characters that match the search terms."""
+
+    term = request.args.get('term')
+    return render_template('/character/search.html', term=term)
+
+
+@app.route("/character/id/<int:char_id>")
+def show_character(char_id):
+    """Shows a character page for an in-game character."""
+
+    return render_template('/character/profile.html', char_id=char_id)
 
 
 @app.route("/fflogs")
