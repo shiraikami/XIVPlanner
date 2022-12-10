@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="/gear/id/{{gearset.id}}/edit" method="POST" style="margin-top: 70px;">
+<form action="/gearset/id/{{gearset.id}}/edit" method="POST" style="margin-top: 70px;">
     <div class="container">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -170,7 +170,7 @@
         </div>
     </div>
 </form>
-<form action="/gear/id/{{ gearset.id }}" method="GET">
+<form action="/gearset/id/{{ gearset.id }}" method="GET">
     <div class="container">
         <button class="btn btn-danger float-end" type="submit">Cancel</button>
     </div>

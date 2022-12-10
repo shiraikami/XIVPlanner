@@ -28,8 +28,9 @@ class User(db.Model):
         nullable = False
     )
 
-    gearsets = db.relationship('GearSet', cascade="all,delete", backref="users")
-    acquiredgear = db.relationship('AcquiredGear', cascade="all,delete", backref="users")
+    gearsets = db.relationship('GearSet', cascade="all, delete", backref="users")
+    acquiredgear = db.relationship('AcquiredGear', cascade="all, delete", backref="users")
+    character = db.relationship('Character', cascade="all, delete", backref="users")
 
     @classmethod
     def signup(cls, username, password):
@@ -87,9 +88,9 @@ class User(db.Model):
 
 
 class Character(db.Model):
-    """User's character data from FFXIV."""
+    """Character associated with user."""
 
-    __tablename__ = 'characters'
+    __tablename__ = 'character'
 
     id = db.Column(
         db.Integer,
@@ -104,24 +105,9 @@ class Character(db.Model):
     character_id = db.Column(
         db.Integer
     )
-
-    name = db.Column(
-        db.Text
-    )
-
-    portrait = db.Column(
-        db.Text
-    )
-
-    lodestone_id = db.Column(
-        db.Integer
-    )
-
-    __table_args__ = (
-        db.UniqueConstraint('user_id', 'character_id', name='user_character'), 
-    )
-
-
+    
+    db.UniqueConstraint(user_id, character_id)
+    
 class Weapon(db.Model):
     """Gear list for a user."""
 
@@ -744,7 +730,6 @@ class GearSet(db.Model):
         db.ForeignKey('rings.id')
     )
 
-    acquiredgear = db.relationship('AcquiredGear', cascade="all,delete", backref="gearsets")
 
 class AcquiredGear(db.Model):
     """Piece of gear each user has."""
@@ -761,18 +746,11 @@ class AcquiredGear(db.Model):
         db.ForeignKey('users.id')
     )
 
-    gearset_id = db.Column(
-        db.Integer,
-        db.ForeignKey('gearsets.id')
-    )
-
     gear_id = db.Column(
         db.Integer
     )
     
-    __table_args__ = (
-        db.UniqueConstraint('user_id', 'gear_id', name='acquired_unique'),
-    )
+    db.UniqueConstraint(user_id, gear_id)
 
     def to_dict(self):
         """Serialize data to a dict of specific gear info."""

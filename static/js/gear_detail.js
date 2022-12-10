@@ -1,7 +1,7 @@
 "use strict";
 
 const gearid = document.getElementById('gearid')
-const url = "http://127.0.0.1:5000/gear/id/" + gearid.innerText;
+const url = "http://127.0.0.1:5000/gearset/id/" + gearid.innerText;
 let acquiredgear;
 const weaponbox = document.getElementById('weaponcheck');
 const offhandbox = document.getElementById('offhandcheck')
@@ -615,6 +615,10 @@ lringbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = lringbox.value;
     let checked = true;
+    if(rringbox.value == lringbox.value) {
+      if(rringbox.checked == false) 
+        rringbox.checked = true;
+    }
     const lringResponse = await axios.post(url, {
       checked,
       gear
@@ -628,6 +632,10 @@ lringbox.addEventListener('change', async (event) => {
   } else {
     let gear = lringbox.value;
     let checked = false;
+    if(rringbox.value == lringbox.value) {
+      if(rringbox.checked == true)
+        rringbox.checked = false
+    }
     const lringResponse = await axios.post(url, {
       checked,
       gear
@@ -645,6 +653,10 @@ rringbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = rringbox.value;
     let checked = true;
+    if(lringbox.value == rringbox.value) {
+      if(lringbox.checked == false) 
+        lringbox.checked = true;
+    }
     const rringResponse = await axios.post(url, {
       checked,
       gear
@@ -658,6 +670,10 @@ rringbox.addEventListener('change', async (event) => {
   } else {
     let gear = rringbox.value;
     let checked = false;
+    if(lringbox.value == rringbox.value) {
+      if(lringbox.checked == true) 
+        lringbox.checked = false;
+    }
     const rringResponse = await axios.post(url, {
       checked,
       gear

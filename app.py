@@ -10,7 +10,7 @@ from psycopg2.errors import UniqueViolation
 import requests
 
 from forms import UserSignUpForm, LoginForm, UserEditForm
-from models import db, connect_db, User, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, AcquiredGear
+from models import db, connect_db, User, Character, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, AcquiredGear
 
 CURR_USER = "curr_user"
 
@@ -119,7 +119,7 @@ def show_profile(user_id):
     """Show the profile of a user."""
 
     user = User.query.get(user_id)
-    return render_template('/users/profile.html', user=user)
+    return render_template('/users/user_profile.html', user=user)
 
 
 @app.route("/profile/id/<int:user_id>/edit", methods=["GET", "POST"])
@@ -142,7 +142,7 @@ def edit_profile(user_id):
         return redirect("/profile/id/" + str(g.user.id))
 
     else:
-        return render_template('/users/profile_edit.html', form=form)
+        return render_template('/users/user_profile_edit.html', form=form)
 
 
 @app.route("/profile/id/<int:user_id>/delete", methods=["GET"])
@@ -158,14 +158,14 @@ def delete_profile(user_id):
 ##############################################################################
 # Gear routes
 
-@app.route("/gear")
+@app.route("/gearset")
 def show_gear():
     """Show the gear page of a user."""
 
     return render_template('gear/gear_create.html')
 
 
-@app.route("/gear/save", methods=["POST"])
+@app.route("/gearset/save", methods=["POST"])
 def save_gear():
     """Save the current gearset of user."""
 
@@ -187,10 +187,10 @@ def save_gear():
     gearset = GearSet(user_id=g.user.id, job=job, name=name, weapon_id=weapon, offhand_id=offhand, helmet_id=helmet, body_id=body, gloves_id=gloves, pants_id=pants, boots_id=boots, earring_id=earring, necklace_id=necklace, bracelet_id=bracelet, lring_id=lring, rring_id=rring)
     db.session.add(gearset)
     db.session.commit()
-    return redirect("/gear")
+    return redirect("/gearset")
 
 
-@app.route("/gear/id/<int:gearset_id>")
+@app.route("/gearset/id/<int:gearset_id>")
 def gear_detail(gearset_id):
     """Shows a gearset that is saved."""
     
@@ -211,13 +211,13 @@ def gear_detail(gearset_id):
     return render_template("/gear/gear_detail.html", gearset=gearset, weapon=weapon, offhand=offhand, helmet=helmet, body=body, gloves=gloves, pants=pants, boots=boots, earring=earring, necklace=necklace, bracelet=bracelet, lring=lring, rring=rring)
 
 
-@app.route("/gear/id/<int:gearset_id>", methods=["POST"])
+@app.route("/gearset/id/<int:gearset_id>", methods=["POST"])
 def gear_acquired(gearset_id):
     """Updates what gear the user currently has."""
 
     data = request.json
     if(data['checked'] == True and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is None):
-        acquiredgear = AcquiredGear(user_id=g.user.id, gearset_id=gearset_id, gear_id=data['gear'])
+        acquiredgear = AcquiredGear(user_id=g.user.id, gear_id=data['gear'])
         db.session.add(acquiredgear)
         db.session.commit()
     elif(data['checked'] == True and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is not None):
@@ -228,10 +228,10 @@ def gear_acquired(gearset_id):
         db.session.commit()
     else:
         pass
-    return redirect("/gear/id/" + str(gearset_id))
+    return redirect("/gearset/id/" + str(gearset_id))
 
 
-@app.route("/gear/id/<int:gearset_id>/edit")
+@app.route("/gearset/id/<int:gearset_id>/edit")
 def gear_show_edit(gearset_id):
     """Shows a page for user to edit a gearset."""
 
@@ -251,10 +251,9 @@ def gear_show_edit(gearset_id):
     return render_template('gear/gear_edit.html', gearset=gearset, weapon=weapon, offhand=offhand, helmet=helmet, body=body, gloves=gloves, pants=pants, boots=boots, earring=earring, necklace=necklace, bracelet=bracelet, lring=lring, rring=rring)
 
 
-@app.route("/gear/id/<int:gearset_id>/edit", methods=["POST"])
+@app.route("/gearset/id/<int:gearset_id>/edit", methods=["POST"])
 def gear_save_edit(gearset_id):
     """Shows a page for user to edit a gearset."""
-    print(request.form.get('job'))
 
     editgearset = GearSet.query.get(gearset_id)
     if request.form.get('job') == None:
@@ -266,7 +265,6 @@ def gear_save_edit(gearset_id):
         editgearset.weapon_id = editgearset.weapon_id
     else:
         editgearset.weapon_id = request.form.get('weapon')
-
 
     if request.form.get('offhand') == None:
         editgearset.offhand_id = editgearset.offhand_id
@@ -327,17 +325,17 @@ def gear_save_edit(gearset_id):
     
     db.session.add(editgearset)
     db.session.commit()
-    return redirect("/gear/id/" + str(gearset_id))
+    return redirect("/gearset/id/" + str(gearset_id))
 
 
-@app.route("/gear/id/<int:gearset_id>/delete", methods=["POST"])
+@app.route("/gearset/id/<int:gearset_id>/delete", methods=["POST"])
 def gear_delete(gearset_id):
     """Deletes a gearset."""
 
     gearset = GearSet.query.get(gearset_id)
     db.session.delete(gearset)
     db.session.commit()
-    return redirect("/gear")
+    return redirect("/gearset")
 
 
 @app.route("/api/gear")
@@ -398,14 +396,30 @@ def search_character():
 def show_character(char_id):
     """Shows a character page for an in-game character."""
 
-    return render_template('/character/profile.html', char_id=char_id)
+    character = db.session.query(Character).filter_by(character_id=char_id).first()
+    print(character)
+
+    return render_template('/character/character_profile.html', char_id=char_id, character=character)
 
 
-@app.route("/fflogs")
-def show_fflogs():
-    """Show the FFLogs page."""
+@app.route("/character/id/<int:char_id>", methods=["POST"])
+def save_character(char_id):
+    """Claims the character and saves it to the user."""
 
-    return render_template('users/fflogs.html')
+    character = Character(user_id=g.user.id, character_id=char_id)
+    db.session.add(character)
+    db.session.commit()
+    return redirect("/character/id/" + str(char_id))
+
+
+@app.route("/cahracter/id/<int:char_id>/delete", methods=["POST"])
+def delete_character(char_id):
+    """Deletes the claimed character and removes it from user."""
+
+    character = Character.query.get(char_id)
+    db.session.delete(character)
+    db.commit()
+    return redirect("/search")
 
 ##############################################################################
 # Homepage

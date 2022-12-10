@@ -24,19 +24,19 @@
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Gear Planner
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    {% for gearset in g.user.gearsets %}
-                      <li><a class="dropdown-item" href="/gear/id/{{ gearset.id }}">{{ gearset.name }}</a></li>
-                    {% endfor %}
+                  <ul class="dropdown-menu dropdown-menu-end" style="height: 300px; overflow-y: scroll;">
+                    <li><a class="dropdown-item" href="/gearset">Create a gearset</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/gear">Create a gearset</a></li>
+                    {% for gearset in g.user.gearsets %}
+                      <li><a class="dropdown-item" href="/gearset/id/{{ gearset.id }}">{{ gearset.job }} - {{ gearset.name }}</a></li>
+                    {% endfor %}
                   </ul>
                 </li>
               </ul>
             {% else %}
             <ul class="navbar-nav me-auto mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="/gear">Gear Planner</a>
+                <a class="nav-link" href="/gearset">Gear Planner</a>
               </li>
             </ul>
             {% endif %}

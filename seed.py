@@ -2,27 +2,25 @@ from app import app, db
 from models import Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 import requests
 
-with app.app_context():
-        db.drop_all()
-        db.create_all() 
 
-try: 
-    weapon_data = []
-    new_response = True
-    page = 1
-    while new_response:
-        response = requests.get(f"https://xivapi.com/search?columns=ID,Name,Icon,Url,LevelItem,ClassJobCategory,EquipSlotCategory.ID&filters=EquipSlotCategory.ID=1&page={page}").json()
-        new_response = response.get('Results', [])
-        weapon_data.extend(new_response)
-        page += 1
+db.drop_all()
+db.create_all() 
 
-    for weapon in weapon_data:
-        weap = Weapon(id=weapon['ID'], name=weapon['Name'], icon=weapon['Icon'], url=weapon['Url'], ilevel=weapon['LevelItem'], classjob=weapon['ClassJobCategory']['Name'], equipslot=weapon['EquipSlotCategory']['ID'])
-        with app.app_context():
-            db.session.add(weap)
-            db.session.commit()
-except:
-    print("API request error with 'weapon data'")
+weapon_data = []
+new_response = True
+page = 1
+while new_response:
+    response = requests.get(f"https://xivapi.com/search?columns=ID,Name,Icon,Url,LevelItem,ClassJobCategory,EquipSlotCategory.ID&filters=EquipSlotCategory.ID=1&page={page}").json()
+    new_response = response.get('Results', [])
+    weapon_data.extend(new_response)
+    page += 1
+
+for weapon in weapon_data:
+    weap = Weapon(id=weapon['ID'], name=weapon['Name'], icon=weapon['Icon'], url=weapon['Url'], ilevel=weapon['LevelItem'], classjob=weapon['ClassJobCategory']['Name'], equipslot=weapon['EquipSlotCategory']['ID'])
+    with app.app_context():
+        db.session.add(weap)
+        db.session.commit()
+
 
 try:
     weapon_data2 = []

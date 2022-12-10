@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="/gear/save" method="POST" style="margin-top: 70px;">
+<form action="/gearset/save" method="POST" style="margin-top: 70px;">
     <div class="container">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
             <label class="input-group-text" for="JobSelect">Job</label>
             </div>
-            <select name="job" class="custom-select" id="JobSelect">
+            <select name="job" class="custom-select" id="JobSelect" required>
                 <option hidden disabled selected value>Select a Job</option>
                 <optgroup label="Tank"></optgroup>
                     <option value="PLD">Paladin</option>

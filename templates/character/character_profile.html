@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p hidden id="char-id">{{ char_id }}</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-1 border">
+            <img src="" class="img-thumbnail" alt="Avatar" id="character-thumbnail" style="display: inline;">
+        </div>
+        <div class="col-9 border border-end-0">
+            <p class="align-top fs-3" style="font-weight: bold; margin-bottom: 0;" id="character-name"></p>
+            <p class="align-top fs-5" id="character-server"></p>
+        </div>
+        <div class="col border border-start-0 p-0 position-relative">
+            {% if not g.user.character %}
+                <form action="/character/id/{{ char_id }}" method="POST">
+                    <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
+                        <p class="m-0" style="font-size: 13px">Claim Character</p>
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7 border" style="margin-top: 10px; margin-right: 10px; padding: 0px; width: 270px; height: 650px;">
+            <div class="border">
+                <p style="margin-left:10px; margin-bottom: 0px;">Jobs</p>
+            </div>
+            <div style="margin-left:5px; margin-top: 5px">
+                <div class="container" id="job-list">
+                </div>
+            </div>
+        </div> 
+        <div class="col border" style="margin-top: 10px; margin-right: 10px; padding: 0px; height: 650px">
+            <div class="border">
+                <p style="margin-left:10px; margin-bottom: 0px;">Gearsets</p>
+            </div>
+            <div class="row">
+                <div class="col" id="gearset-list">
+                    {% if character is not none %}
+                        <ul style="height:610px; overflow-y: scroll;">
+                        {% for gearset in character.users.gearsets %}
+                            <li><p style="padding-left: 10px; padding-top: 5px; margin: 0px"><a href="/gearset/id/{{ gearset.id }}">{{ gearset.job }} - {{ gearset.name }}</a></p></li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-center">No Found Gearsets</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-8 border" style="height: 650px; width: 270px; margin-top: 10px; padding: 0%;">
+            <img src="" width="270" height="650" class="float-end" style="object-fit: cover;" alt="Portrait" id="character-portrait">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/character_profile.js"></script>
+{% endblock %}
