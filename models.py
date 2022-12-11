@@ -97,6 +97,10 @@ class Character(db.Model):
         primary_key = True
     )
 
+    name = db.Column(
+        db.Text
+    )
+
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id')

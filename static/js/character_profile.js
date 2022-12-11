@@ -12,9 +12,9 @@ async function requestCharacter(url) {
 
     document.getElementById("character-thumbnail").src=res.data.Character.Avatar;
     document.getElementById("character-name").innerText = res.data.Character.Name;
+    document.getElementById("name").value = res.data.Character.Name;
     document.getElementById("character-server").innerText = res.data.Character.Server;
     document.getElementById("character-portrait").src=res.data.Character.Portrait;
-    console.log(res.data);
 
     let joblist = document.getElementById("job-list");
     for(job of res.data.Character.ClassJobs) {

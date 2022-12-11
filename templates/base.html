@@ -61,7 +61,11 @@
                         {{g.user.username}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="/profile/id/{{ g.user.id }}">Profile</a></li>
+                          {% if g.user.character %}
+                            {% for character in g.user.character %}
+                            <li><a class="dropdown-item" href="/character/id/{{ character.character_id }}">{{ character.name }}</a></li>
+                            {% endfor %}
+                          {% endif %}
                         <li><a class="dropdown-item" href="/profile/id/{{ g.user.id }}/edit">Edit User</a></li>
                         <li><a class="dropdown-item" href="/profile/id/{{ g.user.id }}/delete">Delete User</a></li>
                         <li><hr class="dropdown-divider"></li>

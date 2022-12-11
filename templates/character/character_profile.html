@@ -13,9 +13,17 @@
         </div>
         <div class="col border border-start-0 p-0 position-relative">
             {% if not g.user.character %}
-                <form action="/character/id/{{ char_id }}" method="POST">
+                <form action="/character/id/{{ char_id }}/link" method="POST">
+                    <input id="name" name="name" type="text" hidden>
                     <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
-                        <p class="m-0" style="font-size: 13px">Claim Character</p>
+                        <p class="m-0" style="font-size: 13px">Link Character</p>
+                    </button>
+                </form>
+            {% elif g.user.character %}
+                <form action="/character/id/{{ char_id }}/unlink" method="POST">
+                    <input id="name" name="name" type="text" hidden>
+                    <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
+                        <p class="m-0 danger" style="font-size: 13px">Unlink Character</p>
                     </button>
                 </form>
             {% endif %}

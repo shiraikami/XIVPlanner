@@ -397,29 +397,28 @@ def show_character(char_id):
     """Shows a character page for an in-game character."""
 
     character = db.session.query(Character).filter_by(character_id=char_id).first()
-    print(character)
-
     return render_template('/character/character_profile.html', char_id=char_id, character=character)
 
 
-@app.route("/character/id/<int:char_id>", methods=["POST"])
+@app.route("/character/id/<int:char_id>/link", methods=["POST"])
 def save_character(char_id):
     """Claims the character and saves it to the user."""
 
-    character = Character(user_id=g.user.id, character_id=char_id)
+    name = request.form.get('name')
+    character = Character(name=name, user_id=g.user.id, character_id=char_id)
     db.session.add(character)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
 
 
-@app.route("/cahracter/id/<int:char_id>/delete", methods=["POST"])
+@app.route("/character/id/<int:char_id>/unlink", methods=["POST"])
 def delete_character(char_id):
     """Deletes the claimed character and removes it from user."""
 
-    character = Character.query.get(char_id)
+    character = Character.query.filter_by(character_id=char_id).first()
     db.session.delete(character)
-    db.commit()
-    return redirect("/search")
+    db.session.commit()
+    return redirect("/character/id/" + str(char_id))
 
 ##############################################################################
 # Homepage
