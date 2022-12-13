@@ -761,7 +761,6 @@ class AcquiredGear(db.Model):
 
         return {
             "gear_id": self.gear_id,
-            "gearset_id": self.gearset_id,
             "user_id": self.user_id
         }
 

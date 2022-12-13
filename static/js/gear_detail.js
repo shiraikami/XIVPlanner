@@ -29,7 +29,6 @@ async function mapGear(url) {
   return res.data.map(data => {
     return {
       gear_id: data.gear_id,
-      gearset_id: data.gearset_id,
       user_id: data.user_id
     }
   })

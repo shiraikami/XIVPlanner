@@ -7,231 +7,345 @@
 </div>
 <div class="container border">
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-1">
+            Acquired
+        </div>
+        <div class="col-sm-5">
             Gear
         </div>
-        <div class="col-sm-2">
-            Item Level: 
+        <div class="col-sm-2 text-center">
+            Item Level
+        </div>
+        <div class="col-sm-2 text-center">
+            Raid Drop
         </div>
     </div>
 </div>
 <div class="container border" style="margin-bottom: 0px">
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{weapon.id}} id="weaponcheck" name="{{ weapon.name }}">
             </div>
-            <div class="gear-img" id="weapon-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="weapon-img">
                 <img src={{"https://xivapi.com" + weapon.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="weapon-name">
                 {{ weapon.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="weapon-ilevel">{{ weapon.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="weapon-raid">
+            {% if "Abyssos" in weapon.name %}
+                Raid 4
+            {% else %}
+                Raid 3
+            {% endif %}
         </div>
     </div>
     {% if offhand %}
         <div class="row">
-            <div class="col-sm-1">
-                <div class="form-check" style="display: inline-block;">
+            <div class="col-md-auto">
+                <div class="form-check">
                     <input class="form-check-input" type="checkbox" value={{offhand.id}} id="offhandcheck" name="{{ offhand.name }}">   
                 </div>
-                <div class="gear-img" id="offhand-img" style="display: inline-block;">
+            </div>
+            <div class="col-md-auto">
+                <div class="gear-img" id="offhand-img">
                     <img src={{"https://xivapi.com" + offhand.icon}}>
                 </div>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-5">
                 <div class="gear-name" id="offhand-name">
                     {{ offhand.name }}
                 </div>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 text-center">
                 <span class="ilevel" id="offhand-ilevel">{{ offhand.ilevel }}</span>
+            </div>
+            <div class="col-sm-2 text-center" id="offhand-raid">
+                {% if "Abyssos" in offhand.name %}
+                    Raid 4
+                {% else %}
+                    Raid 3
+                {% endif %}
             </div>
         </div>
     {% endif %}
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{helmet.id}} id="helmetcheck" name="{{ helmet.name }}">   
             </div>
-            <div class="gear-img" id="helmet-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="helmet-img">
                 <img src={{"https://xivapi.com" + helmet.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="helmet-name">
                 {{ helmet.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="helmet-ilevel">{{ helmet.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="helmet-raid">
+            {% if "Abyssos" in helmet.name %}
+                Raid 2 - 3
+            {% else %}
+                Raid 3
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{body.id}} id="bodycheck" name="{{ body.name }}">   
             </div>
-            <div class="gear-img" id="body-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="body-img">
                 <img src={{"https://xivapi.com" + body.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="body-name">
                 {{ body.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="body-ilevel">{{ body.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="body-raid">
+            {% if "Abyssos" in body.name %}
+                Raid 4
+            {% else %}
+                Raid 3
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{gloves.id}} id="glovescheck" name="{{ gloves.name }}">   
             </div>
-            <div class="gear-img" id="gloves-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="gloves-img">
                 <img src={{"https://xivapi.com" + gloves.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="gloves-name">
                 {{ gloves.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="gloves-ilevel">{{ gloves.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="gloves-raid">
+            {% if "Abyssos" in gloves.name %}
+                Raid 2-3
+            {% else %}
+                Raid 3
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{pants.id}} id="pantscheck" name="{{ pants.name }}">   
             </div>
-            <div class="gear-img" id="pants-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="pants-img">
                 <img src={{"https://xivapi.com" + pants.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="pants-name">
                 {{ pants.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="pants-ilevel">{{ pants.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="pants-raid">
+            {% if "Abyssos" in pants.name %}
+                Raid 3
+            {% else %}
+                Raid 3
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{boots.id}} id="bootscheck" name="{{ boots.name }}">   
             </div>
-            <div class="gear-img" id="boots-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="boots-img">
                 <img src={{"https://xivapi.com" + boots.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="boots-name">
                 {{ boots.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="boots-ilevel">{{ boots.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="boots-raid">
+            {% if "Abyssos" in boots.name %}
+                Raid 2-3
+            {% else %}
+                Raid 3
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{earring.id}} id="earringcheck" name="{{ earring.name }}">   
             </div>
-            <div class="gear-img" id="earring-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="earring-img">
                 <img src={{"https://xivapi.com" + earring.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="earring-name">
                 {{ earring.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="earring-ilevel">{{ earring.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="earring-raid">
+            {% if "Abyssos" in earring.name %}
+                Raid 1
+            {% else %}
+                Raid 2
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{necklace.id}} id="necklacecheck" name="{{ necklace.name }}">   
             </div>
-            <div class="gear-img" id="necklace-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="necklace-img">
                 <img src={{"https://xivapi.com" + necklace.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="necklace-name">
                 {{ necklace.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="necklace-ilevel">{{ necklace.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="necklace-raid">
+            {% if "Abyssos" in necklace.name %}
+                Raid 1
+            {% else %}
+                Raid 2
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{bracelet.id}} id="braceletcheck" name="{{ bracelet.name }}">   
             </div>
-            <div class="gear-img" id="bracelet-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="bracelet-img">
                 <img src={{"https://xivapi.com" + bracelet.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="bracelet-name">
                 {{ bracelet.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="bracelet-ilevel">{{ bracelet.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="bracelet-raid">
+            {% if "Abyssos" in bracelet.name %}
+                Raid 1
+            {% else %}
+                Raid 2
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{lring.id}} id="lringcheck" name="{{ lring.name }}">   
             </div>
-            <div class="gear-img" id="lring-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="lring-img">
                 <img src={{"https://xivapi.com" + lring.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="lring-name">
                 {{ lring.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="lring-ilevel">{{ lring.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="lring-raid">
+            {% if "Abyssos" in lring.name %}
+                Raid 1
+            {% else %}
+                Raid 2
+            {% endif %}
         </div>
     </div>
     <div class="row border">
-        <div class="col-sm-1">
-            <div class="form-check" style="display: inline-block;">
+        <div class="col-md-auto">
+            <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{rring.id}} id="rringcheck" name="{{ rring.name }}">   
             </div>
-            <div class="gear-img" id="rring-img" style="display: inline-block;">
+        </div>
+        <div class="col-md-auto">
+            <div class="gear-img" id="rring-img">
                 <img src={{"https://xivapi.com" + rring.icon}}>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-5">
             <div class="gear-name" id="rring-name">
                 {{ rring.name }}
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-center">
             <span class="ilevel" id="rring-ilevel">{{ rring.ilevel }}</span>
+        </div>
+        <div class="col-sm-2 text-center" id="rring-raid">
+            {% if "Abyssos" in rring.name %}
+                Raid 1
+            {% else %}
+                Raid 2
+            {% endif %}
         </div>
     </div>
 </div>
@@ -277,12 +391,12 @@
             <h5><b>Shine</b></h5>
         </div>
     </div>
-    <div class="row">
-        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="earrings-shine">
-        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="necklace-shine">
-        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="bracelet-shine">
-        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="lring-shine">
-        <img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="rring-shine">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="earrings-shine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="necklace-shine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="bracelet-shine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="lring-shine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="rring-shine"></div>
     </div>
     <div class="row">
         <div class="col text-center border">
@@ -310,14 +424,14 @@
             <h5><b>Twine</b></h5>
         </div>
     </div>
-    <div class="row text-center">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="weapon-twine">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="offhand-twine">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="helmet-twine">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="body-twine">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="gloves-twine">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="pants-twine">
-        <img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="boots-twine">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="weapon-twine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="offhand-twine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="helmet-twine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="body-twine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="gloves-twine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="pants-twine"></div>
+        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="boots-twine"></div>
     </div>
 </div>
 {% endblock %}
