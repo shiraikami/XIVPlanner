@@ -9,7 +9,6 @@ window.onload = async (evt) => {
 
 async function searchCharacter(url) {
     let res = await axios.get(url);
-    console.log(res);
     data = [];
 
     for(character of res.data.Results) {
@@ -32,12 +31,6 @@ async function searchCharacter(url) {
           listCharacters(data);
       }
     });
-
-    // if(res.data.Pagination.PageNext != null) {
-    //   searchCharacter({url:url, page: page});
-    // } else {
-    //   listCharacters();
-    // }
 }
 
 function listCharacters(data) {
