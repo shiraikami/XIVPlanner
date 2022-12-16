@@ -1,34 +1,52 @@
 "user strict;"
 
 let url = "https://xivapi.com/character/search?name=";
-let data = [];
 
 window.onload = async (evt) => {
     url = url + document.getElementById('term').innerText;
-    await searchCharacter({url: url, page:0});
+    await searchCharacter(url);
 };
 
-async function searchCharacter({url, page}) {
-    page++;
-
-    let res = await axios.get(url + "&page=" + page.toString());
+async function searchCharacter(url) {
+    let res = await axios.get(url);
+    console.log(res);
+    data = [];
 
     for(character of res.data.Results) {
-      data.push(character)
+      data.push(character);
     }
 
-    if(res.data.Pagination.PageNext != null) {
-      searchCharacter({url:url, page: page});
-    } else {
-      listCharacters();
-    }
+    listCharacters(data);
+
+    $('#list-pagination').twbsPagination({
+      totalPages: res.data.Pagination.PageTotal,
+      visiblePages: 3,
+      onPageClick: async function (event, page) {
+          data = [];
+          let res = await axios.get(url + "&page=" + page.toString());
+    
+          for(character of res.data.Results) {
+            data.push(character);
+          }
+    
+          listCharacters(data);
+      }
+    });
+
+    // if(res.data.Pagination.PageNext != null) {
+    //   searchCharacter({url:url, page: page});
+    // } else {
+    //   listCharacters();
+    // }
 }
 
-function listCharacters() {
+function listCharacters(data) {
+    $('#characterList').empty();
     document.getElementById("spinner").style.display = "none";
     let index = 0;
     let row;
     let charList = document.getElementById('characterList');
+
 
     for(character of data) {
       if(index == 0 || index % 3 == 0) {
@@ -45,7 +63,7 @@ function listCharacters() {
 
         let serverDiv = document.createElement("div");
         serverDiv.innerText = character.Lang + " - " + character.Server;
-        serverDiv.setAttribute("class", "col border border-start-0 text-end");
+        serverDiv.setAttribute("class", "col-2 border border-start-0 text-end");
         serverDiv.style.fontSize = "12px";
 
         charDiv.append(anchor);
@@ -66,7 +84,7 @@ function listCharacters() {
 
         let serverDiv = document.createElement("div");
         serverDiv.innerText = character.Lang + " - " + character.Server;
-        serverDiv.setAttribute("class", "col border border-start-0 text-end");
+        serverDiv.setAttribute("class", "col-2 border border-start-0 text-end");
         serverDiv.style.fontSize = "12px";
 
         charDiv.append(anchor);

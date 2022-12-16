@@ -8,12 +8,17 @@
 <div class="container-fluid w-75 border mb-5" id="characterList">
 </div>
 <div class="d-flex justify-content-center">
-    <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" id="spinner">
-      <span class="visually-hidden">Loading...</span>
-    </div>
+  <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status" id="spinner">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="container mt-5">
+  <ul class="pagination justify-content-center" id="list-pagination">
+  </ul>
 </div>
 {% endblock %}
 
 {% block script %}
 <script src="/static/js/search.js"></script>
+<script src="/static/js/twbsPagination.js"></script>
 {% endblock %}
