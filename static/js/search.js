@@ -21,20 +21,21 @@ async function searchCharacter(url) {
       totalPages: res.data.Pagination.PageTotal,
       visiblePages: 3,
       onPageClick: async function (event, page) {
+          $('#characterList').empty();
+          document.getElementById("spinner").style.display = "block";
           data = [];
           let res = await axios.get(url + "&page=" + page.toString());
     
           for(character of res.data.Results) {
             data.push(character);
           }
-    
+          
           listCharacters(data);
       }
     });
 }
 
 function listCharacters(data) {
-    $('#characterList').empty();
     document.getElementById("spinner").style.display = "none";
     let index = 0;
     let row;
