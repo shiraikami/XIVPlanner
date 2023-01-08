@@ -11,8 +11,10 @@ import requests
 
 from forms import UserSignUpForm, LoginForm, UserEditForm
 from models import db, connect_db, User, Character, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, AcquiredGear
+from authenticate import CLIENT_ID, CLIENT_SECRET
 
 CURR_USER = "curr_user"
+TOKEN = ""
 
 app = Flask(__name__)
 
@@ -145,7 +147,7 @@ def edit_profile(user_id):
         return render_template('/users/user_profile_edit.html', form=form)
 
 
-@app.route("/profile/id/<int:user_id>/delete", methods=["GET"])
+@app.route("/profile/id/<int:user_id>/delete", methods=["POST"])
 def delete_profile(user_id):
     """Deletes the user."""
 
@@ -161,7 +163,7 @@ def delete_profile(user_id):
 @app.route("/gearset")
 def show_gear():
     """Show the gear page of a user."""
-
+    
     return render_template('gear/gear_create.html')
 
 
@@ -384,13 +386,24 @@ def api_acquiredgear():
 ##############################################################################
 # Character
 
+@app.route("/search/token")
+def get_token():
+    """Gets token for searching FFLogs"""
+    try: 
+        if TOKEN == "":
+            TOKEN = requests.post("https://www.fflogs.com/oauth/token", data={"grant_type":"client_credentials"}, auth=(CLIENT_ID, CLIENT_SECRET))
+    except: 
+        print("Error getting response from token request")
+    return TOKEN.json()
+
+
 @app.route("/search")
 def search_character():
     """Shows a list of characters that match the search terms."""
 
     term = request.args.get('term')
     return render_template('/character/search.html', term=term)
-
+    
 
 @app.route("/character/id/<int:char_id>")
 def show_character(char_id):

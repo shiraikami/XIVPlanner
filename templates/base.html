@@ -44,7 +44,7 @@
               <form action="/search" role="search" method="GET">
                 <div class="row g-0">
                   <div class="col d-inline">
-                    <input type="search" class="form-control-sm-2 w-100" name="term" placeholder="Search for a player" id="search-input">
+                    <input type="search" class="form-control-sm-2 w-100" name="term" placeholder="Search for a player" id="search-input" required>
                   </div>
                   <div class="col d-inline">
                     <button>
@@ -67,7 +67,9 @@
                             {% endfor %}
                           {% endif %}
                         <li><a class="dropdown-item" href="/profile/id/{{ g.user.id }}/edit">Edit User</a></li>
-                        <li><a class="dropdown-item" href="/profile/id/{{ g.user.id }}/delete">Delete User</a></li>
+                        <form action="/profile/id/{{ g.user.id }}/delete" method="POST" id="delete-user-form">
+                          <li><a id="delete-user" class="dropdown-item">Delete User</a></li>
+                        </form>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                         </ul>

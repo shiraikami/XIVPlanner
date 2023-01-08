@@ -20,13 +20,120 @@
                     </button>
                 </form>
             {% elif g.user.character %}
-                <form action="/character/id/{{ char_id }}/unlink" method="POST">
+                <form action="/character/id/{{ char_id }}/unlink" method="POST" id="unlink-form">
                     <input id="name" name="name" type="text" hidden>
-                    <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
-                        <p class="m-0 danger" style="font-size: 13px">Unlink Character</p>
-                    </button>
                 </form>
+                <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="unclaim-character">
+                    <p class="m-0 danger" style="font-size: 13px">Unlink Character</p>
+                </button>
             {% endif %}
+        </div>
+    </div>
+    <div id="fflogs-container">
+        <div class="row border" style="margin-top: 10px">
+            <p class="text-center fs-5 align-middle" style="margin-top: 10px">FFLogs</p>
+        </div>
+        <div class="row">
+            <div class="col-5 border">
+                <p class="text-center" style="margin-top: 10px">Boss</p>
+            </div>
+            <div class="col-3 border">
+                <p class="text-center" style="margin-top: 10px">Best %</p>
+            </div>
+            <div class="col-2 border">
+                <p class="text-center" style="margin-top: 10px">Highest rDPS</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center" style="margin-top: 10px">Median</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center" style="margin-top: 10px">Kills</p>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-5 border">
+                <p id="boss1-name" class="text-center"></p>
+            </div>
+            <div class="col-3 border">
+                <p id="boss1-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss1-highest" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss1-median" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss1-kills" class="text-center"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 border">
+                <p id="boss2-name" class="text-center"></p>
+            </div>
+            <div class="col-3 border">
+                <p id="boss2-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss2-highest" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss2-median" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss2-kills" class="text-center"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 border">
+                <p id="boss3-name" class="text-center"></p>
+            </div>
+            <div class="col-3 border">
+                <p id="boss3-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss3-highest" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss3-median" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss3-kills" class="text-center"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 border">
+                <p id="boss4-name" class="text-center"></p>
+            </div>
+            <div class="col-3 border">
+                <p id="boss4-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss4-highest" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss4-median" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss4-kills" class="text-center"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 border">
+                <p id="boss5-name" class="text-center"></p>
+            </div>
+            <div class="col-3 border">
+                <p id="boss5-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss5-highest" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss5-median" class="text-center"></p>
+            </div>
+            <div class="col-1 border">
+                <p id="boss5-kills" class="text-center"></p>
+            </div>
         </div>
     </div>
     <div class="row">
