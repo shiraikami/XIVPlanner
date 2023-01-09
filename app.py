@@ -19,7 +19,7 @@ TOKEN = ""
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql:///XIVPlanner'))
+    os.environ.get('DATABASE_URL', 'postgresql:///xivplanner'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
@@ -28,7 +28,6 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'SECRET')
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
-
 
 ##############################################################################
 # User signup/login/logout

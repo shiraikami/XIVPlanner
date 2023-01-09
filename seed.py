@@ -1,10 +1,10 @@
-from app import app, db
+from app import db, app
 from models import Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 import requests
 
-
-db.drop_all()
-db.create_all() 
+with app.app_context():
+    db.drop_all()
+    db.create_all() 
 
 weapon_data = []
 new_response = True
@@ -40,6 +40,7 @@ try:
 except:
     print("API request error with 'weapon data'")
 
+
 try:
     offhand_data = []
     new_response = True
@@ -57,6 +58,7 @@ try:
             db.session.commit()
 except:
     print("API request error with 'offhand data'")
+
 
 try:
     helmet_data = []
@@ -76,6 +78,7 @@ try:
 except:
     print("API request error with 'helmet data'")
 
+
 try:
     body_data = []
     new_response = True
@@ -94,6 +97,7 @@ try:
 except:
     print("API request error with 'body data'")
 
+
 try:
     gloves_data = []
     new_response = True
@@ -105,12 +109,13 @@ try:
         page += 1
 
     for gloves in gloves_data:
-        glov = Gloves(id=gloves['ID'], name=gloves['Name'], icon=gloves['Icon'], url=gloves['Url'], ilevel=gloves['LevelItem'], classjob=gloves['ClassJobCategory']['Name'], equipslot=gloves['EquipSlotCategory']['ID'])
+        glove = Gloves(id=gloves['ID'], name=gloves['Name'], icon=gloves['Icon'], url=gloves['Url'], ilevel=gloves['LevelItem'], classjob=gloves['ClassJobCategory']['Name'], equipslot=gloves['EquipSlotCategory']['ID'])
         with app.app_context():
-            db.session.add(glov)
+            db.session.add(glove)
             db.session.commit()
 except:
     print("API request error with 'gloves data'")
+
 
 try:
     pants_data = []
@@ -130,6 +135,7 @@ try:
 except:
     print("API request error with 'pants data'")
 
+
 try:
     boots_data = []
     new_response = True
@@ -147,6 +153,7 @@ try:
             db.session.commit()
 except:
     print("API request error with 'boots data'")
+
 
 try:
     earring_data = []
@@ -166,6 +173,7 @@ try:
 except:
     print("API request error with 'earring data'")
 
+
 try:
     necklace_data = []
     new_response = True
@@ -184,6 +192,7 @@ try:
 except:
     print("API request error with 'necklace data'")
 
+
 try:
     bracelet_data = []
     new_response = True
@@ -201,6 +210,7 @@ try:
             db.session.commit()
 except:
     print("API request error with 'bracelet data'")
+
 
 try:
     ring_data = []
