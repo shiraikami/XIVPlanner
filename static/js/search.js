@@ -8,15 +8,16 @@ window.onload = async (evt) => {
 };
 
 async function searchCharacter(url) {
+  try {
     let res = await axios.get(url);
     data = [];
 
     for(character of res.data.Results) {
       data.push(character);
     }
-
+  
     listCharacters(data);
-
+  
     $('#list-pagination').twbsPagination({
       totalPages: res.data.Pagination.PageTotal,
       visiblePages: 3,
@@ -33,6 +34,11 @@ async function searchCharacter(url) {
           listCharacters(data);
       }
     });
+  } catch {
+    console.log('XIVAPI Error');
+    document.getElementById("spinner").style.display = "none";
+    $("#characterList").append("XIVAPI Error").css("color", "red");
+  }
 }
 
 function listCharacters(data) {

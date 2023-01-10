@@ -2,6 +2,9 @@ from app import db, app
 from models import Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 import requests
 
+print("**********************************************")
+print("Requesting gear data from API...")
+
 with app.app_context():
     db.drop_all()
     db.create_all() 
@@ -229,3 +232,6 @@ try:
             db.session.commit()
 except:
     print("API request error with 'ring data'")
+
+print("**********************************")
+print("Added all gear to database...")
