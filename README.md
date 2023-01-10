@@ -8,6 +8,6 @@
 ### Instructions
 - Set up a new client from the client management page from the FFLogs API docs provided above. Get a client_id and client_secret and add both as variables ("CLIENT_ID",  "CLIENT_SECRET") to a new file called "authenticate.py" in the root of the folder.
 - Download the packages from requirements.txt.
-- Create a new postgresql database: "XIVPlanner".
+- Create a new postgresql database: "xivplanner".
 - Run the seed.py. 
 - Can run the server with "flask run".
