@@ -685,3 +685,9 @@ rringbox.addEventListener('change', async (event) => {
     }
   }
 })
+
+$("#delete-button").click(() => {
+  if(confirm("Delete this gearset?")) {
+      $("#delete-form").submit();
+  }
+});

@@ -378,11 +378,11 @@
 <br>
 {% if g.user %}
 <div class="container d-flex">
-    <form action="/gearset/id/{{gearset.id}}/delete" method="POST">
-        <div class="container">
-            <button class="btn btn-danger float-end" type="submit">Delete</button>
-        </div>
+    <form id="delete-form" action="/gearset/id/{{gearset.id}}/delete" method="POST">
     </form>
+    <div class="container">
+        <button id="delete-button" class="btn btn-danger float-end" type="submit">Delete</button>
+    </div>
     <form action="/gearset/id/{{gearset.id}}/edit" method="GET">
         <div class="container">
             <button class="btn btn-primary float-end" type="submit">Edit</button>

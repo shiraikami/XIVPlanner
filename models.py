@@ -21,6 +21,10 @@ class Character(db.Model):
         db.Text
     )
 
+    server = db.Column(
+        db.Text
+    )
+
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id')
@@ -43,6 +47,10 @@ class Follows(db.Model):
     )
 
     char_being_followed_name = db.Column(
+        db.Text
+    )
+
+    char_being_followed_server = db.Column(
         db.Text
     )
 

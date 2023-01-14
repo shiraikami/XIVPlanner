@@ -412,8 +412,8 @@ def save_character(char_id):
     """Claims the character and saves it to the user."""
 
     name = request.form.get('linkname')
-    print(request.form)
-    character = Character(name=name, user_id=g.user.id, character_id=char_id)
+    server = request.form.get('linkserver')
+    character = Character(name=name, server=server, user_id=g.user.id, character_id=char_id)
     db.session.add(character)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
@@ -433,7 +433,9 @@ def delete_character(char_id):
 def follow_character(char_id):
     """Follows the character."""
 
-    follow = Follows(char_being_followed_id=char_id, user_following_id=g.user.id)
+    name = request.form.get('followname')
+    server = request.form.get('followserver')
+    follow = Follows(char_being_followed_id=char_id, char_being_followed_name=name, char_being_followed_server=server, user_following_id=g.user.id)
     db.session.add(follow)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
