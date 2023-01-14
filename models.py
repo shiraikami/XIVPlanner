@@ -7,6 +7,51 @@ from flask_sqlalchemy import SQLAlchemy
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
+class Character(db.Model):
+    """Character associated with user."""
+
+    __tablename__ = 'character'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    name = db.Column(
+        db.Text
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
+    )
+
+    character_id = db.Column(
+        db.Integer
+    )
+    
+    db.UniqueConstraint(user_id, character_id)
+
+class Follows(db.Model): 
+    """Connection of a follower <-> followed_user."""
+
+    __tablename__ = 'follows'
+
+    char_being_followed_id = db.Column(
+        db.Integer, 
+        primary_key = True
+    )
+
+    char_being_followed_name = db.Column(
+        db.Text
+    )
+
+    user_following_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id', ondelete="cascade"),
+        primary_key = True
+    )
+
 class User(db.Model):
     """User in the system."""
 
@@ -28,9 +73,10 @@ class User(db.Model):
         nullable = False
     )
 
-    gearsets = db.relationship('GearSet', cascade="all, delete", backref="users")
-    acquiredgear = db.relationship('AcquiredGear', cascade="all, delete", backref="users")
-    character = db.relationship('Character', cascade="all, delete", backref="users")
+    gearsets = db.relationship("GearSet", cascade="all, delete", backref="users")
+    acquiredgear = db.relationship("AcquiredGear", cascade="all, delete", backref="users")
+    character = db.relationship("Character", cascade="all, delete", backref="users")
+    following = db.relationship("Follows", cascade="all, delete", backref="users")
 
     @classmethod
     def signup(cls, username, password):
@@ -86,31 +132,6 @@ class User(db.Model):
 
         return False
 
-
-class Character(db.Model):
-    """Character associated with user."""
-
-    __tablename__ = 'character'
-
-    id = db.Column(
-        db.Integer,
-        primary_key = True
-    )
-
-    name = db.Column(
-        db.Text
-    )
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id')
-    )
-
-    character_id = db.Column(
-        db.Integer
-    )
-    
-    db.UniqueConstraint(user_id, character_id)
     
 class Weapon(db.Model):
     """Gear list for a user."""

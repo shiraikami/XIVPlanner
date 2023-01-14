@@ -8,7 +8,9 @@
 <div class="container border">
     <div class="row">
         <div class="col-sm-1">
+            {% if g.user %}
             Acquired
+            {% endif %}
         </div>
         <div class="col-sm-5">
             Gear
@@ -23,11 +25,13 @@
 </div>
 <div class="container border" style="margin-bottom: 0px">
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{weapon.id}} id="weaponcheck" name="{{ weapon.name }}">
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="weapon-img">
                 <img src={{"https://xivapi.com" + weapon.icon}}>
@@ -43,19 +47,21 @@
         </div>
         <div class="col-sm-3 text-center" id="weapon-raid">
             {% if "Abyssos" in weapon.name %}
-                Raid 4
+                Raid 4 - Weapon
             {% else %}
-                Raid 3
+                Raid 3 - Twine
             {% endif %}
         </div>
     </div>
     {% if offhand %}
         <div class="row">
+            {% if g.user %}
             <div class="col-md-auto">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value={{offhand.id}} id="offhandcheck" name="{{ offhand.name }}">   
                 </div>
             </div>
+            {% endif %}
             <div class="col-md-auto">
                 <div class="gear-img" id="offhand-img">
                     <img src={{"https://xivapi.com" + offhand.icon}}>
@@ -71,19 +77,21 @@
             </div>
             <div class="col-sm-3 text-center" id="offhand-raid">
                 {% if "Abyssos" in offhand.name %}
-                    Raid 4
+                    Raid 4 - Weapon
                 {% else %}
-                    Raid 3
+                    Raid 3 - Twine
                 {% endif %}
             </div>
         </div>
     {% endif %}
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{helmet.id}} id="helmetcheck" name="{{ helmet.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="helmet-img">
                 <img src={{"https://xivapi.com" + helmet.icon}}>
@@ -99,18 +107,20 @@
         </div>
         <div class="col-sm-3 text-center" id="helmet-raid">
             {% if "Abyssos" in helmet.name %}
-                Raid 2 - 3
+                Raid 2, 3 - Helmet
             {% else %}
-                Raid 3
+                Raid 3 - Twine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{body.id}} id="bodycheck" name="{{ body.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="body-img">
                 <img src={{"https://xivapi.com" + body.icon}}>
@@ -126,18 +136,20 @@
         </div>
         <div class="col-sm-3 text-center" id="body-raid">
             {% if "Abyssos" in body.name %}
-                Raid 4
+                Raid 4 - Body
             {% else %}
-                Raid 3
+                Raid 3 - Twine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{gloves.id}} id="glovescheck" name="{{ gloves.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="gloves-img">
                 <img src={{"https://xivapi.com" + gloves.icon}}>
@@ -153,18 +165,20 @@
         </div>
         <div class="col-sm-3 text-center" id="gloves-raid">
             {% if "Abyssos" in gloves.name %}
-                Raid 2-3
+                Raid 2, 3 - Gloves
             {% else %}
-                Raid 3
+                Raid 3 - Twine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{pants.id}} id="pantscheck" name="{{ pants.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="pants-img">
                 <img src={{"https://xivapi.com" + pants.icon}}>
@@ -180,18 +194,20 @@
         </div>
         <div class="col-sm-3 text-center" id="pants-raid">
             {% if "Abyssos" in pants.name %}
-                Raid 3
+                Raid 3 - Pants
             {% else %}
-                Raid 3
+                Raid 3 - Twine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{boots.id}} id="bootscheck" name="{{ boots.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="boots-img">
                 <img src={{"https://xivapi.com" + boots.icon}}>
@@ -207,18 +223,20 @@
         </div>
         <div class="col-sm-3 text-center" id="boots-raid">
             {% if "Abyssos" in boots.name %}
-                Raid 2-3
+                Raid 2, 3 - Boots
             {% else %}
-                Raid 3
+                Raid 3 - Twine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{earring.id}} id="earringcheck" name="{{ earring.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="earring-img">
                 <img src={{"https://xivapi.com" + earring.icon}}>
@@ -234,18 +252,20 @@
         </div>
         <div class="col-sm-3 text-center" id="earring-raid">
             {% if "Abyssos" in earring.name %}
-                Raid 1
+                Raid 1 - Earring
             {% else %}
-                Raid 2
+                Raid 2 - Shine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{necklace.id}} id="necklacecheck" name="{{ necklace.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="necklace-img">
                 <img src={{"https://xivapi.com" + necklace.icon}}>
@@ -261,18 +281,20 @@
         </div>
         <div class="col-sm-3 text-center" id="necklace-raid">
             {% if "Abyssos" in necklace.name %}
-                Raid 1
+                Raid 1 - Necklace
             {% else %}
-                Raid 2
+                Raid 2 - Shine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{bracelet.id}} id="braceletcheck" name="{{ bracelet.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="bracelet-img">
                 <img src={{"https://xivapi.com" + bracelet.icon}}>
@@ -288,18 +310,20 @@
         </div>
         <div class="col-sm-3 text-center" id="bracelet-raid">
             {% if "Abyssos" in bracelet.name %}
-                Raid 1
+                Raid 1 - Bracelet
             {% else %}
-                Raid 2
+                Raid 2 - Shine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{lring.id}} id="lringcheck" name="{{ lring.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="lring-img">
                 <img src={{"https://xivapi.com" + lring.icon}}>
@@ -315,18 +339,20 @@
         </div>
         <div class="col-sm-3 text-center" id="lring-raid">
             {% if "Abyssos" in lring.name %}
-                Raid 1
+                Raid 1 - Ring
             {% else %}
-                Raid 2
+                Raid 2 - Shine
             {% endif %}
         </div>
     </div>
     <div class="row border">
+        {% if g.user %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{rring.id}} id="rringcheck" name="{{ rring.name }}">   
             </div>
         </div>
+        {% endif %}
         <div class="col-md-auto">
             <div class="gear-img" id="rring-img">
                 <img src={{"https://xivapi.com" + rring.icon}}>
@@ -342,25 +368,29 @@
         </div>
         <div class="col-sm-3 text-center" id="rring-raid">
             {% if "Abyssos" in rring.name %}
-                Raid 1
+                Raid 1 - Ring
             {% else %}
-                Raid 2
+                Raid 2 - Shine
             {% endif %}
         </div>
     </div>
 </div>
 <br>
-<form action="/gearset/id/{{gearset.id}}/delete" method="POST">
-    <div class="container">
-        <button class="btn btn-danger float-end" type="submit">Delete</button>
-    </div>
-</form>
-<form action="/gearset/id/{{gearset.id}}/edit" method="GET">
-    <div class="container">
-        <button class="btn btn-primary float-end" type="submit">Edit</button>
-    </div>
-</form>
-<div class="container d-flex justify-content-center">
+{% if g.user %}
+<div class="container d-flex">
+    <form action="/gearset/id/{{gearset.id}}/delete" method="POST">
+        <div class="container">
+            <button class="btn btn-danger float-end" type="submit">Delete</button>
+        </div>
+    </form>
+    <form action="/gearset/id/{{gearset.id}}/edit" method="GET">
+        <div class="container">
+            <button class="btn btn-primary float-end" type="submit">Edit</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+<div class="container d-flex justify-content-center" style="margin-top: 20px">
     <h4>Raid Drops</h4>
 </div>
 <div class="container border" style="margin-bottom: 50px">
@@ -374,16 +404,16 @@
     </div>
     <div class="row">
         <div class="col text-center border" id="raid-1">
-            <p id="earrings" style="display: none">Earrings</p>
-            <p id="necklace" style="display: none">Necklace</p>
-            <p id="bracelet" style="display: none">Bracelet</p>
-            <p id="lring" style="display: none">Ring</p>
-            <p id="rring" style="display: none">Ring</p>
+            <p id="earrings" style="display: none">{{ earring.name }}</p>
+            <p id="necklace" style="display: none">{{ necklace.name }}</p>
+            <p id="bracelet" style="display: none">{{ bracelet.name }}</p>
+            <p id="lring" style="display: none">{{ lring.name }}</p>
+            <p id="rring" style="display: none">{{ rring.name }}</p>
         </div>
         <div class="col text-center border" id="raid-2">
-            <p id="helmet" style="display: none">Helmet</p>
-            <p id="gloves" style="display: none">Gloves</p>
-            <p id="boots" style="display: none">Boots</p>
+            <p id="helmet" style="display: none">{{ helmet.name }}</p>
+            <p id="gloves" style="display: none">{{ gloves.name }}</p>
+            <p id="boots" style="display: none">{{ boots.name }}</p>
         </div>
     </div>
     <div class="row">
@@ -408,15 +438,15 @@
     </div>
     <div class="row">
         <div class="col text-center border" id="raid-3">
-            <p id="helmet2" style="display: none">Helmet</p>
-            <p id="gloves2" style="display: none">Gloves</p>
-            <p id="pants" style="display: none">Pants</p>
-            <p id="boots2" style="display: none">Boots</p>
+            <p id="helmet2" style="display: none">{{ helmet.name }}</p>
+            <p id="gloves2" style="display: none">{{ gloves.name }}</p>
+            <p id="pants" style="display: none">{{ pants.name }}</p>
+            <p id="boots2" style="display: none">{{ boots.name }}</p>
         </div>
         <div class="col text-center border" id="raid-4">
-            <p id="weapon" style="display: none">Weapon</p>
-            <p id="offhand" style="display: none">Offhand</p>
-            <p id="body" style="display: none">Body</p>
+            <p id="weapon" style="display: none">{{ weapon.name }}</p>
+            <p id="offhand" style="display: none">{{ offhand.name }}</p>
+            <p id="body" style="display: none">{{ body.name }}</p>
         </div>
     </div>
     <div class="row">

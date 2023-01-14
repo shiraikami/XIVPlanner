@@ -2,30 +2,34 @@ from app import db, app
 from models import Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 import requests
 
-print("**********************************************")
-print("Requesting gear data from API...")
-
 with app.app_context():
     db.drop_all()
     db.create_all() 
 
-weapon_data = []
-new_response = True
-page = 1
-while new_response:
-    response = requests.get(f"https://xivapi.com/search?columns=ID,Name,Icon,Url,LevelItem,ClassJobCategory,EquipSlotCategory.ID&filters=EquipSlotCategory.ID=1&page={page}").json()
-    new_response = response.get('Results', [])
-    weapon_data.extend(new_response)
-    page += 1
+try:
+    print("**********************************************")
+    print("Requesting weapon data from XIVAPI...")
+    weapon_data = []
+    new_response = True
+    page = 1
+    while new_response:
+        response = requests.get(f"https://xivapi.com/search?columns=ID,Name,Icon,Url,LevelItem,ClassJobCategory,EquipSlotCategory.ID&filters=EquipSlotCategory.ID=1&page={page}").json()
+        new_response = response.get('Results', [])
+        weapon_data.extend(new_response)
+        page += 1
 
-for weapon in weapon_data:
-    weap = Weapon(id=weapon['ID'], name=weapon['Name'], icon=weapon['Icon'], url=weapon['Url'], ilevel=weapon['LevelItem'], classjob=weapon['ClassJobCategory']['Name'], equipslot=weapon['EquipSlotCategory']['ID'])
-    with app.app_context():
-        db.session.add(weap)
-        db.session.commit()
+    for weapon in weapon_data:
+        weap = Weapon(id=weapon['ID'], name=weapon['Name'], icon=weapon['Icon'], url=weapon['Url'], ilevel=weapon['LevelItem'], classjob=weapon['ClassJobCategory']['Name'], equipslot=weapon['EquipSlotCategory']['ID'])
+        with app.app_context():
+            db.session.add(weap)
+            db.session.commit()
+except:
+    print("API request error with 'weapon data'")
 
 
 try:
+    print("**********************************************")
+    print("Requesting weapon data from XIVAPI...")
     weapon_data2 = []
     new_response = True
     page = 1
@@ -45,6 +49,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting offhand data from XIVAPI...")
     offhand_data = []
     new_response = True
     page = 1
@@ -64,6 +70,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting helmet data from XIVAPI...")
     helmet_data = []
     new_response = True
     page = 1
@@ -83,6 +91,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting body data from XIVAPI...")
     body_data = []
     new_response = True
     page = 1
@@ -102,6 +112,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting gloves data from XIVAPI...")
     gloves_data = []
     new_response = True
     page = 1
@@ -121,6 +133,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting pants data from XIVAPI...")
     pants_data = []
     new_response = True
     page = 1
@@ -140,6 +154,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting boots data from XIVAPI...")
     boots_data = []
     new_response = True
     page = 1
@@ -159,6 +175,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting earring data from XIVAPI...")
     earring_data = []
     new_response = True
     page = 1
@@ -178,6 +196,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting necklace data from XIVAPI...")
     necklace_data = []
     new_response = True
     page = 1
@@ -197,6 +217,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting bracelet data from XIVAPI...")
     bracelet_data = []
     new_response = True
     page = 1
@@ -216,6 +238,8 @@ except:
 
 
 try:
+    print("**********************************************")
+    print("Requesting ring data from XIVAPI...")
     ring_data = []
     new_response = True
     page = 1

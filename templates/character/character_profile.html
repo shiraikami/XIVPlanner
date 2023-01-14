@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<p>{{ g.user.following }}</p>
 <p hidden id="char-id">{{ char_id }}</p>
 <div class="container mt-5">
     <div class="row">
@@ -11,23 +12,51 @@
             <p class="align-top fs-3" style="font-weight: bold; margin-bottom: 0;" id="character-name"></p>
             <p class="align-top fs-5" id="character-server"></p>
         </div>
-        <div class="col border border-start-0 p-0 position-relative">
-            {% if not g.user.character %}
-                <form action="/character/id/{{ char_id }}/link" method="POST">
-                    <input id="name" name="name" type="text" hidden>
-                    <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
-                        <p class="m-0" style="font-size: 13px">Link Character</p>
-                    </button>
-                </form>
-            {% elif g.user.character %}
-                <form action="/character/id/{{ char_id }}/unlink" method="POST" id="unlink-form">
-                    <input id="name" name="name" type="text" hidden>
-                </form>
-                <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="unclaim-character">
-                    <p class="m-0 danger" style="font-size: 13px">Unlink Character</p>
-                </button>
-            {% endif %}
-        </div>
+        {% if g.user %}
+            <div class="col-1 border border-start-0 border-end-0 p-0 position-relative">
+                {% if g.user.following is defined and g.user.following|length == 0 %}
+                    <form action="/character/id/{{ char_id }}/follow" method="POST">
+                        <input id="followname" name="followname" type="text" hidden>
+                        <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="follow-character">
+                            <p class="m-0" style="font-size: 13px">Follow</p>
+                        </button>
+                    </form>
+                {% elif g.user.following %}
+                    {% for char in g.user.following %}
+                        {% if char.character_id == character.character_id %}
+                            <form action="/character/id/{{ char_id }}/unfollow" method="POST" id="unfollow-form">
+                            </form>
+                            <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="unfollow-character">
+                                <p class="m-0 danger" style="font-size: 13px">Unfollow</p>
+                            </button>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-1 border border-start-0 p-0 position-relative">
+                {% if g.user.character is defined and g.user.character|length == 0 %}
+                    <form action="/character/id/{{ char_id }}/link" method="POST">
+                        <input id="linkname" name="linkname" type="text" hidden>
+                        <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
+                            <p class="m-0" style="font-size: 13px">Link Character</p>
+                        </button>
+                    </form>
+                {% elif g.user.character %}
+                    {% for char in g.user.character %}
+                        {% if char.character_id == character.character_id %}
+                            <form action="/character/id/{{ char_id }}/unlink" method="POST" id="unlink-form">
+                            </form>
+                            <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="unclaim-character">
+                                <p class="m-0 danger" style="font-size: 13px">Unlink Character</p>
+                            </button>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="col-2 border border-start-0 p-0 position-relative">
+            </div>
+        {% endif %}
     </div>
     <div id="fflogs-container">
         <div class="row border" style="margin-top: 10px">

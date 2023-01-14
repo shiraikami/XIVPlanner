@@ -40,6 +40,17 @@
               </li>
             </ul>
             {% endif %}
+            {% if g.user.following %}
+            <ul class="navbar-nav mb-2 mr-5">
+              <li class="nav-item dropdown">
+                <ul class="dropdown-menu dropdown-menu-end" style="height: 300px; overflow-y: scroll;">
+                  {% for following in g.user.following %}
+                    <li><a class="dropdown-item" href="/character/id/{{ following.id }}">{{ following.name }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+            {% endif %}
             <div class="container">
               <form action="/search" role="search" method="GET">
                 <div class="row g-0">
@@ -66,8 +77,8 @@
                             <li><a class="dropdown-item" href="/character/id/{{ character.character_id }}">{{ character.name }}</a></li>
                             {% endfor %}
                           {% endif %}
-                        <li><a class="dropdown-item" href="/profile/id/{{ g.user.id }}/edit">Edit User</a></li>
-                        <form action="/profile/id/{{ g.user.id }}/delete" method="POST" id="delete-user-form">
+                        <li><a class="dropdown-item" href="/user/id/{{ g.user.id }}/edit">Edit User</a></li>
+                        <form action="/user/id/{{ g.user.id }}/delete" method="POST" id="delete-user-form">
                           <li><a id="delete-user" class="dropdown-item">Delete User</a></li>
                         </form>
                         <li><hr class="dropdown-divider"></li>

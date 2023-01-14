@@ -1,20 +1,24 @@
 """XIVPlanner Flask app."""
 
-from email import generator
 import os
 from flask import Flask, render_template, request, redirect, session, flash, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
-from psycopg2.errors import UniqueViolation
 import requests
+from requests_oauthlib import OAuth2Session
+from oauthlib.oauth2 import BackendApplicationClient
 
 from forms import UserSignUpForm, LoginForm, UserEditForm
-from models import db, connect_db, User, Character, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, AcquiredGear
-from authenticate import CLIENT_ID, CLIENT_SECRET
+from models import db, connect_db, User, Character, Follows, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring, GearSet, AcquiredGear
+from dotenv import load_dotenv
 
+load_dotenv()
+
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+CLIENT_TOKEN = ""
 CURR_USER = "curr_user"
-TOKEN = ""
 
 app = Flask(__name__)
 
@@ -115,15 +119,7 @@ def logout():
 ##############################################################################
 # User routes
 
-@app.route("/profile/id/<int:user_id>")
-def show_profile(user_id):
-    """Show the profile of a user."""
-
-    user = User.query.get(user_id)
-    return render_template('/users/user_profile.html', user=user)
-
-
-@app.route("/profile/id/<int:user_id>/edit", methods=["GET", "POST"])
+@app.route("/user/id/<int:user_id>/edit", methods=["GET", "POST"])
 def edit_profile(user_id):
     """Shows the edit page for a user."""
 
@@ -143,11 +139,11 @@ def edit_profile(user_id):
         return redirect("/profile/id/" + str(g.user.id))
 
     else:
-        return render_template('/users/user_profile_edit.html', form=form)
+        return render_template('/users/user_edit.html', form=form)
 
 
-@app.route("/profile/id/<int:user_id>/delete", methods=["POST"])
-def delete_profile(user_id):
+@app.route("/user/id/<int:user_id>/delete", methods=["POST"])
+def user_profile(user_id):
     """Deletes the user."""
 
     user = User.query.get(user_id)
@@ -385,15 +381,14 @@ def api_acquiredgear():
 ##############################################################################
 # Character
 
-@app.route("/search/token")
+@app.route("/fflogs/token")
 def get_token():
     """Gets token for searching FFLogs"""
-    try: 
-        if TOKEN == "":
-            TOKEN = requests.post("https://www.fflogs.com/oauth/token", data={"grant_type":"client_credentials"}, auth=(CLIENT_ID, CLIENT_SECRET))
-    except: 
-        print("Error getting response from token request")
-    return TOKEN.json()
+
+    client = BackendApplicationClient(client_id=CLIENT_ID)
+    oauth = OAuth2Session(client=client)
+    CLIENT_TOKEN = oauth.fetch_token(token_url='https://www.fflogs.com/oauth/token', client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
+    return jsonify(CLIENT_TOKEN)
 
 
 @app.route("/search")
@@ -416,7 +411,8 @@ def show_character(char_id):
 def save_character(char_id):
     """Claims the character and saves it to the user."""
 
-    name = request.form.get('name')
+    name = request.form.get('linkname')
+    print(request.form)
     character = Character(name=name, user_id=g.user.id, character_id=char_id)
     db.session.add(character)
     db.session.commit()
@@ -431,6 +427,27 @@ def delete_character(char_id):
     db.session.delete(character)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
+
+
+@app.route("/character/id/<int:char_id>/follow", methods=["POST"])
+def follow_character(char_id):
+    """Follows the character."""
+
+    follow = Follows(char_being_followed_id=char_id, user_following_id=g.user.id)
+    db.session.add(follow)
+    db.session.commit()
+    return redirect("/character/id/" + str(char_id))
+
+
+@app.route("/character/id/<int:char_id>/unfollow", methods=["POST"])
+def unfollow_character(char_id):
+    """Unfollows the character."""
+
+    follow = Follows.query.filter_by(char_being_followed_id=char_id).first()
+    db.session.delete(follow)
+    db.session.commit()
+    return redirect("/character/id/" + str(char_id))
+
 
 ##############################################################################
 # Homepage
