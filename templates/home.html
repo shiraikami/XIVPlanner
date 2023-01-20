@@ -1,4 +1,265 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class="container mt-5 border">
+    <div class="row border">
+        <p class="m-2 fs-3">Welcome to XIVPlanner</p>
+    </div>
+    <div class="row">
+        <p class="m-3">Welcome to XIVPlanner! This is a simple website for you to create gearsets, search characters and look at some FFLogs data. </p>
+    </div>
+</div>
+{% if g.user %}
+    <div class="container mt-3 border">
+        <div class="row border">
+            <p class="m-2 fs-5">{{ g.user.username }}</p>
+        </div>
+        <div class="row">
+            <div class="col m-2 border">
+                <p>Gearsets</p>
+                <div>
+                    {% if g.user.gearsets %}
+                        {% for gearset in g.user.gearsets %}
+                            <p><a href="/gearset/id/{{ gearset.id }}">{{ gearset.job }} - {{ gearset.name }}</a></p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col m-2 border">
+                <p>Characters</p>
+                <div>
+                    {% if g.user.character %}
+                        {% for character in g.user.character %}
+                            <div class="card mb-2">
+                                <div class="row g-0">
+                                    <div class="col-2 align-self-center">
+                                        <img src="{{character.portrait}}" class="" style="width: 42px; height: 42px;"></img>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body p-0 ">
+                                            <div class="card-title m-0">
+                                                <a href="/character/id/{{ character.character_id }}">
+                                                    <p class="m-0">{{ character.name }}</p>
+                                                </a>
+                                            </div>
+                                            <div class="card-text m-0">
+                                                <p class="m-0">{{ character.server }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No Linked Characters</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col m-2 border">
+                <p>Following</p>
+                <div>
+                    {% if g.user.following %}
+                        {% for follow in g.user.following %}
+                        <div class="card mb-2">
+                            <div class="row g-0">
+                                <div class="col-2 align-self-center">
+                                    <img src="{{ follow.char_being_followed_portrait }}" class="" style="width: 42px; height: 42px;"></img>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body p-0 ">
+                                        <div class="card-title m-0">
+                                            <a href="/character/id/{{ follow.char_being_followed_id }}">
+                                                <p class="m-0">{{ follow.char_being_followed_name }}</p>
+                                            </a>
+                                        </div>
+                                        <div class="card-text m-0">
+                                            <p class="m-0">{{ follow.char_being_followed_server }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>None Following</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div class="container mt-3 d-flex border" id="zone">
+    <p class="mx-auto m-2 fs-3" id="zonename"></p>
+</div>
+<div class="container mx-auto border mb-5" id="rankings">
+    <div class="container mb-2" id="boss1">
+        <div class="row">
+            <div class="col mt-2 border">
+                <p class="text-start m-2 fs-5" id="boss1name"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Rank</p>
+            </div>
+            <div class="col-3 border">
+                <p class="text-center mx-auto m-2">Name</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">Job</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Patch</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">DPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">rDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">aDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">nDPS</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-2" id="boss2">
+        <div class="row">
+            <div class="border">
+                <p class="text-start m-2 fs-5" id="boss2name"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Rank</p>
+            </div>
+            <div class="col-3 border">
+                <p class="text-center mx-auto m-2">Name</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">Job</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Patch</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">DPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">rDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">aDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">nDPS</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-2" id="boss3">
+        <div class="row">
+            <div class="border">
+                <p class="text-start m-2 fs-5" id="boss3name"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Rank</p>
+            </div>
+            <div class="col-3 border">
+                <p class="text-center mx-auto m-2">Name</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">Job</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Patch</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">DPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">rDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">aDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">nDPS</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-2" id="boss4">
+        <div class="row">
+            <div class="border">
+                <p class="text-start m-2 fs-5" id="boss4name"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Rank</p>
+            </div>
+            <div class="col-3 border">
+                <p class="text-center mx-auto m-2">Name</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">Job</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Patch</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">DPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">rDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">aDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">nDPS</p>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-2" id="boss5">
+        <div class="row">
+            <div class="border">
+                <p class="text-start m-2 fs-5" id="boss5name"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Rank</p>
+            </div>
+            <div class="col-3 border">
+                <p class="text-center mx-auto m-2">Name</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">Job</p>
+            </div>
+            <div class="col-1 border">
+                <p class="text-center mx-auto m-2">Patch</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">DPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">rDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">aDPS</p>
+            </div>
+            <div class="col border">
+                <p class="text-center mx-auto m-2">nDPS</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/home.js"></script>
 {% endblock %}

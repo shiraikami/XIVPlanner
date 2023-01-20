@@ -42,9 +42,11 @@ async function requestXIVAPI(url) {
     document.getElementById("character-server").innerText = res.data.Character.Server;
     document.getElementById("character-portrait").src=res.data.Character.Portrait;
     $("#followname").val(res.data.Character.Name);
-    $("#followserver").val(serverRegion);
+    $("#followserver").val(serverSlug);
+    $("#followportrait").val(res.data.Character.Avatar);
     $("#linkname").val(res.data.Character.Name);
-    $("#linkserver").val(serverRegion);
+    $("#linkserver").val(serverSlug);
+    $("#linkportrait").val(res.data.Character.Avatar);
 
     let joblist = document.getElementById("job-list");
     for(job of res.data.Character.ClassJobs) {
@@ -100,6 +102,7 @@ async function requestFFLogs(access_token, name, serverSlug, serverRegion) {
             }
         });
     
+        console.log(data);
         let rankings = await data.data.data.characterData.character.zoneRankings.rankings;
      
         for (let i = 0; i < rankings.length; i++) {
@@ -108,18 +111,19 @@ async function requestFFLogs(access_token, name, serverSlug, serverRegion) {
     
             let bestrank = String(Math.floor(rankings[i].rankPercent))
             if(bestrank < 25)
-                $(`#boss${i+1}-rank`).text(bestrank + " - " + rankings[i].spec).css("color", "gray");
+                $(`#boss${i+1}-rank`).text(bestrank).css("color", "gray");
             else if(bestrank < 50)
-                $(`#boss${i+1}-rank`).text(bestrank + " - " + rankings[i].spec).css("color", "green");
+                $(`#boss${i+1}-rank`).text(bestrank).css("color", "green");
             else if(bestrank < 75)
-                $(`#boss${i+1}-rank`).text(bestrank + " - " + rankings[i].spec).css("color", "blue");
+                $(`#boss${i+1}-rank`).text(bestrank).css("color", "blue");
             else if(bestrank < 95)
-                $(`#boss${i+1}-rank`).text(bestrank + " - " + rankings[i].spec).css("color", "purple");
+                $(`#boss${i+1}-rank`).text(bestrank).css("color", "purple");
             else if(bestrank < 99)
-                $(`#boss${i+1}-rank`).text(bestrank + " - " + rankings[i].spec).css("color", "orange");
+                $(`#boss${i+1}-rank`).text(bestrank).css("color", "orange");
             else if(bestrank == 99 || bestrank == 100)
-                $(`#boss${i+1}-rank`).text(bestrank + " - " + rankings[i].spec).css("color", "pink");
+                $(`#boss${i+1}-rank`).text(bestrank).css("color", "pink");
     
+            $(`#boss${i+1}-job`).text(rankings[i].spec);
             $(`#boss${i+1}-highest`).text(rankings[i].bestAmount.toFixed(1)).css("color", "purple");
             $(`#boss${i+1}-median`).text(Math.floor(rankings[i].medianPercent));
             $(`#boss${i+1}-kills`).text(rankings[i].totalKills);

@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, redirect, session, flash, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
-import requests
 from requests_oauthlib import OAuth2Session
 from oauthlib.oauth2 import BackendApplicationClient
 
@@ -34,7 +33,7 @@ toolbar = DebugToolbarExtension(app)
 connect_db(app)
 
 ##############################################################################
-# User signup/login/logout
+# User signup/login/logout + FFLogs token
 
 @app.before_request
 def add_user_to_g():
@@ -49,7 +48,6 @@ def do_login(user):
     """Log in user."""
 
     session[CURR_USER] = user.id
-
 
 def do_logout():
     """Logout user."""
@@ -127,19 +125,21 @@ def edit_profile(user_id):
     form = UserEditForm()
 
     if form.validate_on_submit():
-        try:
-            if(User.authenticate(g.user.username, form.confirmpass.data)):
+        if(User.authenticate(g.user.username, form.confirmpass.data)):
+            print("in if")
+            try:
                 User.update(form.username.data, form.password.data, user.id)
                 db.session.commit()
-
-        except:
-            flash("Username already taken", 'error')
-            return render_template('/profile/id/' + str(g.user.id), form=form)
-
-        return redirect("/profile/id/" + str(g.user.id))
-
+                return redirect("/")
+            except:
+                db.session.rollback()
+                flash("Username already taken", 'error')
+                return redirect("/user/id/" + str(g.user.id) + "/edit")
+        else:
+            flash("Wrong Password. Try again.")
+            return redirect("/user/id/" + str(g.user.id) + "/edit")
     else:
-        return render_template('/users/user_edit.html', form=form)
+        return render_template("/users/user_edit.html", form=form)
 
 
 @app.route("/user/id/<int:user_id>/delete", methods=["POST"])
@@ -184,7 +184,7 @@ def save_gear():
     gearset = GearSet(user_id=g.user.id, job=job, name=name, weapon_id=weapon, offhand_id=offhand, helmet_id=helmet, body_id=body, gloves_id=gloves, pants_id=pants, boots_id=boots, earring_id=earring, necklace_id=necklace, bracelet_id=bracelet, lring_id=lring, rring_id=rring)
     db.session.add(gearset)
     db.session.commit()
-    return redirect("/gearset")
+    return redirect("/gearset/id/" + str(gearset.id))
 
 
 @app.route("/gearset/id/<int:gearset_id>")
@@ -384,7 +384,7 @@ def api_acquiredgear():
 @app.route("/fflogs/token")
 def get_token():
     """Gets token for searching FFLogs"""
-
+    
     client = BackendApplicationClient(client_id=CLIENT_ID)
     oauth = OAuth2Session(client=client)
     CLIENT_TOKEN = oauth.fetch_token(token_url='https://www.fflogs.com/oauth/token', client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
@@ -403,8 +403,15 @@ def search_character():
 def show_character(char_id):
     """Shows a character page for an in-game character."""
 
+    claimed = False
+    gearsets = None
     character = db.session.query(Character).filter_by(character_id=char_id).first()
-    return render_template('/character/character_profile.html', char_id=char_id, character=character)
+    if character:
+        gearsets = character.users.gearsets
+        claimed = True
+    followed = db.session.query(Follows).filter(Follows.user_following_id==g.user.id, Follows.char_being_followed_id==char_id).first()
+
+    return render_template('/character/character_profile.html', char_id=char_id, gearsets=gearsets, character=character, followed=followed, claimed=claimed)
 
 
 @app.route("/character/id/<int:char_id>/link", methods=["POST"])
@@ -413,7 +420,8 @@ def save_character(char_id):
 
     name = request.form.get('linkname')
     server = request.form.get('linkserver')
-    character = Character(name=name, server=server, user_id=g.user.id, character_id=char_id)
+    portrait = request.form.get('linkportrait')
+    character = Character(name=name, server=server, user_id=g.user.id, character_id=char_id, portrait=portrait)
     db.session.add(character)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
@@ -435,7 +443,8 @@ def follow_character(char_id):
 
     name = request.form.get('followname')
     server = request.form.get('followserver')
-    follow = Follows(char_being_followed_id=char_id, char_being_followed_name=name, char_being_followed_server=server, user_following_id=g.user.id)
+    portrait = request.form.get('followportrait')
+    follow = Follows(char_being_followed_id=char_id, char_being_followed_name=name, char_being_followed_server=server, char_being_followed_portrait=portrait, user_following_id=g.user.id)
     db.session.add(follow)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
@@ -458,4 +467,5 @@ def unfollow_character(char_id):
 def homepage():
     """Show homepage."""
 
-    return render_template('gear/gear_create.html')
+
+    return render_template('home.html')

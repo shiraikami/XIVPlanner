@@ -270,7 +270,7 @@ function updateRaidList() {
       document.getElementById("lring").style.display = "none";
     }
     else {
-      document.getElementById("lring-shine").style.display = "none";
+      document.getElementById("ring-shine").style.display = "none";
     }
   } 
   else {
@@ -278,7 +278,7 @@ function updateRaidList() {
       document.getElementById("lring").style.display = "block";
     }
     else {
-      document.getElementById("lring-shine").style.display = "block";
+      document.getElementById("ring-shine").style.display = "block";
     }
   }
 
@@ -287,7 +287,7 @@ function updateRaidList() {
       document.getElementById("rring").style.display = "none";
     }
     else {
-      document.getElementById("rring-shine").style.display = "none";
+      document.getElementById("ring-shine").style.display = "none";
     }
   } 
   else {
@@ -295,7 +295,7 @@ function updateRaidList() {
       document.getElementById("rring").style.display = "block";
     }
     else {
-      document.getElementById("rring-shine").style.display = "block";
+      document.getElementById("ring-shine").style.display = "block";
     }
   }
 }
@@ -307,7 +307,7 @@ weaponbox.addEventListener('change', async (event) => {
     if(event.currentTarget.checked) {
         let gear = weaponbox.value;
         let checked = true;
-        const weaponResponse = await axios.post(url, {
+        await axios.post(url, {
           checked,
           gear
         });
@@ -319,7 +319,7 @@ weaponbox.addEventListener('change', async (event) => {
     } else {
         let gear = weaponbox.value;
         let checked = false;
-        const weaponResponse = await axios.post(url, {
+        await axios.post(url, {
           checked,
           gear
         });
@@ -337,7 +337,7 @@ try {
       if (event.currentTarget.checked) {
         let gear = offhandbox.value;
         let checked = true;
-        const offhandResponse = await axios.post(url, {
+        await axios.post(url, {
           checked,
           gear
         });
@@ -349,7 +349,7 @@ try {
     } else {
         let gear = offhandbox.value;
         let checked = false;
-        const offhandResponse = await axios.post(url, {
+        await axios.post(url, {
           checked,
           gear
         });
@@ -369,7 +369,7 @@ helmetbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = helmetbox.value;
     let checked = true;
-    const helmetResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -383,7 +383,7 @@ helmetbox.addEventListener('change', async (event) => {
   } else {
     let gear = helmetbox.value;
     let checked = false;
-    const helmetResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -400,7 +400,7 @@ bodybox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = bodybox.value;
     let checked = true;
-    const bodyResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -413,7 +413,7 @@ bodybox.addEventListener('change', async (event) => {
   } else {
     let gear = bodybox.value;
     let checked = false;
-    const bodyResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -430,7 +430,7 @@ glovesbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = glovesbox.value;
     let checked = true;
-    const glovesResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -444,7 +444,7 @@ glovesbox.addEventListener('change', async (event) => {
   } else {
     let gear = glovesbox.value;
     let checked = false;
-    const glovesResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -462,7 +462,7 @@ pantsbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = pantsbox.value;
     let checked = true;
-    const pantsResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -475,7 +475,7 @@ pantsbox.addEventListener('change', async (event) => {
   } else {
     let gear = pantsbox.value;
     let checked = false;
-    const pantsResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -492,7 +492,7 @@ bootsbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = bootsbox.value;
     let checked = true;
-    const bootsResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -506,7 +506,7 @@ bootsbox.addEventListener('change', async (event) => {
   } else {
     let gear = bootsbox.value;
     let checked = false;
-    const bootsResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -524,7 +524,7 @@ earringbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = earringbox.value;
     let checked = true;
-    const earringResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -537,7 +537,7 @@ earringbox.addEventListener('change', async (event) => {
   } else {
     let gear = earringbox.value;
     let checked = false;
-    const earringResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -554,7 +554,7 @@ necklacebox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = necklacebox.value;
     let checked = true;
-    const necklaceResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -567,7 +567,7 @@ necklacebox.addEventListener('change', async (event) => {
   } else {
     let gear = necklacebox.value;
     let checked = false;
-    const necklaceResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -584,7 +584,7 @@ braceletbox.addEventListener('change', async (event) => {
   if (event.currentTarget.checked) {
     let gear = braceletbox.value;
     let checked = true;
-    const braceletResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -597,7 +597,7 @@ braceletbox.addEventListener('change', async (event) => {
   } else {
     let gear = braceletbox.value;
     let checked = false;
-    const braceletResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -618,7 +618,7 @@ lringbox.addEventListener('change', async (event) => {
       if(rringbox.checked == false) 
         rringbox.checked = true;
     }
-    const lringResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -626,7 +626,7 @@ lringbox.addEventListener('change', async (event) => {
       document.getElementById("lring").style.display = "none";
     }
     else {
-      document.getElementById("lring-shine").style.display = "none";
+      document.getElementById("ring-shine").style.display = "none";
     }
   } else {
     let gear = lringbox.value;
@@ -635,7 +635,7 @@ lringbox.addEventListener('change', async (event) => {
       if(rringbox.checked == true)
         rringbox.checked = false
     }
-    const lringResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -643,7 +643,7 @@ lringbox.addEventListener('change', async (event) => {
       document.getElementById("lring").style.display = "block";
     }
     else {
-      document.getElementById("lring-shine").style.display = "block";
+      document.getElementById("ring-shine").style.display = "block";
     }
   }
 })
@@ -656,7 +656,7 @@ rringbox.addEventListener('change', async (event) => {
       if(lringbox.checked == false) 
         lringbox.checked = true;
     }
-    const rringResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -664,7 +664,7 @@ rringbox.addEventListener('change', async (event) => {
       document.getElementById("rring").style.display = "none";
     }
     else {
-      document.getElementById("rring-shine").style.display = "none";
+      document.getElementById("ring-shine").style.display = "none";
     }
   } else {
     let gear = rringbox.value;
@@ -673,7 +673,7 @@ rringbox.addEventListener('change', async (event) => {
       if(lringbox.checked == true) 
         lringbox.checked = false;
     }
-    const rringResponse = await axios.post(url, {
+    await axios.post(url, {
       checked,
       gear
     });
@@ -681,7 +681,7 @@ rringbox.addEventListener('change', async (event) => {
       document.getElementById("rring").style.display = "block";
     }
     else {
-      document.getElementById("rring-shine").style.display = "block";
+      document.getElementById("ring-shine").style.display = "block";
     }
   }
 })

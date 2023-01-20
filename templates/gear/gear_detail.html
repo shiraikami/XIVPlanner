@@ -8,7 +8,7 @@
 <div class="container border">
     <div class="row">
         <div class="col-sm-1">
-            {% if g.user %}
+            {% if g.user.id == gearset.user_id %}
             Acquired
             {% endif %}
         </div>
@@ -25,7 +25,7 @@
 </div>
 <div class="container border" style="margin-bottom: 0px">
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{weapon.id}} id="weaponcheck" name="{{ weapon.name }}">
@@ -55,7 +55,7 @@
     </div>
     {% if offhand %}
         <div class="row">
-            {% if g.user %}
+            {% if g.user.id == gearset.user_id %}
             <div class="col-md-auto">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value={{offhand.id}} id="offhandcheck" name="{{ offhand.name }}">   
@@ -85,7 +85,7 @@
         </div>
     {% endif %}
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{helmet.id}} id="helmetcheck" name="{{ helmet.name }}">   
@@ -114,7 +114,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{body.id}} id="bodycheck" name="{{ body.name }}">   
@@ -143,7 +143,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{gloves.id}} id="glovescheck" name="{{ gloves.name }}">   
@@ -172,7 +172,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{pants.id}} id="pantscheck" name="{{ pants.name }}">   
@@ -201,7 +201,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{boots.id}} id="bootscheck" name="{{ boots.name }}">   
@@ -230,7 +230,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{earring.id}} id="earringcheck" name="{{ earring.name }}">   
@@ -259,7 +259,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{necklace.id}} id="necklacecheck" name="{{ necklace.name }}">   
@@ -288,7 +288,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{bracelet.id}} id="braceletcheck" name="{{ bracelet.name }}">   
@@ -317,7 +317,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{lring.id}} id="lringcheck" name="{{ lring.name }}">   
@@ -346,7 +346,7 @@
         </div>
     </div>
     <div class="row border">
-        {% if g.user %}
+        {% if g.user.id == gearset.user_id %}
         <div class="col-md-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value={{rring.id}} id="rringcheck" name="{{ rring.name }}">   
@@ -376,94 +376,94 @@
     </div>
 </div>
 <br>
-{% if g.user %}
-<div class="container d-flex">
-    <form id="delete-form" action="/gearset/id/{{gearset.id}}/delete" method="POST">
-    </form>
-    <div class="container">
-        <button id="delete-button" class="btn btn-danger float-end" type="submit">Delete</button>
-    </div>
-    <form action="/gearset/id/{{gearset.id}}/edit" method="GET">
+{% if g.user.id == gearset.user_id %}
+    <div class="container d-flex">
+        <form id="delete-form" action="/gearset/id/{{gearset.id}}/delete" method="POST">
+        </form>
         <div class="container">
-            <button class="btn btn-primary float-end" type="submit">Edit</button>
+            <button id="delete-button" class="btn btn-danger float-end" type="submit">Delete</button>
         </div>
-    </form>
-</div>
+        <form action="/gearset/id/{{gearset.id}}/edit" method="GET">
+            <div class="container">
+                <button class="btn btn-primary float-end" type="submit">Edit</button>
+            </div>
+        </form>
+    </div>
+    <div class="container d-flex justify-content-center" style="margin-top: 20px">
+        <h4>Raid Drops</h4>
+    </div>
+    <div class="container border" style="margin-bottom: 50px">
+        <div class="row">
+            <div class="col text-center border">
+                <h5><b>Raid 1</b></h5>
+            </div>
+            <div class="col text-center border">
+                <h5><b>Raid 2</b></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center border" id="raid-1">
+                <p id="earrings" style="display: none">{{ earring.name }}</p>
+                <p id="necklace" style="display: none">{{ necklace.name }}</p>
+                <p id="bracelet" style="display: none">{{ bracelet.name }}</p>
+                <p id="lring" style="display: none">{{ lring.name }}</p>
+                <p id="rring" style="display: none">{{ rring.name }}</p>
+            </div>
+            <div class="col text-center border" id="raid-2">
+                <p id="helmet" style="display: none">{{ helmet.name }}</p>
+                <p id="gloves" style="display: none">{{ gloves.name }}</p>
+                <p id="boots" style="display: none">{{ boots.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center border">
+                <h5><b>Shine</b></h5>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="earrings-shine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="necklace-shine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="bracelet-shine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="ring-shine"></div>
+        </div>
+        <div class="row">
+            <div class="col text-center border">
+                <h5><b>Raid 3</b></h5>
+            </div>
+            <div class="col text-center border">
+                <h5><b>Raid 4</b></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center border" id="raid-3">
+                <p id="helmet2" style="display: none">{{ helmet.name }}</p>
+                <p id="gloves2" style="display: none">{{ gloves.name }}</p>
+                <p id="pants" style="display: none">{{ pants.name }}</p>
+                <p id="boots2" style="display: none">{{ boots.name }}</p>
+            </div>
+            <div class="col text-center border" id="raid-4">
+                <p id="weapon" style="display: none">{{ weapon.name }}</p>
+                <p id="offhand" style="display: none">{{ offhand.name }}</p>
+                <p id="body" style="display: none">{{ body.name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center border">
+                <h5><b>Twine</b></h5>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="weapon-twine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="offhand-twine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="helmet-twine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="body-twine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="gloves-twine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="pants-twine"></div>
+            <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="boots-twine"></div>
+        </div>
+    </div>
 {% endif %}
-<div class="container d-flex justify-content-center" style="margin-top: 20px">
-    <h4>Raid Drops</h4>
-</div>
-<div class="container border" style="margin-bottom: 50px">
-    <div class="row">
-        <div class="col text-center border">
-            <h5><b>Raid 1</b></h5>
-        </div>
-        <div class="col text-center border">
-            <h5><b>Raid 2</b></h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center border" id="raid-1">
-            <p id="earrings" style="display: none">{{ earring.name }}</p>
-            <p id="necklace" style="display: none">{{ necklace.name }}</p>
-            <p id="bracelet" style="display: none">{{ bracelet.name }}</p>
-            <p id="lring" style="display: none">{{ lring.name }}</p>
-            <p id="rring" style="display: none">{{ rring.name }}</p>
-        </div>
-        <div class="col text-center border" id="raid-2">
-            <p id="helmet" style="display: none">{{ helmet.name }}</p>
-            <p id="gloves" style="display: none">{{ gloves.name }}</p>
-            <p id="boots" style="display: none">{{ boots.name }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center border">
-            <h5><b>Shine</b></h5>
-        </div>
-    </div>
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="earrings-shine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="necklace-shine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="bracelet-shine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="lring-shine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Shine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none;" id="rring-shine"></div>
-    </div>
-    <div class="row">
-        <div class="col text-center border">
-            <h5><b>Raid 3</b></h5>
-        </div>
-        <div class="col text-center border">
-            <h5><b>Raid 4</b></h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center border" id="raid-3">
-            <p id="helmet2" style="display: none">{{ helmet.name }}</p>
-            <p id="gloves2" style="display: none">{{ gloves.name }}</p>
-            <p id="pants" style="display: none">{{ pants.name }}</p>
-            <p id="boots2" style="display: none">{{ boots.name }}</p>
-        </div>
-        <div class="col text-center border" id="raid-4">
-            <p id="weapon" style="display: none">{{ weapon.name }}</p>
-            <p id="offhand" style="display: none">{{ offhand.name }}</p>
-            <p id="body" style="display: none">{{ body.name }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center border">
-            <h5><b>Twine</b></h5>
-        </div>
-    </div>
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="weapon-twine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="offhand-twine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="helmet-twine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="body-twine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="gloves-twine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="pants-twine"></div>
-        <div class="col-md-auto"><img src="/static/images/gear/Twine_Icon.png" style="width: 35px; height: 35px; margin: 5px; padding: 0px; display: none" id="boots-twine"></div>
-    </div>
-</div>
+
 {% endblock %}
 
 {% block script %}

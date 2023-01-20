@@ -12,64 +12,46 @@
             <p class="align-top fs-5" id="character-server"></p>
         </div>
         {% if g.user %}
-            <div class="col-1 border border-start-0 border-end-0 p-0 position-relative">
-                {% if not g.user.following %}
-                    <form action="/character/id/{{ char_id }}/follow" method="POST">
-                        <input id="followname" name="followname" type="text" hidden>
-                        <input id="followserver" name="followserver" type="text" hidden>
-                        <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="follow-character">
-                            <p class="m-0" style="font-size: 13px">Follow</p>
-                        </button>
-                    </form>
-                {% endif %}
-                {% for follow in g.user.following %}
-                    {% if not follow.char_being_followed_id == char_id %}
+            <div class="col-2 border d-flex align-items-center">
+                <div class="mx-auto m-0">
+                    {% if followed is none %}
                         <form action="/character/id/{{ char_id }}/follow" method="POST">
                             <input id="followname" name="followname" type="text" hidden>
                             <input id="followserver" name="followserver" type="text" hidden>
-                            <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="follow-character">
+                            <input id="followportrait" name="followportrait" type="text" hidden>
+                            <button type="submit" class="btn btn-secondary border" style="width: 80px; height: 40px;" id="follow-character">
                                 <p class="m-0" style="font-size: 13px">Follow</p>
                             </button>
                         </form>
                     {% else %}
                         <form action="/character/id/{{ char_id }}/unfollow" method="POST" id="unfollow-form">
                         </form>
-                        <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="unfollow-character">
-                            <p class="m-0 danger" style="font-size: 13px">Unfollow</p>
+                        <button type="submit" class="btn btn-secondary border" style="width: 80px; height: 40px;" id="unfollow-character">
+                            <p class="m-0" style="font-size: 13px">Unfollow</p>
                         </button>
                     {% endif %}
-                {% endfor %}
-            </div>
-            <div class="col-1 border border-start-0 p-0 position-relative">
-                {% if not g.user.character %}
-                    <form action="/character/id/{{ char_id }}/link" method="POST">
-                        <input id="linkname" name="linkname" type="text" hidden>
-                        <input id="linkserver" name="linkserver" type="text" hidden>
-                        <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
-                            <p class="m-0" style="font-size: 13px">Link Character</p>
-                        </button>
-                    </form>
-                {% endif %}
-                {% for char in g.user.character %}
-                    {% if not char.character_id == char_id %}
+                </div>
+                <div class="mx-auto m-0">
+                    {% if character.user_id != g.user.id and claimed == False %}
                         <form action="/character/id/{{ char_id }}/link" method="POST">
                             <input id="linkname" name="linkname" type="text" hidden>
                             <input id="linkserver" name="linkserver" type="text" hidden>
-                            <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="claim-character">
-                                <p class="m-0" style="font-size: 13px">Link Character</p>
+                            <input id="linkportrait" name="linkportrait" type="text" hidden>
+                            <button type="submit" class="btn btn-secondary border" style="width: 80px; height: 40px;" id="claim-character">
+                                <p class="m-0" style="font-size: 13px">Link</p>
                             </button>
                         </form>
-                    {% else %}  
+                    {% elif character.user_id == g.user.id %}  
                         <form action="/character/id/{{ char_id }}/unlink" method="POST" id="unlink-form">
                         </form>
-                        <button type="submit" class="btn btn-light position-absolute top-50 start-50 translate-middle p-1" id="unclaim-character">
-                            <p class="m-0 danger" style="font-size: 13px">Unlink Character</p>
+                        <button type="submit" class="btn btn-secondary border" style="width: 80px; height: 40px;" id="unclaim-character">
+                            <p class="m-0 danger" style="font-size: 13px">Unlink</p>
                         </button>
                     {% endif %}
-                {% endfor %}
+                </div>
             </div>
         {% else %}
-            <div class="col-2 border border-start-0 p-0 position-relative">
+            <div class="col-2 border border-start-0">
             </div>
         {% endif %}
     </div>
@@ -78,11 +60,14 @@
             <p class="text-center fs-5 align-middle" style="margin-top: 10px">FFLogs</p>
         </div>
         <div class="row">
-            <div class="col-5 border">
+            <div class="col-4 border">
                 <p class="text-center" style="margin-top: 10px">Boss</p>
             </div>
-            <div class="col-3 border">
+            <div class="col-2 border">
                 <p class="text-center" style="margin-top: 10px">Best %</p>
+            </div>
+            <div class="col-2 border">
+                <p class="text-center" style="margin-top: 10px">Job</p>
             </div>
             <div class="col-2 border">
                 <p class="text-center" style="margin-top: 10px">Highest rDPS</p>
@@ -95,11 +80,14 @@
             </div> 
         </div>
         <div class="row">
-            <div class="col-5 border">
+            <div class="col-4 border">
                 <p id="boss1-name" class="text-center"></p>
             </div>
-            <div class="col-3 border">
+            <div class="col-2 border">
                 <p id="boss1-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss1-job" class="text-center"></p>
             </div>
             <div class="col-2 border">
                 <p id="boss1-highest" class="text-center"></p>
@@ -112,11 +100,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-5 border">
+            <div class="col-4 border">
                 <p id="boss2-name" class="text-center"></p>
             </div>
-            <div class="col-3 border">
+            <div class="col-2 border">
                 <p id="boss2-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss2-job" class="text-center"></p>
             </div>
             <div class="col-2 border">
                 <p id="boss2-highest" class="text-center"></p>
@@ -129,11 +120,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-5 border">
+            <div class="col-4 border">
                 <p id="boss3-name" class="text-center"></p>
             </div>
-            <div class="col-3 border">
+            <div class="col-2 border">
                 <p id="boss3-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss3-job" class="text-center"></p>
             </div>
             <div class="col-2 border">
                 <p id="boss3-highest" class="text-center"></p>
@@ -146,11 +140,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-5 border">
+            <div class="col-4 border">
                 <p id="boss4-name" class="text-center"></p>
             </div>
-            <div class="col-3 border">
+            <div class="col-2 border">
                 <p id="boss4-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss4-job" class="text-center"></p>
             </div>
             <div class="col-2 border">
                 <p id="boss4-highest" class="text-center"></p>
@@ -163,11 +160,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-5 border">
+            <div class="col-4 border">
                 <p id="boss5-name" class="text-center"></p>
             </div>
-            <div class="col-3 border">
+            <div class="col-2 border">
                 <p id="boss5-rank" class="text-center"></p>
+            </div>
+            <div class="col-2 border">
+                <p id="boss5-job" class="text-center"></p>
             </div>
             <div class="col-2 border">
                 <p id="boss5-highest" class="text-center"></p>
@@ -196,9 +196,9 @@
             </div>
             <div class="row">
                 <div class="col" id="gearset-list">
-                    {% if character is not none %}
+                    {% if gearsets is not none %}
                         <ul style="height:610px; overflow-y: scroll;">
-                        {% for gearset in character.users.gearsets %}
+                        {% for gearset in gearsets %}
                             <li><p style="padding-left: 10px; padding-top: 5px; margin: 0px"><a href="/gearset/id/{{ gearset.id }}">{{ gearset.job }} - {{ gearset.name }}</a></p></li>
                         {% endfor %}
                         </ul>

@@ -25,6 +25,10 @@ class Character(db.Model):
         db.Text
     )
 
+    portrait = db.Column(
+        db.Text
+    )
+
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id')
@@ -37,7 +41,7 @@ class Character(db.Model):
     db.UniqueConstraint(user_id, character_id)
 
 class Follows(db.Model): 
-    """Connection of a follower <-> followed_user."""
+    """User following a character."""
 
     __tablename__ = 'follows'
 
@@ -54,6 +58,10 @@ class Follows(db.Model):
         db.Text
     )
 
+    char_being_followed_portrait = db.Column(
+        db.Text
+    )
+
     user_following_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id', ondelete="cascade"),
@@ -64,7 +72,7 @@ class User(db.Model):
     """User in the system."""
 
     __tablename__ = 'users'
-
+    
     id = db.Column(
         db.Integer,
         primary_key=True
@@ -85,6 +93,9 @@ class User(db.Model):
     acquiredgear = db.relationship("AcquiredGear", cascade="all, delete", backref="users")
     character = db.relationship("Character", cascade="all, delete", backref="users")
     following = db.relationship("Follows", cascade="all, delete", backref="users")
+
+    def __repr__(self):
+        return f"<User #{self.id}: {self.username}"
 
     @classmethod
     def signup(cls, username, password):
@@ -134,13 +145,126 @@ class User(db.Model):
                 user.username = username
             else:
                 user.username = user.username
-
             db.session.add(user)
+            print("working")
             return user
+        return False  
 
-        return False
+class GearSet(db.Model):
+    """List of gear the user saved."""
 
+    __tablename__ = 'gearsets'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
+    )
+
+    job = db.Column(
+        db.Text,
+        nullable = False
+    )
+
+    name = db.Column(
+        db.Text
+    )
+
+    weapon_id = db.Column(
+        db.Integer,
+        db.ForeignKey('weapons.id')
+    )
+
+    offhand_id = db.Column(
+        db.Integer,
+        db.ForeignKey('offhands.id')
+    )
+
+    helmet_id = db.Column(
+        db.Integer,
+        db.ForeignKey('helmets.id')
+    )
+
+    body_id = db.Column(
+        db.Integer,
+        db.ForeignKey('bodies.id')
+    )
+
+    gloves_id = db.Column(
+        db.Integer,
+        db.ForeignKey('gloves.id')
+    )
+
+    pants_id = db.Column(
+        db.Integer,
+        db.ForeignKey('pants.id')
+    )
+
+    boots_id = db.Column(
+        db.Integer,
+        db.ForeignKey('boots.id')
+    )
+
+    earring_id = db.Column(
+        db.Integer,
+        db.ForeignKey('earrings.id')
+    )
+
+    necklace_id = db.Column(
+        db.Integer,
+        db.ForeignKey('necklaces.id')
+    )
+
+    bracelet_id = db.Column(
+        db.Integer,
+        db.ForeignKey('bracelets.id')
+    )
+
+    lring_id = db.Column(
+        db.Integer,
+        db.ForeignKey('rings.id')
+    )
+
+    rring_id = db.Column(
+        db.Integer,
+        db.ForeignKey('rings.id')
+    )
+
+
+class AcquiredGear(db.Model):
+    """Piece of gear each user has."""
+
+    __tablename__ = 'acquiredgear'
+
+    id = db.Column(
+        db.Integer,
+        primary_key = True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
+    )
+
+    gear_id = db.Column(
+        db.Integer
+    )
     
+    db.UniqueConstraint(user_id, gear_id)
+
+    def to_dict(self):
+        """Serialize data to a dict of specific gear info."""
+
+        return {
+            "gear_id": self.gear_id,
+            "user_id": self.user_id
+        }
+
+
 class Weapon(db.Model):
     """Gear list for a user."""
 
@@ -679,119 +803,6 @@ class Ring(db.Model):
             "equipslot": self.equipslot
         }
 
-class GearSet(db.Model):
-    """List of gear the user saved."""
-
-    __tablename__ = 'gearsets'
-
-    id = db.Column(
-        db.Integer,
-        primary_key = True
-    )
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id')
-    )
-
-    job = db.Column(
-        db.Text,
-        nullable = False
-    )
-
-    name = db.Column(
-        db.Text
-    )
-
-    weapon_id = db.Column(
-        db.Integer,
-        db.ForeignKey('weapons.id')
-    )
-
-    offhand_id = db.Column(
-        db.Integer,
-        db.ForeignKey('offhands.id')
-    )
-
-    helmet_id = db.Column(
-        db.Integer,
-        db.ForeignKey('helmets.id')
-    )
-
-    body_id = db.Column(
-        db.Integer,
-        db.ForeignKey('bodies.id')
-    )
-
-    gloves_id = db.Column(
-        db.Integer,
-        db.ForeignKey('gloves.id')
-    )
-
-    pants_id = db.Column(
-        db.Integer,
-        db.ForeignKey('pants.id')
-    )
-
-    boots_id = db.Column(
-        db.Integer,
-        db.ForeignKey('boots.id')
-    )
-
-    earring_id = db.Column(
-        db.Integer,
-        db.ForeignKey('earrings.id')
-    )
-
-    necklace_id = db.Column(
-        db.Integer,
-        db.ForeignKey('necklaces.id')
-    )
-
-    bracelet_id = db.Column(
-        db.Integer,
-        db.ForeignKey('bracelets.id')
-    )
-
-    lring_id = db.Column(
-        db.Integer,
-        db.ForeignKey('rings.id')
-    )
-
-    rring_id = db.Column(
-        db.Integer,
-        db.ForeignKey('rings.id')
-    )
-
-
-class AcquiredGear(db.Model):
-    """Piece of gear each user has."""
-
-    __tablename__ = 'acquiredgear'
-
-    id = db.Column(
-        db.Integer,
-        primary_key = True
-    )
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('users.id')
-    )
-
-    gear_id = db.Column(
-        db.Integer
-    )
-    
-    db.UniqueConstraint(user_id, gear_id)
-
-    def to_dict(self):
-        """Serialize data to a dict of specific gear info."""
-
-        return {
-            "gear_id": self.gear_id,
-            "user_id": self.user_id
-        }
 
 def connect_db(app):
     """Connect this database to provided Flask app."""
