@@ -22,6 +22,8 @@
                         {% for gearset in g.user.gearsets %}
                             <p><a href="/gearset/id/{{ gearset.id }}">{{ gearset.job }} - {{ gearset.name }}</a></p>
                         {% endfor %}
+                    {% else %}
+                        <p>No Gearsets</p>
                     {% endif %}
                 </div>
             </div>

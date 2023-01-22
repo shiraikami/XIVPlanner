@@ -16,7 +16,6 @@ load_dotenv()
 
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
-CLIENT_TOKEN = ""
 CURR_USER = "curr_user"
 
 app = Flask(__name__)
@@ -31,6 +30,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'SECRET')
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
+
 
 ##############################################################################
 # User signup/login/logout + FFLogs token
@@ -157,7 +157,7 @@ def user_profile(user_id):
 
 @app.route("/gearset")
 def show_gear():
-    """Show the gear page of a user."""
+    """Show the gear create page."""
     
     return render_template('gear/gear_create.html')
 
@@ -407,7 +407,7 @@ def show_character(char_id):
     gearsets = None
     character = db.session.query(Character).filter_by(character_id=char_id).first()
     if character:
-        gearsets = character.users.gearsets
+        gearsets = character.user.gearsets
         claimed = True
     followed = db.session.query(Follows).filter(Follows.user_following_id==g.user.id, Follows.char_being_followed_id==char_id).first()
 

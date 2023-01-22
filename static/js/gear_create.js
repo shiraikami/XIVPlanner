@@ -10,7 +10,7 @@ window.onload = (event) => {
 
 async function mapGear(url) {
   let res = await axios.get(url);
-
+  console.log(res)
   return res.data.map(data => {
     return {
       id: data.id,

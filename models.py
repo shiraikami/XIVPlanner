@@ -1,6 +1,5 @@
 """SQLAlchemy models for XIVPlanner."""
 
-from enum import unique
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
@@ -89,10 +88,10 @@ class User(db.Model):
         nullable = False
     )
 
-    gearsets = db.relationship("GearSet", cascade="all, delete", backref="users")
-    acquiredgear = db.relationship("AcquiredGear", cascade="all, delete", backref="users")
-    character = db.relationship("Character", cascade="all, delete", backref="users")
-    following = db.relationship("Follows", cascade="all, delete", backref="users")
+    gearsets = db.relationship("GearSet", cascade="all, delete", backref="user")
+    acquiredgear = db.relationship("AcquiredGear", cascade="all, delete", backref="user")
+    characters = db.relationship("Character", cascade="all, delete", backref="user")
+    following = db.relationship("Follows", cascade="all, delete", backref="user")
 
     def __repr__(self):
         return f"<User #{self.id}: {self.username}"

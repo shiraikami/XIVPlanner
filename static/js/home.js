@@ -52,7 +52,6 @@ async function requestFFLogs(access_token) {
 }
 
 function Boss1(data) {
-    console.log(data);
     let encounterData = data.worldData.zone.encounters[0];
     $("#boss1name").text(encounterData.name);
     let rankings = data.worldData.zone.encounters[0].characterRankings.rankings;

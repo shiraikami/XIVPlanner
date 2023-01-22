@@ -1,4 +1,4 @@
-from app import db, app
+from app import app, db
 from models import Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 import requests
 
