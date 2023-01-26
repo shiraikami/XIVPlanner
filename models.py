@@ -145,7 +145,6 @@ class User(db.Model):
             else:
                 user.username = user.username
             db.session.add(user)
-            print("working")
             return user
         return False  
 
