@@ -137,7 +137,6 @@ def edit_profile(user_id):
 
     if form.validate_on_submit():
         if(User.authenticate(g.user.username, form.confirmpass.data)):
-            print("in if")
             try:
                 User.update(form.username.data, form.password.data, user.id)
                 db.session.commit()
