@@ -130,6 +130,10 @@ def edit_profile(user_id):
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
+    
+    if g.user.id != user_id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
 
     if form.validate_on_submit():
         if(User.authenticate(g.user.username, form.confirmpass.data)):
@@ -156,6 +160,11 @@ def user_profile(user_id):
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
+
+    if g.user.id != user_id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+    
 
     user = User.query.get(user_id)
     db.session.delete(user)
@@ -251,11 +260,16 @@ def gear_acquired(gearset_id):
 def gear_show_edit(gearset_id):
     """Shows a page for user to edit a gearset."""
 
+    gearset = GearSet.query.get(gearset_id)
+
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    gearset = GearSet.query.get(gearset_id)
+    if g.user.id != gearset.user_id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     weapon = Weapon.query.get(gearset.weapon_id)
     offhand = Offhand.query.get(gearset.offhand_id)
     helmet = Helmet.query.get(gearset.helmet_id)
@@ -275,11 +289,16 @@ def gear_show_edit(gearset_id):
 def gear_save_edit(gearset_id):
     """Shows a page for user to edit a gearset."""
 
+    editgearset = GearSet.query.get(gearset_id)
+    
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    editgearset = GearSet.query.get(gearset_id)
+    if g.user.id != editgearset.user_id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     if request.form.get('job') == None:
         editgearset.job = editgearset.job
     else:
@@ -356,11 +375,16 @@ def gear_save_edit(gearset_id):
 def gear_delete(gearset_id):
     """Deletes a gearset."""
 
+    gearset = GearSet.query.get(gearset_id)
+    
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    gearset = GearSet.query.get(gearset_id)
+    if g.user.id != gearset.user_id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     db.session.delete(gearset)
     db.session.commit()
     return redirect("/gearset")
@@ -466,11 +490,16 @@ def save_character(char_id):
 def delete_character(char_id):
     """Deletes the claimed character and removes it from user."""
 
+    character = Character.query.filter_by(character_id=char_id).first()
+
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    character = Character.query.filter_by(character_id=char_id).first()
+    if g.user.id != character.user_id:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     db.session.delete(character)
     db.session.commit()
     return redirect("/character/id/" + str(char_id))
@@ -497,7 +526,13 @@ def follow_character(char_id):
 def unfollow_character(char_id):
     """Unfollows the character."""
 
+    follow = Follows.query.filter_by(char_being_followed_id=char_id).first()
+
     if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    if g.user.id != follow.user_following_id:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
