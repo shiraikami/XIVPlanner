@@ -127,6 +127,10 @@ def edit_profile(user_id):
     user = User.query.get(user_id)
     form = UserEditForm()
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     if form.validate_on_submit():
         if(User.authenticate(g.user.username, form.confirmpass.data)):
             print("in if")
@@ -149,6 +153,10 @@ def edit_profile(user_id):
 def user_profile(user_id):
     """Deletes the user."""
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     user = User.query.get(user_id)
     db.session.delete(user)
     db.session.commit()
@@ -168,6 +176,10 @@ def show_gear():
 @app.route("/gearset/save", methods=["POST"])
 def save_gear():
     """Save the current gearset of user."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
 
     job = request.form.get('job')
     name = request.form.get('name')
@@ -215,6 +227,10 @@ def gear_detail(gearset_id):
 def gear_acquired(gearset_id):
     """Updates what gear the user currently has."""
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     data = request.json
     if(data['checked'] == True and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is None):
         acquiredgear = AcquiredGear(user_id=g.user.id, gear_id=data['gear'])
@@ -235,6 +251,10 @@ def gear_acquired(gearset_id):
 def gear_show_edit(gearset_id):
     """Shows a page for user to edit a gearset."""
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     gearset = GearSet.query.get(gearset_id)
     weapon = Weapon.query.get(gearset.weapon_id)
     offhand = Offhand.query.get(gearset.offhand_id)
@@ -254,6 +274,10 @@ def gear_show_edit(gearset_id):
 @app.route("/gearset/id/<int:gearset_id>/edit", methods=["POST"])
 def gear_save_edit(gearset_id):
     """Shows a page for user to edit a gearset."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
 
     editgearset = GearSet.query.get(gearset_id)
     if request.form.get('job') == None:
@@ -331,6 +355,10 @@ def gear_save_edit(gearset_id):
 @app.route("/gearset/id/<int:gearset_id>/delete", methods=["POST"])
 def gear_delete(gearset_id):
     """Deletes a gearset."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
 
     gearset = GearSet.query.get(gearset_id)
     db.session.delete(gearset)
@@ -421,6 +449,10 @@ def show_character(char_id):
 def save_character(char_id):
     """Claims the character and saves it to the user."""
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     name = request.form.get('linkname')
     server = request.form.get('linkserver')
     portrait = request.form.get('linkportrait')
@@ -434,6 +466,10 @@ def save_character(char_id):
 def delete_character(char_id):
     """Deletes the claimed character and removes it from user."""
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     character = Character.query.filter_by(character_id=char_id).first()
     db.session.delete(character)
     db.session.commit()
@@ -443,6 +479,10 @@ def delete_character(char_id):
 @app.route("/character/id/<int:char_id>/follow", methods=["POST"])
 def follow_character(char_id):
     """Follows the character."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
 
     name = request.form.get('followname')
     server = request.form.get('followserver')
@@ -457,6 +497,10 @@ def follow_character(char_id):
 def unfollow_character(char_id):
     """Unfollows the character."""
 
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
     follow = Follows.query.filter_by(char_being_followed_id=char_id).first()
     db.session.delete(follow)
     db.session.commit()
@@ -469,6 +513,5 @@ def unfollow_character(char_id):
 @app.route("/")
 def homepage():
     """Show homepage."""
-
 
     return render_template('home.html')
