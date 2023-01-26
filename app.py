@@ -187,7 +187,7 @@ def save_gear():
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset")
 
     job = request.form.get('job')
     name = request.form.get('name')
@@ -237,7 +237,7 @@ def gear_acquired(gearset_id):
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     data = request.json
     if(data['checked'] == True and AcquiredGear.query.filter_by(gear_id=data['gear']).first() is None):
@@ -263,11 +263,11 @@ def gear_show_edit(gearset_id):
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     if g.user.id != gearset.user_id:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     weapon = Weapon.query.get(gearset.weapon_id)
     offhand = Offhand.query.get(gearset.offhand_id)
@@ -292,11 +292,11 @@ def gear_save_edit(gearset_id):
     
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     if g.user.id != editgearset.user_id:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     if request.form.get('job') == None:
         editgearset.job = editgearset.job
@@ -378,11 +378,11 @@ def gear_delete(gearset_id):
     
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     if g.user.id != gearset.user_id:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/gearset/id/" + str(gearset_id))
 
     db.session.delete(gearset)
     db.session.commit()
@@ -474,7 +474,7 @@ def save_character(char_id):
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/character/id/" + str(char_id))
 
     name = request.form.get('linkname')
     server = request.form.get('linkserver')
@@ -493,11 +493,11 @@ def delete_character(char_id):
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/character/id/" + str(char_id))
 
     if g.user.id != character.user_id:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/character/id/" + str(char_id))
 
     db.session.delete(character)
     db.session.commit()
@@ -510,7 +510,7 @@ def follow_character(char_id):
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/character/id/" + str(char_id))
 
     name = request.form.get('followname')
     server = request.form.get('followserver')
@@ -529,11 +529,11 @@ def unfollow_character(char_id):
 
     if not g.user:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/character/id/" + str(char_id))
 
     if g.user.id != follow.user_following_id:
         flash("Access unauthorized.", "danger")
-        return redirect("/")
+        return redirect("/character/id/" + str(char_id))
 
     follow = Follows.query.filter_by(char_being_followed_id=char_id).first()
     db.session.delete(follow)
