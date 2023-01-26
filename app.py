@@ -20,6 +20,8 @@ CURR_USER = "curr_user"
 
 app = Flask(__name__)
 
+# Get DB_URI from environ variable (useful for production/testing) or,
+# if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgresql:///xivplanner'))
 
@@ -30,7 +32,8 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'SECRET')
 toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
-
+with app.app_context():
+    db.create_all()
 
 ##############################################################################
 # User signup/login/logout + FFLogs token
