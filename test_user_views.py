@@ -57,7 +57,7 @@ class UserViewsTestCase(TestCase):
         with self.app.app_context():
             db.drop_all()
 
-    def test__show_signup(self):
+    def test_show_signup(self):
         with self.client as c:
             resp = c.get("/signup")
 
