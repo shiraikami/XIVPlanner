@@ -2,7 +2,7 @@
 
 # run these tests like:
 # 
-#   python -m unittest test_user_model.py
+#   python -m unittest test_gearset_model.py
 
 import os
 from unittest import TestCase
@@ -22,7 +22,6 @@ class GearSetModelTestCase(TestCase):
     def setUp(self):
         """Create test client, add sample data."""
         self.app = app
-        connect_db(self.app)
         with self.app.app_context():
             db.drop_all()
             db.create_all()
@@ -63,8 +62,6 @@ class GearSetModelTestCase(TestCase):
             self.uid1 = uid1
         
     def tearDown(self):
-        self.app = app
-        connect_db(self.app)
         with self.app.app_context():
             db.drop_all()
 
