@@ -6,7 +6,7 @@
 
 import os
 from unittest import TestCase
-from models import db, connect_db, User, GearSet, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
+from models import db, User, GearSet, Weapon, Offhand, Helmet, Body, Gloves, Pants, Boots, Earring, Necklace, Bracelet, Ring
 
 # BEFORE we import our app, let's set an environmental variable
 # to use a different database for tests (we need to do this
