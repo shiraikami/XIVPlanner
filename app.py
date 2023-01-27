@@ -459,11 +459,13 @@ def show_character(char_id):
 
     claimed = False
     gearsets = None
+    followed = None
     character = db.session.query(Character).filter_by(character_id=char_id).first()
     if character:
         gearsets = character.user.gearsets
         claimed = True
-    followed = db.session.query(Follows).filter(Follows.user_following_id==g.user.id, Follows.char_being_followed_id==char_id).first()
+    if g.user:
+        followed = db.session.query(Follows).filter(Follows.user_following_id==g.user.id, Follows.char_being_followed_id==char_id).first()
 
     return render_template('/character/character_profile.html', char_id=char_id, gearsets=gearsets, character=character, followed=followed, claimed=claimed)
 
