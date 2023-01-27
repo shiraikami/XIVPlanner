@@ -164,8 +164,11 @@ class UserViewsTestCase(TestCase):
 
             resp = c.post(f"/user/id/{self.testuser.id}/delete", follow_redirects=True)
 
+            deleted = User.query.get(self.testuser_id)
+
             self.assertEqual(resp.status_code, 200)
             self.assertIn("""<p class="m-3">Welcome to XIVPlanner!""", str(resp.data))
+            self.assertEqual(deleted, None)
 
     def test_delete_no_session(self):
         with self.client as c:
