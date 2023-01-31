@@ -41,8 +41,8 @@
                   Characters
                 </a>
                   <ul class="dropdown-menu dropdown-menu-end" style="height: 300px; overflow-y: scroll;">
-                    {% if g.user.character %}
-                      {% for character in g.user.character %}
+                    {% if g.user.characters %}
+                      {% for character in g.user.characters %}
                         <li><a class="dropdown-item" href="/character/id/{{ character.character_id }}">{{ character.name }} - {{ character.server }}</a></li>
                       {% endfor %}
                     {% else %}
