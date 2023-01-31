@@ -42,7 +42,7 @@ class CharacterViewsTestCase(TestCase):
             testuser2_id = 2222
             testuser2.id = testuser2_id
 
-            character = Character(name="name", server="server", user_id=testuser_id, character_id=1, portrait="portrait")
+            character = Character(name="Test Character", server="TestServer", user_id=testuser_id, character_id=1, portrait="portrait")
             character_id = 1111
             character.id = character_id
 
@@ -89,6 +89,19 @@ class CharacterViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn("""<p hidden id="char-id">""", str(resp.data))
+
+    # Test to confirm linked characters show up on homepage and navbar
+    def test_character_linked_show(self):
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess[CURR_USER] = self.testuser.id
+            
+            resp = c.get("/")
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("Test Character", str(resp.data))
+            self.assertIn("TestServer", str(resp.data))
+            self.assertIn("""<li><a class="dropdown-item" href="/character/id/1">Test Character - TestServer</a></li>""", str(resp.data))
 
     def test_character_link(self):
         with self.client as c:
